@@ -126,6 +126,7 @@ h2 {
     position: absolute;
     top: 3px;
     right: 7px;
+    color: black;
     font-size: 1.5rem;
     transition: 100ms ease-in;
     &:hover {
@@ -212,7 +213,6 @@ h2 {
   }
 }
 
-.showModal {
-  display: flex;
-  justify-content: center;
+.hidden {
+  display: none;
 }

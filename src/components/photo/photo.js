@@ -2,20 +2,38 @@ import React, { Component } from 'react';
 import './Photo.scss';
 
 
-function RenderPhotos(props) {
-    if(props.photo) {
-        return (
-            <div key={props.photo._id} className="photo" >
-                <img alt={props.photo.tags[0]}data-id={props.photo._id} className="image" width="200" height="200" src={props.photo.imageUrl} />
-                <div className="category">
-                    <p>{props.photo.category}</p>
-                    <div className="likes"><p>{props.photo.likes}</p><i className="far fa-heart"></i></div>
-                </div>
-                <div className="author">
-                    <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"/>
-                    <p>{props.photo.author}</p>
-                </div>
-            </div>
+class RenderPhotos extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            show: false,
+        }
+    }
+
+    showModal = () => {
+        this.setState({ show: true });
+    }
+      
+      hideModal = () => {
+        this.setState({ show: false });
+    }
+
+    render() {
+
+        if(this.props.photo) {
+            return (
+                <React.Fragment>
+                    <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                    <div className="category">
+                        <p>{this.props.photo.category}</p>
+                        <div className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                    </div>
+                    <div className="author">
+                        <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"/>
+                        <p>{this.props.photo.author}</p>
+                    </div>
+                    <SinglePhoto photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
+                </React.Fragment>
         )
     } else {
         return (
@@ -24,14 +42,38 @@ function RenderPhotos(props) {
             </div>
         )
     }
-}
+    }
+};
+
+const SinglePhoto = ({ handleClose, show, photo }) => {
+    const showHideClassName = show ? 'singlePhoto' : 'singlePhoto hidden';
+  
+    return (
+      <div className={showHideClassName}>
+        <div onClick={handleClose} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
+            <div className="photo">
+                <img alt="" data-id={photo._id} className="image" width="200" height="200" src={photo.imageUrl} />
+                <div className="category">
+                    <p>{photo.category}</p>
+                    <div className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
+                </div>
+                <div className="author">
+                    <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" />
+                    <p>{photo.author}</p>
+                </div>
+            </div>
+      </div>
+    );
+}; 
+
+
 class Photo extends Component {
         render() {
             const photoCollection = this.props.photos.map(photo => {
                 return (
-                        <React.Fragment>
-                            <RenderPhotos photo={photo} />
-                        </React.Fragment>
+                        <div key={photo._id} className="photo" >
+                            <RenderPhotos key={photo._id} photo={photo} />
+                        </div>
                     )
             });
             return (
