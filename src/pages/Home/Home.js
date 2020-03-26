@@ -1,13 +1,18 @@
 import React, { Component } from 'react';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
+import Photo from '../../components/Photo/Photo';
 
 export default class Home extends Component {
+    state = {
+        photos: [],
+    }
     componentDidMount() {
         const url = "http://localhost:3000/photos"
         fetch(url)
     .then(res => res.json())
     .then(data => {
         console.log(data)
+        this.setState({photos: data})
     })
     .catch(err => console.log(err))
     }
@@ -15,7 +20,7 @@ export default class Home extends Component {
         return (
             <div>
             <HomeHeader />
-                <h1>Home</h1>
+            <Photo photos={this.state.photos} />
             </div>
         )
     }
