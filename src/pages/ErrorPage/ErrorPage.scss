@@ -1,0 +1,39 @@
+.errorPage {
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    z-index: 5;
+  }
+  .message {
+    position: absolute;
+    color: #fff;
+    z-index: 15;
+  }
+  h1 {
+    font-size: 5rem;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+  }
+  p {
+    background: rgba(0, 0, 0, 0.5);
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.4);
+
+    padding: 1rem 2rem;
+  }
+  .overlay {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 10;
+  }
+}
