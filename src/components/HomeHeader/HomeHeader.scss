@@ -3,6 +3,7 @@ header {
   align-items: center;
   justify-content: space-between;
   padding: 1rem 2rem;
+  color: black;
   h1 {
     padding: 0.5rem 2rem;
     font-size: 1.5rem;
@@ -12,6 +13,12 @@ header {
   }
   a {
     text-decoration: none;
+    color: black;
+  }
+  .searchButton {
+    &:hover {
+      cursor: pointer;
+    }
   }
   .tools {
     display: flex;
@@ -19,6 +26,22 @@ header {
     align-items: center;
     div {
       padding: 0.5rem 1rem;
+    }
+    i {
+      padding-right: 0.5rem;
+    }
+    button {
+      padding: 0.5rem 1rem;
+      font-family: "Playfair Display", serif;
+      background: white;
+      border: solid 2px black;
+      transition: 300ms ease-in;
+      &:hover {
+        background: black;
+      }
+      &:hover a {
+        color: #fff;
+      }
     }
   }
   i {
@@ -43,6 +66,7 @@ header {
     width: 75%;
     max-width: 500px;
   }
+
   .closeBar {
     position: absolute;
     top: 0.5rem;
@@ -59,7 +83,7 @@ header {
     justify-content: center;
   }
 }
-.hidden {
+.hideSearchBar {
   transition: 300ms ease-in;
   transform: translateY(-120px);
   opacity: 0;
