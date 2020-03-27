@@ -1,9 +1,13 @@
 header {
   display: flex;
+  position: fixed;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 2rem;
+  width: 100%;
   color: black;
+  background-color: #fff;
+  transition: 800ms ease-in;
+  z-index: 50;
   h1 {
     padding: 0.5rem 2rem;
     font-size: 1.5rem;
@@ -57,10 +61,11 @@ header {
   align-items: center;
   position: fixed;
   top: 0;
-  z-index: 20;
+  z-index: 80;
   background: rgba(255, 255, 255, 0.99);
   border-bottom: rgba(0, 0, 0, 0.5) solid 5px;
   transition: 300ms ease-in;
+  box-shadow: 4px 4px 4px black;
   opacity: 1;
   input {
     width: 75%;

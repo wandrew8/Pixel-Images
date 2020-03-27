@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './HomeHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -7,6 +8,7 @@ export default class HomeHeader extends Component {
 
         this.state = {
             show: false,
+            scrollPosition: 0,
         };
     }
     showModal = () => {
@@ -16,11 +18,39 @@ export default class HomeHeader extends Component {
       hideModal = () => {
         this.setState({ show: false });
       }
+
+      componentDidMount() {
+        window.addEventListener('scroll', this.listenToScroll)
+      }
+      
+      componentWillUnmount() {
+        window.removeEventListener('scroll', this.listenToScroll)
+      }
+      
+      listenToScroll = () => {
+        const winScroll =
+          document.body.scrollTop || document.documentElement.scrollTop
+      
+        const height =
+          document.documentElement.scrollHeight -
+          document.documentElement.clientHeight
+      
+        const scrolled = winScroll / height
+        console.log(this.state)
+        this.setState({
+          scrollPosition: scrolled,
+        })
+      }
     render() {
+        const styledHeader = {
+            height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
+            opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
+
+        }
         return (
             <div>
-                <header>
-                    <a href="/"><h1>Search Stock Photos</h1></a>
+                <header style={styledHeader}>
+                    <Link to="/signup"><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
                         <div className="formButton"><button><a href="/signup"><i className="fas fa-user"></i>Join</a></button></div>

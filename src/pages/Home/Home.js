@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
+import Hero from '../../components/Hero/Hero';
 
 export default class Home extends Component {
     state = {
@@ -20,6 +21,7 @@ export default class Home extends Component {
         return (
             <div>
             <HomeHeader />
+            <Hero />
             <Photo photos={this.state.photos} />
             </div>
         )
