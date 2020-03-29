@@ -10,6 +10,10 @@ class RenderPhotos extends Component {
         }
     }
 
+    componentDidMount() {
+        
+    };
+
     showModal = () => {
         this.setState({ show: true });
     }
@@ -30,7 +34,7 @@ class RenderPhotos extends Component {
                     </div>
                     <div className="author">
                         <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"/>
-                        <p>{this.props.photo.author}</p>
+                        <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
                     </div>
                     <SinglePhoto photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
                 </React.Fragment>
@@ -59,7 +63,7 @@ const SinglePhoto = ({ handleClose, show, photo }) => {
                 </div>
                 <div className="author">
                     <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" />
-                    <p>{photo.author}</p>
+                    <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
                 </div>
             </div>
       </div>

@@ -119,6 +119,7 @@ h2 {
   position: fixed;
   left: 50%;
   top: 50%;
+  z-index: 90;
   padding: 2rem;
   border: solid 5px rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);

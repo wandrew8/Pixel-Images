@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from "react-router-dom";
 import './Signup.scss';
 
 
@@ -16,20 +17,28 @@ export default class Signup extends Component {
         url: 'http://localhost:3000',
         firstName: '',
         lastName: '',
-        email: '',
+        username: '',
         password: '',
         userImage: '',
         uploadImage: false,
+        token: false,
 
         }
         
     }
     componentDidMount() {
+        // Changes background images every seven seconds
         setInterval(() => {
             this.setState({index: this.state.index >= this.state.images.length - 1 ? 0 : this.state.index + 1})
         }, 7000);
         
     };
+
+    componentWillUnmount() {
+        clearInterval(() => {
+            this.setState({index: this.state.index >= this.state.images.length - 1 ? 0 : this.state.index + 1})
+        }, 7000);
+    }
     
     openWidget = event => {
         event.preventDefault();
@@ -53,18 +62,23 @@ export default class Signup extends Component {
             [name]: value
         });
     };
+
+    setSession = token => {
+        window.sessionStorage.setItem('token', token);
+        this.setState({ token: true })
+    }
     
     handleFormSubmit = async (event) => {
         event.preventDefault();
         const body = {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
-            email: this.state.email,
+            username: this.state.username,
             userImage: this.state.userImage,
             password: this.state.password,
         }
         console.log(body)
-        const url = this.state.url + '/users'
+        const url = this.state.url + '/users/signup'
         fetch(url, {
             method: 'POST', 
             headers: {
@@ -75,12 +89,26 @@ export default class Signup extends Component {
             .then((response) => response.json())
             .then((data) => {
             console.log('Success:', data);
+            this.setState({
+                firstName: '',
+                lastName: '',
+                username: '',
+                userImage: '',
+                password: '',
+            });
+            this.setSession(data.token); 
             })
             .catch((error) => {
             console.error('Error:', error);
             });
         
     };
+
+    renderRedirect = () => {
+        if (this.state.token) {
+            return <Redirect to='/user' />
+        }
+    }
     
     render() {
         const divStyle = {
@@ -123,19 +151,21 @@ export default class Signup extends Component {
                             </div>
                         </div>
                         <div className="formGroup">
-                        <label htmlFor="email">Email Address:</label>
+                        <label htmlFor="username">Create a username:</label>
                         <input 
-                                type="email"
-                                id="email"
-                                name="email"
-                                value={this.state.email}
+                                type="text"
+                                id="username"
+                                name="username"
+                                minLength="8"
+                                maxLength="20"
+                                value={this.state.username}
                                 onChange={this.handleInputChange}
-                                placeholder="Enter a valid email address..."
+                                placeholder="Enter a username or email..."
                                 required
                             />
                         </div>
                         <div className="formGroup">
-                        <label htmlFor="email">Password:</label>
+                        <label htmlFor="password">Password:</label>
                         <input 
                                 type="password"
                                 id="password"
@@ -157,6 +187,7 @@ export default class Signup extends Component {
                         </div>
                     </form>
                 </div>
+                {this.renderRedirect()}
             </div>
         )
     }
