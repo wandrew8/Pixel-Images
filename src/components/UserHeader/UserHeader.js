@@ -10,6 +10,11 @@ export default class HomeHeader extends Component {
             show: false,
             scrollPosition: 0,
             addPhoto: false,
+            category: '',
+            tags: [],
+            imageUrl: '',
+            author: '',
+            uploadImage: false,
         };
     }
     showModal = () => {
@@ -36,6 +41,8 @@ export default class HomeHeader extends Component {
     window.removeEventListener('scroll', this.listenToScroll)
     }
     
+    
+
     listenToScroll = () => {
         const winScroll =
           document.body.scrollTop || document.documentElement.scrollTop
@@ -45,7 +52,6 @@ export default class HomeHeader extends Component {
           document.documentElement.clientHeight
       
         const scrolled = winScroll / height
-        console.log(this.state)
         this.setState({
           scrollPosition: scrolled,
         })
@@ -62,7 +68,7 @@ export default class HomeHeader extends Component {
                     <Link to="/user"><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
-                        <div onClick={this.openPhotoModal} className="searchButton"><i class="fas fa-camera-retro"></i></div>
+                        <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i></div>
                     </div>
                 </header>
                 <Modal show={this.state.show} handleClose={this.hideModal} />
@@ -89,18 +95,98 @@ const Modal = ({ handleClose, show }) => {
 }; 
 
 
-const AddPhotoModal = ({ handleClose, show }) => {
-    const showHideClassName = show ? 'formModal' : 'formModal hideModal';
+class AddPhotoModal extends React.Component {
+    constructor(props) {
+        super(props);
 
-    return (
-        <div className={showHideClassName}>
+        this.state = {
+            category: 'Art',
+            tags: ["lines", "patters", "blue", "cool", "design", "geometric"],
+            imageUrl: '',
+            author: window.sessionStorage.getItem('authorId'),
+            uploadImage: false,
+            url: 'http://localhost:3000'
+        };
+    }
+    openWidget = event => {
+        event.preventDefault();
+        const myWidget = window.cloudinary.createUploadWidget({
+            cloudName: "dcokaa0ia",
+            uploadPreset: 'pixelImages'
+        }, (error, result) => {
+            if (result.event === "success") {
+                this.setState({
+                    uploadImage: true,
+                    imageUrl: result.info.url
+                })
+            }
+        });
+        myWidget.open();
+    };
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
+
+    handleFormSubmit = async (event) => {
+        event.preventDefault();
+        const photo = {
+            category: this.state.category,
+            tags: this.state.tags,
+            imageUrl: this.state.imageUrl,
+            author: this.state.author,
+        }
+        console.log(photo);
+        const token = window.sessionStorage.getItem('token');
+        console.log(token)
+        const url = this.state.url + '/photos'
+        fetch(url, {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify(photo),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+            console.log('Success:', data);
+            this.setState({
+                category: '',
+                tags: '',
+                imageUrl: '',
+                author: '',
+            });
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+        
+    };
+    
+    render() {
+        
+        const RenderImage = () => {
+            return <img src={this.state.imageUrl} alt="" />
+        };
+        const showHideClassName = this.props.show ? 'formModal' : 'formModal hideModal';
+
+            return (
+                <div className={showHideClassName}>
             <form id="addPhotoForm">
                 <h2>ADD YOUR OWN PHOTO</h2>
-                <div onClick={handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
+                <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
                
                 <div className="formGroup">
                 <label htmlFor="category">Category</label>
-                <select required id="category">
+                <select 
+                    onChange={this.handleInputChange}
+                    value={this.state.category}
+                    required 
+                    id="category">
                     <option value="landscape">Select a category...</option>
                     <option value="landscape">Landscape</option>
                     <option value="architecture">Architecture</option>
@@ -116,7 +202,11 @@ const AddPhotoModal = ({ handleClose, show }) => {
                 <div className="formGroup">
                 <label htmlFor="tags">Add some tags to describe your image</label>
                 <div className="row">
-                    <input list="tags" id="tagInput" />
+                    <input 
+                    value={this.state.tags}
+                    onChange={this.handleInputChange}
+                    list="tags" 
+                    id="tagInput" />
                     <datalist id="tags">
                     <option value="mountain"> </option>
                     <option value="food"> </option>
@@ -137,17 +227,18 @@ const AddPhotoModal = ({ handleClose, show }) => {
                 <div className="tagAnswers"></div>
                 </div>
                 <div className="imageSample">
-                <button id="upload_widget" className="addPhoto-button">
+                <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
                     Upload Image
                 </button>
-                <div className="imageSampleHolder"></div>
+                <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                 </div>
                 <div className="formGroup">
-                <button type="submit">Submit</button>
+                <button type="submit" onClick={this.handleFormSubmit}>Submit</button>
                 </div>
             </form>
             </div>
     )
+    }
 }
 
-  
+

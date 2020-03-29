@@ -63,9 +63,10 @@ export default class Signup extends Component {
         });
     };
 
-    setSession = token => {
+    setSession = (token, authorId) => {
         window.sessionStorage.setItem('token', token);
-        this.setState({ token: true })
+        window.sessionStorage.setItem('authorId', authorId);
+        this.setState({ token: true });
     }
     
     handleFormSubmit = async (event) => {
@@ -96,7 +97,7 @@ export default class Signup extends Component {
                 userImage: '',
                 password: '',
             });
-            this.setSession(data.token); 
+            this.setSession(data.token, data.userId); 
             })
             .catch((error) => {
             console.error('Error:', error);
