@@ -3,6 +3,7 @@ import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/Photo/Photo';
+import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
 export default class Category extends Component {
     state = {
@@ -40,6 +41,7 @@ export default class Category extends Component {
             <div>
                 <HomeHeader updatePhotos={this.updatePhotos} />
                 <Hero />
+                <CategoryHeader />
                 <Photo photos={this.state.photos} />
             </div>
         )

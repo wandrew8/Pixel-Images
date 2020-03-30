@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/Photo/Photo';
+import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
 export default class User extends Component {
     state = {
@@ -39,6 +40,7 @@ export default class User extends Component {
             <div>
                 <UserHeader updatePhotos={this.updatePhotos} />
                 <Hero />
+                <CategoryHeader />
                 <Photo photos={this.state.photos} />
             </div>
         )
