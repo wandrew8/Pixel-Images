@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { FadeTransform } from 'react-animation-components';
 import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
@@ -38,12 +39,19 @@ export default class Category extends Component {
 
     render() {
         return (
-            <div>
+            <FadeTransform 
+                in
+                style={{ transform: "translateX(-10px)" }}
+                transformProps={{ enterTransform: 'translateX(10px)' }} 
+                delay={0} 
+                exitOpacity={0.1}
+                timingFn='ease-in-out' 
+                duration={300}>
                 <HomeHeader updatePhotos={this.updatePhotos} />
                 <Hero />
-                <CategoryHeader />
+                <CategoryHeader updatePhotos={this.updatePhotos} />
                 <Photo photos={this.state.photos} />
-            </div>
+            </FadeTransform>
         )
     }
 }

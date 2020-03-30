@@ -6,7 +6,7 @@ export default class CategoryHeader extends Component {
     render() {
         return (
             <div className="mainGrid">
-                <Link to="/category/architecture" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/architecture" className="category">
                     <div className="heading"><h2>Architecture</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -21,7 +21,7 @@ export default class CategoryHeader extends Component {
                     </div>
                 </Link>
 
-                <Link to="/category/animals" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/animals" className="category">
                     <div className="heading"><h2>Animals</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -36,7 +36,7 @@ export default class CategoryHeader extends Component {
                     </div>
                 </Link>
                 
-                <Link to="/category/food" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/food" className="category">
                     <div className="heading"><h2>Food</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -52,7 +52,7 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link to="/category/scenic" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/scenic" className="category">
                     <div className="heading"><h2>Scenic</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -67,7 +67,7 @@ export default class CategoryHeader extends Component {
                     </div>
                 </Link>
                 
-                <Link to="/category/portrait" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/portrait" className="category">
                     <div className="heading"><h2>Portrait</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -83,7 +83,7 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link to="/category/art" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/art" className="category">
                     <div className="heading"><h2>Art</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -99,7 +99,7 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link to="/category/fashion" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/fashion" className="category">
                     <div className="heading"><h2>Fashion</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -115,7 +115,7 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link to="/category/aerial" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/aerial" className="category">
                     <div className="heading"><h2>Aerial</h2></div>
                     <div className="photoGrid">
                         <div className="image">
@@ -131,7 +131,7 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link to="/category/activity" className="category">
+                <Link onClick={this.props.updatePhotos} to="/category/activity" className="category">
                     <div className="heading"><h2>Activity</h2></div>
                     <div className="photoGrid">
                         <div className="image">

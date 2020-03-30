@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/Photo/Photo';
@@ -37,12 +38,12 @@ export default class User extends Component {
 
     render() {
         return (
-            <div>
+            <Fade in>
                 <UserHeader updatePhotos={this.updatePhotos} />
                 <Hero />
                 <CategoryHeader />
                 <Photo photos={this.state.photos} />
-            </div>
+            </Fade>
         )
     }
 }

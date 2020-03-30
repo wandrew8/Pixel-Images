@@ -41,7 +41,7 @@ class RenderPhotos extends Component {
         )
     } else {
         return (
-            <div>
+            <div className="error">
                 <p>Oops, We couldn't find any photos</p>
             </div>
         )
@@ -91,7 +91,7 @@ class Photo extends Component {
                 )
             } else {
                 return (
-                    <div>
+                    <div className="error">
                         <p>Sorry, we couldn't find any photos</p>
                     </div>
                 )

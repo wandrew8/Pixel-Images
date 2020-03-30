@@ -1,11 +1,13 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Fade } from 'react-animation-components';
+import './Login.scss';
 
 export default class Login extends Component {
     render() {
         return (
-            <div>
+            <Fade in>
                 <h1>Login</h1>
-            </div>
+            </Fade>
         )
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from "react-router-dom";
+import { Fade } from 'react-animation-components';
 import './Signup.scss';
 
 
@@ -120,6 +121,7 @@ export default class Signup extends Component {
               return <img src={this.state.userImage} alt="" />
           };
         return (
+        <Fade in>
             <div className="container" style={divStyle}> 
                 <div className="overlay"></div>
                 <div className="formContainer">
@@ -190,6 +192,7 @@ export default class Signup extends Component {
                 </div>
                 {this.renderRedirect()}
             </div>
+        </Fade>
         )
     }
 }
