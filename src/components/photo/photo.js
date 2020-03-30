@@ -52,6 +52,7 @@ class RenderPhotos extends Component {
 const SinglePhoto = ({ handleClose, show, photo }) => {
     const showHideClassName = show ? 'singlePhoto' : 'singlePhoto hidden';
   
+    
     return (
       <div className={showHideClassName}>
         <div onClick={handleClose} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
@@ -73,19 +74,28 @@ const SinglePhoto = ({ handleClose, show, photo }) => {
 
 class Photo extends Component {
         render() {
-            const photoCollection = this.props.photos.map(photo => {
-                return (
+            if (this.props.photos.length > 0) {
+
+                const photoCollection = this.props.photos.map(photo => {
+                    return (
                         <div key={photo._id} className="photo" >
                             <RenderPhotos key={photo._id} photo={photo} />
                         </div>
                     )
-            });
-            return (
-                <div className="photoContainer">
+                });
+                return (
+                    <div className="photoContainer">
                     {photoCollection}
                 </div>
 
-            )
+                )
+            } else {
+                return (
+                    <div>
+                        <p>Sorry, we couldn't find any photos</p>
+                    </div>
+                )
+            }
                
     }
 };

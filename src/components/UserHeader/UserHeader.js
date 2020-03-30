@@ -214,14 +214,14 @@ class AddPhotoModal extends React.Component {
                     name="category"
                     id="category">
                     <option value="">Select a category...</option>
-                    <option value="landscape">Landscape</option>
                     <option value="architecture">Architecture</option>
-                    <option value="wildlife">Wildlife</option>
+                    <option value="animals">Animals</option>
                     <option value="nature">Nature</option>
                     <option value="aerial">Aerial</option>
+                    <option value="food">Food</option>
                     <option value="portrait">Portrait</option>
                     <option value="fashion">Fashion</option>
-                    <option value="sports">Sports</option>
+                    <option value="activity">Activity</option>
                     <option value="art">Art</option>
                 </select>
                 </div>
