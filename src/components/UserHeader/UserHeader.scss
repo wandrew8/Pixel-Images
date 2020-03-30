@@ -184,14 +184,19 @@ header {
   }
   .smallTag {
     font-size: 0.9rem;
-    display: inline;
+    display: inline-block;
     padding: 0rem 0.5rem;
     transition: 200ms ease-in;
+    line-height: 0rem;
     &:hover::after {
-      content: "X";
-      font-size: 0.7rem;
+      content: "❌";
+      font-size: 0.5rem;
       position: absolute;
-      cursor: default;
+    }
+    &:hover {
+      content: "delete";
+      color: red;
+      cursor: pointer;
     }
   }
   .imageSample {

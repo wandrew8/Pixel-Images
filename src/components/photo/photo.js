@@ -33,7 +33,7 @@ class RenderPhotos extends Component {
                         <div className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
                     </div>
                     <div className="author">
-                        <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"/>
+                        <img alt="" src={this.props.photo.author[0].userImage}/>
                         <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
                     </div>
                     <SinglePhoto photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
@@ -62,7 +62,7 @@ const SinglePhoto = ({ handleClose, show, photo }) => {
                     <div className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
                 </div>
                 <div className="author">
-                    <img alt="" src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" />
+                    <img alt="" src={photo.author[0].userImage} />
                     <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
                 </div>
             </div>

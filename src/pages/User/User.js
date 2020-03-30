@@ -6,15 +6,30 @@ import Photo from '../../components/Photo/Photo';
 export default class User extends Component {
     state = {
         photos: [],
+        updatePhotos: false,
     }
 
     componentDidMount() {
+       this.fetchPhotos()
+    }
+
+    componentDidUpdate() {
+        if(this.state.updatePhotos) {
+            this.fetchPhotos();
+        }
+    }
+
+    updatePhotos = () => {
+        this.setState({updatePhotos: true})
+    }
+
+    fetchPhotos = () => {
         const url = "http://localhost:3000/photos"
         fetch(url)
-    .then(res => res.json())
-    .then(data => {
+        .then(res => res.json())
+        .then(data => {
         console.log(data)
-        this.setState({photos: data})
+        this.setState({photos: data, updatePhotos: false})
     })
     .catch(err => console.log(err))
     }
@@ -22,7 +37,7 @@ export default class User extends Component {
     render() {
         return (
             <div>
-                <UserHeader />
+                <UserHeader updatePhotos={this.updatePhotos} />
                 <Hero />
                 <Photo photos={this.state.photos} />
             </div>

@@ -41,8 +41,6 @@ export default class HomeHeader extends Component {
     window.removeEventListener('scroll', this.listenToScroll)
     }
     
-    
-
     listenToScroll = () => {
         const winScroll =
           document.body.scrollTop || document.documentElement.scrollTop
@@ -72,7 +70,7 @@ export default class HomeHeader extends Component {
                     </div>
                 </header>
                 <Modal show={this.state.show} handleClose={this.hideModal} />
-                <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
+                <AddPhotoModal updatePhotos={this.props.updatePhotos} show={this.state.addPhoto} handleClose={this.closePhotoModal} />
             </div>
         )
     }
@@ -100,12 +98,13 @@ class AddPhotoModal extends React.Component {
         super(props);
 
         this.state = {
-            category: 'Art',
-            tags: ["lines", "patters", "blue", "cool", "design", "geometric"],
+            category: '',
+            tags: [],
             imageUrl: '',
             author: window.sessionStorage.getItem('authorId'),
             uploadImage: false,
-            url: 'http://localhost:3000'
+            url: 'http://localhost:3000',
+            tag: '',
         };
     }
     openWidget = event => {
@@ -131,6 +130,17 @@ class AddPhotoModal extends React.Component {
         });
     };
 
+    change = event => {
+        this.setState({category: event.target.value});
+    }
+
+    updateTags = event => {
+        event.preventDefault();
+        this.setState({tags: [...this.state.tags, this.state.tag]})
+        this.setState({tag: ''});
+        console.log(this.state)
+    }
+
     handleFormSubmit = async (event) => {
         event.preventDefault();
         const photo = {
@@ -154,9 +164,11 @@ class AddPhotoModal extends React.Component {
             .then((response) => response.json())
             .then((data) => {
             console.log('Success:', data);
+            this.props.updatePhotos();
+            this.props.handleClose();
             this.setState({
                 category: '',
-                tags: '',
+                tags: [],
                 imageUrl: '',
                 author: '',
             });
@@ -166,6 +178,12 @@ class AddPhotoModal extends React.Component {
             });
         
     };
+    removeItem = event => {
+        const value = event.target.textContent;
+        const index = this.state.tags.indexOf(value);
+        this.setState({tags: this.state.tags.slice(0, index).concat(this.state.tags.slice(index + 1, this.state.tags.length))});
+        console.log(this.state.tags)
+    }
     
     render() {
         
@@ -174,6 +192,13 @@ class AddPhotoModal extends React.Component {
         };
         const showHideClassName = this.props.show ? 'formModal' : 'formModal hideModal';
 
+        const RenderTags = () => {
+            const tags = this.state.tags.map(tag => {
+                return (<p onClick={this.removeItem} key={tag} className="smallTag">{tag}</p>);
+            })
+            return tags;
+        
+        }
             return (
                 <div className={showHideClassName}>
             <form id="addPhotoForm">
@@ -183,11 +208,12 @@ class AddPhotoModal extends React.Component {
                 <div className="formGroup">
                 <label htmlFor="category">Category</label>
                 <select 
-                    onChange={this.handleInputChange}
+                    onChange={this.change}
                     value={this.state.category}
                     required 
+                    name="category"
                     id="category">
-                    <option value="landscape">Select a category...</option>
+                    <option value="">Select a category...</option>
                     <option value="landscape">Landscape</option>
                     <option value="architecture">Architecture</option>
                     <option value="wildlife">Wildlife</option>
@@ -203,8 +229,9 @@ class AddPhotoModal extends React.Component {
                 <label htmlFor="tags">Add some tags to describe your image</label>
                 <div className="row">
                     <input 
-                    value={this.state.tags}
+                    value={this.state.tag}
                     onChange={this.handleInputChange}
+                    name="tag"
                     list="tags" 
                     id="tagInput" />
                     <datalist id="tags">
@@ -222,9 +249,9 @@ class AddPhotoModal extends React.Component {
                     <option value="garden"> </option>
                     <option value="animals"> </option>
                     </datalist>
-                    <button id="addTagButton"><i className="fas fa-plus"></i></button>
+                    <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
                 </div>
-                <div className="tagAnswers"></div>
+                <div className="tagAnswers"><RenderTags /></div>
                 </div>
                 <div className="imageSample">
                 <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
@@ -233,7 +260,7 @@ class AddPhotoModal extends React.Component {
                 <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                 </div>
                 <div className="formGroup">
-                <button type="submit" onClick={this.handleFormSubmit}>Submit</button>
+                <button onClick={this.handleFormSubmit}>Submit</button>
                 </div>
             </form>
             </div>
