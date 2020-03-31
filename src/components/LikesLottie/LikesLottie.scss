@@ -1,0 +1,10 @@
+.lottie {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, -50%);
+  z-index: 100;
+  .hide {
+    display: none;
+  }
+}

@@ -47,7 +47,7 @@ export default class User extends Component {
                 <UserHeader updatePhotos={this.updatePhotos} />
                 <Hero />
                 <CategoryHeader />
-                <Photo photos={this.state.photos} />
+                <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
             </Fade>
         )
     }

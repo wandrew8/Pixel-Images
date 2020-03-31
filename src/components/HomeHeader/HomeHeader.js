@@ -36,7 +36,6 @@ export default class HomeHeader extends Component {
           document.documentElement.clientHeight
       
         const scrolled = winScroll / height
-        console.log(this.state)
         this.setState({
           scrollPosition: scrolled,
         })

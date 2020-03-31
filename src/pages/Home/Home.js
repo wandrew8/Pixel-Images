@@ -8,18 +8,37 @@ import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 export default class Home extends Component {
     state = {
         photos: [],
+        updatePhotos: false,
     }
     componentDidMount() {
+        this.getPhotos();
+    }
+
+    componentDidUpdate() {
+        if(this.state.updatePhotos) {
+            this.getPhotos();
+            this.setState({updatePhotos: false});
+            console.log('Hit')
+        }
+    }
+
+    updatePhotos = () => {
+        this.setState({updatePhotos: true})
+    }
+
+    getPhotos = () => {
         const url = "http://localhost:3000/photos"
         fetch(url)
-    .then(res => res.json())
-    .then(data => {
-        console.log(data)
-        this.setState({photos: data})
-    })
-    .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            this.setState({photos: data, updatePhotos: false})
+        })
+        .catch(err => console.log(err))
     }
+
     render() {
+      
         return (
             <Fade
                 in
@@ -30,7 +49,7 @@ export default class Home extends Component {
             <HomeHeader />
             <Hero />
             <CategoryHeader />
-            <Photo photos={this.state.photos} />
+            <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
             </Fade>
         )
     }

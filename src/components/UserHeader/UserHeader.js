@@ -138,7 +138,6 @@ class AddPhotoModal extends React.Component {
         event.preventDefault();
         this.setState({tags: [...this.state.tags, this.state.tag]})
         this.setState({tag: ''});
-        console.log(this.state)
     }
 
     handleFormSubmit = async (event) => {
@@ -149,9 +148,7 @@ class AddPhotoModal extends React.Component {
             imageUrl: this.state.imageUrl,
             author: this.state.author,
         }
-        console.log(photo);
         const token = window.sessionStorage.getItem('token');
-        console.log(token)
         const url = this.state.url + '/photos'
         fetch(url, {
             method: 'POST', 
@@ -182,7 +179,6 @@ class AddPhotoModal extends React.Component {
         const value = event.target.textContent;
         const index = this.state.tags.indexOf(value);
         this.setState({tags: this.state.tags.slice(0, index).concat(this.state.tags.slice(index + 1, this.state.tags.length))});
-        console.log(this.state.tags)
     }
     
     render() {

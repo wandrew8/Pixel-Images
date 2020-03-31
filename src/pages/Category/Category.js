@@ -48,7 +48,7 @@ export default class Category extends Component {
                 <HomeHeader updatePhotos={this.updatePhotos} />
                 <Hero />
                 <CategoryHeader updatePhotos={this.updatePhotos} />
-                <Photo photos={this.state.photos} />
+                <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
             </Fade>
         )
     }

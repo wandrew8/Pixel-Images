@@ -8,14 +8,8 @@ class RenderPhotos extends Component {
         this.state = {
             show: false,
             url: 'http://localhost:3000',
-            updateLikes: false,
-
         }
     }
-
-    componentDidMount() {
-        
-    };
 
     setStorage = (id) => {
         window.localStorage.setItem('likedPhotos', JSON.stringify([id]))
@@ -36,6 +30,10 @@ class RenderPhotos extends Component {
             .then((data) => {
             console.log('Success:', data);
             this.setStorage(id); 
+            this.setState({updateLikes: true})
+            // this.props.updateHome();
+            this.props.updatePhotos();
+            console.log('hello')
             })
             .catch((error) => {
             console.error('Error:', error);
@@ -80,7 +78,7 @@ class RenderPhotos extends Component {
     }
 };
 
-const SinglePhoto = ({ handleClose, show, photo, incrementLikes }) => {
+const SinglePhoto = ({ handleClose, show, photo, incrementLikes, playLottie }) => {
     const showHideClassName = show ? 'singlePhoto' : 'singlePhoto hidden';
   
     
@@ -110,7 +108,7 @@ class Photo extends Component {
                 const photoCollection = this.props.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
-                            <RenderPhotos key={photo._id} photo={photo} />
+                            <RenderPhotos updatePhotos={this.props.updatePhotos} updateHome={this.props.updateHome} key={photo._id} photo={photo} />
                         </div>
                     )
                 });
