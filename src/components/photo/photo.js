@@ -7,12 +7,43 @@ class RenderPhotos extends Component {
         super(props)
         this.state = {
             show: false,
+            url: 'http://localhost:3000',
+            updateLikes: false,
+
         }
     }
 
     componentDidMount() {
         
     };
+
+    setStorage = (id) => {
+        window.localStorage.setItem('likedPhotos', JSON.stringify([id]))
+    }
+
+    incrementLikes = (id) => {
+        const storageData = JSON.parse(localStorage.likedPhotos)
+        if(!storageData.includes(id)) {
+            const url = this.state.url + `/photos/${id}`;
+            fetch(url, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({"_id": id})
+            })
+            .then((response) => response.json())
+            .then((data) => {
+            console.log('Success:', data);
+            this.setStorage(id); 
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+        } else {
+            console.log('You already liked this photo')
+        }
+    }
 
     showModal = () => {
         this.setState({ show: true });
@@ -30,13 +61,13 @@ class RenderPhotos extends Component {
                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                     <div className="category">
                         <p>{this.props.photo.category}</p>
-                        <div className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                        <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
                     </div>
                     <div className="author">
                         <img alt="" src={this.props.photo.author[0].userImage}/>
                         <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
                     </div>
-                    <SinglePhoto photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
+                    <SinglePhoto incrementLikes={this.incrementLikes} photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
                 </React.Fragment>
         )
     } else {
@@ -49,7 +80,7 @@ class RenderPhotos extends Component {
     }
 };
 
-const SinglePhoto = ({ handleClose, show, photo }) => {
+const SinglePhoto = ({ handleClose, show, photo, incrementLikes }) => {
     const showHideClassName = show ? 'singlePhoto' : 'singlePhoto hidden';
   
     
@@ -60,7 +91,7 @@ const SinglePhoto = ({ handleClose, show, photo }) => {
                 <img alt="" data-id={photo._id} className="image" width="200" height="200" src={photo.imageUrl} />
                 <div className="category">
                     <p>{photo.category}</p>
-                    <div className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
+                    <div onClick={incrementLikes.bind(null, photo._id)} className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
                 </div>
                 <div className="author">
                     <img alt="" src={photo.author[0].userImage} />
