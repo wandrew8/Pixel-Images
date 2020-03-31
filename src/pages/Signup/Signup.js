@@ -121,8 +121,13 @@ export default class Signup extends Component {
               return <img src={this.state.userImage} alt="" />
           };
         return (
-        <Fade in>
-            <div className="container" style={divStyle}> 
+            <Fade
+                in
+                delay={0} 
+                exitOpacity={0.1}
+                timingFn='ease-in-out' 
+                duration={300}>            
+                <div className="container" style={divStyle}> 
                 <div className="overlay"></div>
                 <div className="formContainer">
                     <form id="addPhotoForm">

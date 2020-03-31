@@ -13,19 +13,24 @@
     width: 97%;
     transition: 300ms ease-in-out;
     text-decoration: none;
+    position: relative;
     .heading {
       display: flex;
       align-items: center;
       justify-content: center;
       text-transform: uppercase;
+      transition: 500ms ease-in;
       height: 41px;
       h2 {
         font-weight: 400;
         color: gray;
+        transition: 200ms ease-in;
       }
     }
     .photoGrid {
       display: grid;
+      position: relative;
+      transition: 300ms ease-in;
       grid-template-columns: 1fr 2fr 1fr;
       grid-gap: 1rem;
       height: 66px;
@@ -34,16 +39,35 @@
         height: 100%;
         overflow: hidden;
         border-radius: 3px;
+        transition: 500ms ease-in;
+      }
+      .mainImage {
+        transition: 500ms ease-in;
       }
       img {
         height: 100%;
         width: 100%;
+        transition: 500ms ease-in;
         object-fit: cover;
       }
     }
     &:hover {
       box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.2);
       cursor: pointer;
+    }
+    &:hover .photoGrid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+      grid-gap: 0;
+    }
+    &:hover .image {
+      border-radius: 0px;
+    }
+    &:hover .heading {
+      background: rgba(0, 0, 0, 0);
+    }
+    &:hover h2 {
+      font-size: 2rem;
     }
   }
 }

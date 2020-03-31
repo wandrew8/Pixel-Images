@@ -5,7 +5,12 @@ import './Login.scss';
 export default class Login extends Component {
     render() {
         return (
-            <Fade in>
+            <Fade
+                in
+                delay={0} 
+                exitOpacity={0.1}
+                timingFn='ease-in-out' 
+                duration={300}>
                 <h1>Login</h1>
             </Fade>
         )

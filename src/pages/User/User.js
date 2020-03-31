@@ -38,7 +38,12 @@ export default class User extends Component {
 
     render() {
         return (
-            <Fade in>
+            <Fade
+                in
+                delay={0} 
+                exitOpacity={0.1}
+                timingFn='ease-in-out' 
+                duration={300}>
                 <UserHeader updatePhotos={this.updatePhotos} />
                 <Hero />
                 <CategoryHeader />

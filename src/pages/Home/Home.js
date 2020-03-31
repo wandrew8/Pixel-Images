@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FadeTransform } from 'react-animation-components';
+import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
@@ -21,10 +21,8 @@ export default class Home extends Component {
     }
     render() {
         return (
-            <FadeTransform 
+            <Fade
                 in
-                style={{ transform: "translateX(-10px)" }}
-                transformProps={{ enterTransform: 'translateX(10px)' }} 
                 delay={0} 
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
@@ -33,7 +31,7 @@ export default class Home extends Component {
             <Hero />
             <CategoryHeader />
             <Photo photos={this.state.photos} />
-            </FadeTransform>
+            </Fade>
         )
     }
 }

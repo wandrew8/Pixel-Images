@@ -9,13 +9,13 @@ export default class CategoryHeader extends Component {
                 <Link onClick={this.props.updatePhotos} to="/category/architecture" className="category">
                     <div className="heading"><h2>Architecture</h2></div>
                     <div className="photoGrid">
-                        <div className="image">
+                        <div className="slide image">
                             <img alt="" src="https://images.unsplash.com/photo-1486744328743-c1151100a95b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" />
                         </div>
-                        <div className="image">
+                        <div className="mainImage image">
                             <img alt="" src="https://images.unsplash.com/photo-1486718448742-163732cd1544?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80" />
                         </div>
-                        <div className="image">
+                        <div className="slide image">
                             <img alt="" src="https://images.unsplash.com/photo-1506146829809-ecf5010c774f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1001&q=80" />
                         </div>
                     </div>
