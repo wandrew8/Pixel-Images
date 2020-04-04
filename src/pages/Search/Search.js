@@ -14,6 +14,11 @@ class Search extends React.Component {
         }
     }
     componentWillMount() {
+        console.log(this.props.location)
+        this.searchQuery()
+    }
+
+    componentDidUpdate() {
         this.searchQuery()
     }
 
@@ -24,7 +29,6 @@ class Search extends React.Component {
         .then((data) => {
         console.log('Success:', data);
         this.setState({photos: data})
-        console.log(this.state.data)
         })
         .catch((error) => {
         console.error('Error:', error);

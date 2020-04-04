@@ -93,3 +93,17 @@ header {
   transform: translateY(-120px);
   opacity: 0;
 }
+#submitSearch {
+  border: solid black 1px;
+  padding: 0.5rem 2rem;
+  color: black;
+  font-size: 1rem;
+  text-decoration: none;
+  &:hover {
+    background: black;
+    color: white
+  }
+  &:hover i {
+    color: #fff;
+  }
+}

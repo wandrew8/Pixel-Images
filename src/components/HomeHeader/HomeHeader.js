@@ -1,5 +1,7 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Component, useState } from 'react';
+import { Link, Redirect, useHistory  } from 'react-router-dom';
+
+
 import './HomeHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -70,23 +72,30 @@ export default class HomeHeader extends Component {
                         <div className="formButton"><button><a href="/signup"><i className="fas fa-user"></i>Join</a></button></div>
                     </div>
                 </header>
-                <Modal show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
+                <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
             </div>
         )
     }
 }
 
-const Modal = ({ handleClose, show, handleQuery, handleInputChange }) => {
-    const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
-  
+const Modal = ({ handleClose, show, history }) => {
+  const [query, setQuery] = useState('')  
+  const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
+  const historyObj = history();
 
-    return (
+    function submitForm(e) {
+      e.preventDefault();
+      console.log(query)
+      console.log(historyObj)
+      if(query) historyObj.push('/search/' + query);
+    }
+      return (
       <div className={showHideClassName}>
         <div onClick={handleClose} className="closeBar"><i className="far fa-times-circle"></i></div>
         <form id="searchForm">
-            <input required onChange={handleInputChange} name="query" id="searchTags" />
-            <button id="submitSearch" onClick={handleQuery}>
-            <i className="fas fa-search"></i> Search
+            <input required onChange={e => setQuery(e.target.value)} name="query" id="searchTags" />
+            <button id="submitSearch" onClick={submitForm}>
+              <i className="fas fa-search"></i> Search
             </button>
         </form>
       </div>
