@@ -94,10 +94,10 @@ const SinglePhoto = ({ handleClose, show, photo, incrementLikes, playLottie }) =
                     <p>{photo.category}</p>
                     <div onClick={incrementLikes.bind(null, photo._id)} className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
                 </div>
-                <div className="author">
-                    <img alt="" src={photo.author[0].userImage} />
-                    <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
-                </div>
+                <Link className="author" to={`/author/${photo.author[0]._id}`} >
+                        <img alt="" src={photo.author[0].userImage} />
+                        <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
+                </Link>
             </div>
       </div>
     );

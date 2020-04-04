@@ -13,25 +13,40 @@ class IndividualUser extends React.Component {
         this.state = {
             url: 'http://localhost:3000',
             data: {},
+            photos: [],
         }
         
     }
         componentDidMount() {
-            this.getAuthorInfo(this.props.author)
+            this.getAuthorInfo(this.props.author);
+            this.getAuthorPhotos(this.props.author)
         }
+
         getAuthorInfo = (id) => {
             const url = `${this.state.url}/users/${this.props.author}`
             fetch(url)
             .then((response) => response.json())
             .then((data) => {
-            console.log('Success:', data);
             this.setState({data: data})
-            console.log(this.state.data)
             })
             .catch((error) => {
             console.error('Error:', error);
             });
         } 
+
+        getAuthorPhotos = (id) => {
+            const url = `${this.state.url}/photos/author/${this.props.author}`
+            fetch(url)
+            .then((response) => response.json())
+            .then((data) => {
+            console.log('Success:', data);
+            this.setState({photos: data})
+            console.log(this.state.data)
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+        }
         render() {
 
             return (
@@ -44,6 +59,7 @@ class IndividualUser extends React.Component {
                 <HomeHeader />
                 <Hero />
                 <UserBanner author={this.state.data} />
+                <Photo photos={this.state.photos} />
             </Fade>
         )
     }

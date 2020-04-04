@@ -1,8 +1,44 @@
-.userBanner {
-    img {
-        height: 80px;
-        width: 80px;
-        border-radius: 50%;
-        object-fit: cover;
+.banner {
+    padding: 1rem;
+    margin: -1rem 0rem 2rem 0rem;
+    height: auto;
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+    .userBanner {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        width: 350px;
+        margin: 0rem 2rem;
+        align-items: center;
+        img {
+            height: 80px;
+            margin: 0 auto;
+            z-index: 100;
+            width: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: 100ms ease-in;
+            &:hover {
+                transform: scale(2.5);
+            }
+        }
+
+        .authorName {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        h2 {
+            text-transform: uppercase;
+            font-weight: 400;
+            letter-spacing: 1px;
+            text-align: center;
+            margin-bottom: 0.5rem !important;
+        }
+        p {
+            margin: 0;
+            padding: 0;
+            color: lightslategray;
+        }
     }
 }

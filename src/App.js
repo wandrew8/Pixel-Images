@@ -8,6 +8,7 @@ import Category from './pages/Category/Category';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import IndividualUser from './pages/IndividualUser/IndividualUser';
 import User from './pages/User/User';
+import Search from './pages/Search/Search';
 
 class App extends React.Component {
   constructor(props) {
@@ -21,18 +22,23 @@ class App extends React.Component {
   render() {
 
     const CategoryType = ({ match }) => {
-      console.log(match)
       return (
         <Category category={match.params.category} /> 
         )
     }
 
     const AuthorPage = ({ match }) => {
-      console.log(match)
       return (
         <IndividualUser author={match.params.authorId} /> 
         )
     }
+
+    const SearchPage = ({ match }) => {
+      return (
+        <Search query={match.params.query} /> 
+        )
+    }
+
     return (
       <div className="App">
         <Router>
@@ -43,6 +49,7 @@ class App extends React.Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/user" component={User} />
               <Route path="/author/:authorId" component={AuthorPage} />
+              <Route path="/search/:query" component={SearchPage} />
               <Route component={ErrorPage} />
             </Switch>
           </Router>
