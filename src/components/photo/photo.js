@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import './Photo.scss';
 
 
@@ -61,10 +62,12 @@ class RenderPhotos extends Component {
                         <p>{this.props.photo.category}</p>
                         <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
                     </div>
-                    <div className="author">
-                        <img alt="" src={this.props.photo.author[0].userImage}/>
-                        <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
-                    </div>
+                    <Link to={`/author/${this.props.photo.author[0]._id}`} >
+                        <div className="author">
+                            <img alt="" src={this.props.photo.author[0].userImage}/>
+                            <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
+                        </div>
+                    </Link>
                     <SinglePhoto incrementLikes={this.incrementLikes} photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
                 </React.Fragment>
         )

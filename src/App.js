@@ -6,6 +6,7 @@ import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
 import Category from './pages/Category/Category';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
+import IndividualUser from './pages/IndividualUser/IndividualUser';
 import User from './pages/User/User';
 
 class App extends React.Component {
@@ -25,6 +26,13 @@ class App extends React.Component {
         <Category category={match.params.category} /> 
         )
     }
+
+    const AuthorPage = ({ match }) => {
+      console.log(match)
+      return (
+        <IndividualUser author={match.params.authorId} /> 
+        )
+    }
     return (
       <div className="App">
         <Router>
@@ -34,6 +42,7 @@ class App extends React.Component {
               <Route exact path="/signup" component={Signup} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/user" component={User} />
+              <Route path="/author/:authorId" component={AuthorPage} />
               <Route component={ErrorPage} />
             </Switch>
           </Router>
