@@ -4,6 +4,7 @@ import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
+import UserHeader from '../../components/UserHeader/UserHeader';
 import UserBanner from '../../components/UserBanner/UserBanner';
 
 class IndividualUser extends React.Component {
@@ -47,7 +48,9 @@ class IndividualUser extends React.Component {
             });
         }
         render() {
-
+            const token = window.sessionStorage.getItem('token');
+            const authorId = window.sessionStorage.getItem('authorId');
+    
             return (
                 <Fade
                     in
@@ -55,7 +58,7 @@ class IndividualUser extends React.Component {
                     exitOpacity={0.1}
                     timingFn='ease-in-out' 
                     duration={300}>
-                    <HomeHeader />
+                    {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                     <Hero />
                     <UserBanner author={this.state.data} />
                     <Photo photos={this.state.photos} />

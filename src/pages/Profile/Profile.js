@@ -1,6 +1,7 @@
 import React from 'react';
 import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
+import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import PhotoEdit from '../../components/PhotoEdit/PhotoEdit';
 import Hero from '../../components/Hero/Hero';
 import ProfileToggle from '../../components/ProfileToggle/ProfileToggle';
@@ -53,7 +54,10 @@ class Profile extends React.Component {
     reRenderPhotos = () => {
         this.getAuthorPhotos();
     }
-    render() {        
+    render() {     
+        const token = window.sessionStorage.getItem('token');
+        const authorId = window.sessionStorage.getItem('authorId');
+
         return(
             <Fade
                 in
@@ -61,7 +65,7 @@ class Profile extends React.Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-                <UserHeader />
+                {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} />

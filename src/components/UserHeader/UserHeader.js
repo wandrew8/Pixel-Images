@@ -66,7 +66,7 @@ export default class HomeHeader extends Component {
                     <Link to="/user"><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
-                        <Link to={`/profile/${this.state.author}`} className="searchButton"><i class="fas fa-user-circle"></i></Link>
+                        <Link to={`/profile/${this.state.author}`} className="searchButton"><i className="fas fa-user-circle"></i></Link>
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i></div>
                     </div>
                 </header>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Fade } from 'react-animation-components';
+import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
@@ -38,6 +39,8 @@ class Search extends React.Component {
 
 
     render() {
+        const token = window.sessionStorage.getItem('token');
+        const authorId = window.sessionStorage.getItem('authorId');
 
         return (
             <Fade
@@ -46,7 +49,7 @@ class Search extends React.Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-                <HomeHeader />
+                {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <Photo photos={this.state.photos} />
             </Fade>

@@ -4,6 +4,7 @@ import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/Photo/Photo';
+import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
 export default class Category extends Component {
@@ -14,6 +15,7 @@ export default class Category extends Component {
 
     componentDidMount() {
        this.fetchPhotos()
+       
     }
 
     componentDidUpdate() {
@@ -38,6 +40,9 @@ export default class Category extends Component {
     }
 
     render() {
+        const token = window.sessionStorage.getItem('token');
+        const authorId = window.sessionStorage.getItem('authorId');
+
         return (
             <Fade
                 in
@@ -45,7 +50,8 @@ export default class Category extends Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-                <HomeHeader updatePhotos={this.updatePhotos} />
+                {}
+                {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <CategoryHeader updatePhotos={this.updatePhotos} />
                 <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />

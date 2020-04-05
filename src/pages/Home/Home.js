@@ -3,6 +3,7 @@ import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
+import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
 export default class Home extends Component {
@@ -38,7 +39,9 @@ export default class Home extends Component {
     }
 
     render() {
-      
+        const token = window.sessionStorage.getItem('token');
+        const authorId = window.sessionStorage.getItem('authorId');
+
         return (
             <Fade
                 in
@@ -46,7 +49,7 @@ export default class Home extends Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-            <HomeHeader />
+            {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
             <Hero />
             <CategoryHeader />
             <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
