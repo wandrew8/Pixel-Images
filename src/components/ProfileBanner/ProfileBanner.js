@@ -1,5 +1,5 @@
 import React from 'react';
-import './UserBanner.scss';
+import './ProfileBanner.scss';
 import moment from 'moment';
 
 
@@ -7,7 +7,8 @@ class UserBanner extends React.Component {
     render() {
         const { firstName, lastName, userImage, createdAt } = this.props.author;
         return (
-            <div className="mainBanner">
+            <div className="banner">
+                <div className="editButton">Edit Profile<i class="fas fa-pencil-alt"></i></div>
                 <div className="userBanner">
                     <img src={userImage} alt={`${firstName}`} />
                     <div className="authorName">

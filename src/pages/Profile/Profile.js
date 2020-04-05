@@ -3,7 +3,8 @@ import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import PhotoEdit from '../../components/PhotoEdit/PhotoEdit';
 import Hero from '../../components/Hero/Hero';
-import UserBanner from '../../components/UserBanner/UserBanner';
+import ProfileToggle from '../../components/ProfileToggle/ProfileToggle';
+import ProfileBanner from '../../components/ProfileBanner/ProfileBanner';
 import './Profile.scss';
 
 class Profile extends React.Component {
@@ -52,9 +53,7 @@ class Profile extends React.Component {
     reRenderPhotos = () => {
         this.getAuthorPhotos();
     }
-    render() {
-        const {createdAt, favorites, firstName, lastName, userImage, userName} = this.state.data
-        
+    render() {        
         return(
             <Fade
                 in
@@ -64,7 +63,8 @@ class Profile extends React.Component {
                 duration={300}>
                 <UserHeader />
                 <Hero />
-                <UserBanner author={this.state.data} />
+                <ProfileBanner author={this.state.data} />
+                <ProfileToggle author={this.state.data} />
                 <PhotoEdit reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />
             </Fade>
         )
