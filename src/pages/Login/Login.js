@@ -29,7 +29,6 @@ export default class Signup extends Component {
     }
     componentDidMount() {
         // Changes background images every seven seconds
-        console.log(this.state)
         setInterval(() => {
             this.setState({index: this.state.index >= this.state.images.length - 1 ? 0 : this.state.index + 1})
         }, 7000);
@@ -47,21 +46,8 @@ export default class Signup extends Component {
         this.setState({
             [name]: value
         });
-    };
-
-    componentDidUpdate() {
-        this.renderErrMess()
-    }
+    }; 
     
-    renderErrMess = () => {
-        if (this.state.errMess.length > 1) {
-            return (
-                <div className="formGroup">
-                    <p>{this.state.errMess}</p>
-                </div>
-            )
-        }
-    }
     setSession = (token, authorId) => {
         window.sessionStorage.setItem('token', token);
         window.sessionStorage.setItem('authorId', authorId);
@@ -94,8 +80,6 @@ export default class Signup extends Component {
             this.setSession(data.token, data.userId); 
             })
             .catch((error) => {
-                this.setState({errMess: "Oops, we couldn't find that account"});
-                console.log(this.state)
                 console.error('Error:', error);
             });
         
@@ -155,7 +139,6 @@ export default class Signup extends Component {
                             maxLength="20"
                         />
                         </div>
-                        {this.renderErrMess}
                         <div className="formGroup">
                             <button type="submit">Submit</button>
                         </div>
