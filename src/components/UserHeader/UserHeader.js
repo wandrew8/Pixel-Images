@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import './UserHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -10,10 +10,10 @@ export default class HomeHeader extends Component {
             show: false,
             scrollPosition: 0,
             addPhoto: false,
+            author: window.sessionStorage.getItem('authorId'),
             category: '',
             tags: [],
             imageUrl: '',
-            author: '',
             uploadImage: false,
         };
     }
@@ -66,11 +66,12 @@ export default class HomeHeader extends Component {
                     <Link to="/user"><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
+                        <Link to={`/profile/${this.state.author}`} className="searchButton"><i class="fas fa-user-circle"></i></Link>
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i></div>
                     </div>
                 </header>
                 <Modal show={this.state.show} handleClose={this.hideModal} />
-                <AddPhotoModal updatePhotos={this.props.updatePhotos} show={this.state.addPhoto} handleClose={this.closePhotoModal} />
+                <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
             </div>
         )
     }
@@ -105,6 +106,7 @@ class AddPhotoModal extends React.Component {
             uploadImage: false,
             url: 'http://localhost:3000',
             tag: '',
+            success: false,
         };
     }
     openWidget = event => {
@@ -149,7 +151,7 @@ class AddPhotoModal extends React.Component {
             author: this.state.author,
         }
         const token = window.sessionStorage.getItem('token');
-        const url = this.state.url + '/photos'
+        const url = this.state.url + '/photos';
         fetch(url, {
             method: 'POST', 
             headers: {
@@ -160,18 +162,18 @@ class AddPhotoModal extends React.Component {
             })
             .then((response) => response.json())
             .then((data) => {
-            console.log('Success:', data);
-            this.props.updatePhotos();
+                console.log(data)
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
             this.props.handleClose();
             this.setState({
                 category: '',
                 tags: [],
                 imageUrl: '',
                 author: '',
-            });
-            })
-            .catch((error) => {
-            console.error('Error:', error);
+                success: true
             });
         
     };
@@ -179,6 +181,12 @@ class AddPhotoModal extends React.Component {
         const value = event.target.textContent;
         const index = this.state.tags.indexOf(value);
         this.setState({tags: this.state.tags.slice(0, index).concat(this.state.tags.slice(index + 1, this.state.tags.length))});
+    }
+
+    renderRedirect = () => {
+        if (this.state.success) {
+            return <Redirect to='/user' />
+        }
     }
     
     render() {
@@ -197,7 +205,7 @@ class AddPhotoModal extends React.Component {
         }
             return (
                 <div className={showHideClassName}>
-            <form id="addPhotoForm">
+            <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
                 <h2>ADD YOUR OWN PHOTO</h2>
                 <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
                
@@ -256,9 +264,10 @@ class AddPhotoModal extends React.Component {
                 <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                 </div>
                 <div className="formGroup">
-                <button onClick={this.handleFormSubmit}>Submit</button>
+                <button disabled={this.state.uploadImage ? false : true}>Submit</button>
                 </div>
             </form>
+            {this.renderRedirect()}
             </div>
     )
     }

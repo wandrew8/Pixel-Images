@@ -8,6 +8,7 @@ import Category from './pages/Category/Category';
 import ErrorPage from './pages/ErrorPage/ErrorPage';
 import IndividualUser from './pages/IndividualUser/IndividualUser';
 import User from './pages/User/User';
+import Profile from './pages/Profile/Profile';
 import Search from './pages/Search/Search';
 
 class App extends React.Component {
@@ -39,6 +40,12 @@ class App extends React.Component {
         )
     }
 
+    const ProfilePage = ({ match }) => {
+      return (
+        <Profile author={match.params.profileId} /> 
+        )
+    }
+
     return (
       <div className="App">
         <Router>
@@ -50,6 +57,7 @@ class App extends React.Component {
               <Route exact path="/user" component={User} />
               <Route path="/author/:authorId" component={AuthorPage} />
               <Route path="/search/:query" component={SearchPage} />
+              <Route path="/profile/:profileId" component={ProfilePage} />
               <Route component={ErrorPage} />
             </Switch>
           </Router>

@@ -131,7 +131,7 @@ export default class Signup extends Component {
                 <div className="container" style={divStyle}> 
                 <div className="overlay"></div>
                 <div className="formContainer">
-                    <form id="addPhotoForm">
+                    <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
                         <h2>CREATE AN ACCOUNT</h2>
                         <div className="splitInputs">
                             <div className="formGroup">
@@ -192,7 +192,7 @@ export default class Signup extends Component {
                             <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                         </div>
                         <div className="formGroup">
-                            <button type="submit" onClick={this.handleFormSubmit}>Submit</button>
+                            <button type="submit">Submit</button>
                         </div>
                     </form>
                 </div>

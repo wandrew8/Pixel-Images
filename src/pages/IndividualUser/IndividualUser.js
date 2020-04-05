@@ -5,7 +5,6 @@ import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
 import UserBanner from '../../components/UserBanner/UserBanner';
-import { render } from '@testing-library/react';
 
 class IndividualUser extends React.Component {
     constructor(props) {
@@ -51,16 +50,16 @@ class IndividualUser extends React.Component {
 
             return (
                 <Fade
-                in
-                delay={0} 
-                exitOpacity={0.1}
-                timingFn='ease-in-out' 
-                duration={300}>
-                <HomeHeader />
-                <Hero />
-                <UserBanner author={this.state.data} />
-                <Photo photos={this.state.photos} />
-            </Fade>
+                    in
+                    delay={0} 
+                    exitOpacity={0.1}
+                    timingFn='ease-in-out' 
+                    duration={300}>
+                    <HomeHeader />
+                    <Hero />
+                    <UserBanner author={this.state.data} />
+                    <Photo photos={this.state.photos} />
+                </Fade>
         )
     }
 }
