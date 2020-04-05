@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component, useState } from 'react';
+import { Link, Redirect, useHistory } from 'react-router-dom';
 import './UserHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -15,6 +15,7 @@ export default class HomeHeader extends Component {
             tags: [],
             imageUrl: '',
             uploadImage: false,
+            query: '',
         };
     }
     showModal = () => {
@@ -40,6 +41,13 @@ export default class HomeHeader extends Component {
     componentWillUnmount() {
     window.removeEventListener('scroll', this.listenToScroll)
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
     
     listenToScroll = () => {
         const winScroll =
@@ -70,21 +78,29 @@ export default class HomeHeader extends Component {
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i></div>
                     </div>
                 </header>
-                <Modal show={this.state.show} handleClose={this.hideModal} />
+                <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
                 <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
             </div>
         )
     }
 }
 
-const Modal = ({ handleClose, show }) => {
+const Modal = ({ handleClose, show , history}) => {
+    const [query, setQuery] = useState('')  
     const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
+    const historyObj = history();
   
+    function submitForm(e) {
+    e.preventDefault();
+    console.log(query)
+    console.log(historyObj)
+    if(query) historyObj.push('/search/' + query);
+    }  
     return (
       <div className={showHideClassName}>
         <div onClick={handleClose} className="closeBar"><i className="far fa-times-circle"></i></div>
-        <form id="searchForm">
-            <input required type="text" name="search" id="searchTags" />
+        <form onSubmit={submitForm} id="searchForm">
+            <input required onChange={e => setQuery(e.target.value)} name="query" id="searchTags" />
             <button id="submitSearch" type="submit">
             <i className="fas fa-search"></i> Search
             </button>
