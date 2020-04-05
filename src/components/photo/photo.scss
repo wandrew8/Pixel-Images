@@ -126,6 +126,15 @@ h2 {
   padding: 2rem;
   border: solid 5px rgba(0, 0, 0, 0.5);
   transform: translate(-50%, -50%);
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  .photoGrid {
+    display: grid;
+    grid-template-columns: minMax(500px, 3fr) minMax(200px, 1fr);
+    height: 100%;
+   
+  }
   .closeSinglePhoto {
     position: absolute;
     top: 3px;
@@ -145,7 +154,8 @@ h2 {
     position: relative;
     display: flex;
     width: 100%;
-    height: 100%;
+    height: 75vh;
+    overflow: auto;
     justify-content: center;
     &:hover .category {
       opacity: 1;

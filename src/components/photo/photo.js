@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import CommentsBar from '../CommentsBar/CommentsBar';
 import './Photo.scss';
 
 
@@ -110,16 +111,19 @@ const SinglePhoto = ({ handleClose, show, photo, incrementLikes, playLottie }) =
     return (
       <div className={showHideClassName}>
         <div onClick={handleClose} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
-            <div className="photo">
-                <img alt="" data-id={photo._id} className="image" width="200" height="200" src={photo.imageUrl} />
-                <div className="category">
-                    <p>{photo.category}</p>
-                    <div onClick={incrementLikes.bind(null, photo._id)} className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
+            <div className="photoGrid">
+                <div className="photo">
+                    <img alt="" data-id={photo._id} className="image" width="200" height="200" src={photo.imageUrl} />
+                    <div className="category">
+                        <p>{photo.category}</p>
+                        <div onClick={incrementLikes.bind(null, photo._id)} className="likes"><p>{photo.likes}</p><i className="far fa-heart"></i></div>
+                    </div>
+                    <Link className="author" to={`/author/${photo.author[0]._id}`} >
+                            <img alt="" src={photo.author[0].userImage} />
+                            <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
+                    </Link>
                 </div>
-                <Link className="author" to={`/author/${photo.author[0]._id}`} >
-                        <img alt="" src={photo.author[0].userImage} />
-                        <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
-                </Link>
+                <CommentsBar photo={photo} />
             </div>
       </div>
     );

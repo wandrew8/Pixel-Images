@@ -1,0 +1,33 @@
+.commentsGrid {
+    .authorName {
+        display: grid;
+        grid-template-columns: 50px 1fr;
+        padding: 0.5rem 1rem;
+        align-items: center;
+        img {
+            height: 50px;
+            width: 50px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+        .name {
+            display: flex;
+            align-content: center;
+            padding-left: 1rem;
+            flex-direction: column;
+
+            h3 { 
+                font-size: 1.2rem;
+                color: black;
+                padding: 0rem;
+                margin: 0rem;
+            }
+            p {
+                font-size: 0.7rem;
+                color: lightgray;
+                margin: 0;
+                padding: 0;
+            }
+        }
+    }
+}
