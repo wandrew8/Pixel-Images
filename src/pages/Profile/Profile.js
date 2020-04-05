@@ -18,6 +18,8 @@ class Profile extends React.Component {
             photoDeleted: false,
             showLiked: false,
             showPosted: true,
+            isLiked: false,
+            
         }
         
     }
@@ -54,9 +56,10 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
-            this.setState({photos: data, photoDeleted: false, showLiked: false, showPosted: false})
+            this.setState({isLiked: true, photos: data, photoDeleted: false, showLiked: false, showPosted: false})
         })
         .catch((error) => {
+            this.setState({isLiked: true, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
             console.error('Error:', error);
         });
     }
@@ -67,9 +70,10 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
-            this.setState({ photos: data, photoDeleted: false, showLiked: false, showPosted: false });
+            this.setState({isLiked: false, photos: data, photoDeleted: false, showLiked: false, showPosted: false });
         })
         .catch((error) => {
+            this.setState({isLiked: false, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
             console.error('Error:', error);
         });
     }
@@ -100,7 +104,7 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
-                <PhotoEdit reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />
+                <PhotoEdit reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
             </Fade>
         )
     }

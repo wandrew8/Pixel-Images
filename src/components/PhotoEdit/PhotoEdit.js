@@ -13,8 +13,8 @@ class RenderPhotos extends Component {
     }
 
     componentDidUpdate() {
-        if (this.state.photoDeleted) {
-
+        if (this.props.isLiked) {
+            console.log("It's true")
         }
     }
 
@@ -49,6 +49,28 @@ class RenderPhotos extends Component {
         
     }
 
+    unlikePhoto = (id) => {
+        const authorId = window.sessionStorage.getItem('authorId');
+        const url = this.state.url + '/users/' + authorId + '/favorites/' + id;
+        const token = window.sessionStorage.getItem('token');
+        fetch(url, {
+            method: 'DELETE', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                'Access-Control-Allow-Origin': '*'
+            }
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                this.props.reRenderPhotos()
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
     render() {
 
         if(this.props.photo) {
@@ -56,15 +78,11 @@ class RenderPhotos extends Component {
                 <React.Fragment>
                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                     <div className="category">
-                        <p>{this.props.photo.category}</p>
-                        <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><p>Remove Photo</p><i class="fas fa-trash-alt"></i></div>
+                    {this.props.isLiked ? 
+                        <div onClick={this.unlikePhoto.bind(null, this.props.photo._id)} className="delete"><i class="far fa-heart"></i><p>Remove from Favorites</p></div> :
+                        <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i class="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
+}
                     </div>
-                    <Link to={`/author/${this.props.photo.author[0]._id}`} >
-                        <div className="author">
-                            <img alt="" src={this.props.photo.author[0].userImage}/>
-                            <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
-                        </div>
-                    </Link>
                     <SinglePhoto photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
                 </React.Fragment>
         )
@@ -87,13 +105,6 @@ const SinglePhoto = ({ handleClose, show, photo }) => {
         <div onClick={handleClose} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
             <div className="photo">
                 <img alt="" data-id={photo._id} className="image" width="200" height="200" src={photo.imageUrl} />
-                <div className="category">
-                    <p>{photo.category}</p>
-                </div>
-                <Link className="author" to={`/author/${photo.author[0]._id}`} >
-                        <img alt="" src={photo.author[0].userImage} />
-                        <p>{photo.author[0].firstName} {photo.author[0].lastName}</p>
-                </Link>
             </div>
       </div>
     );
@@ -107,7 +118,7 @@ class PhotoEdit extends Component {
                 const photoCollection = this.props.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
-                            <RenderPhotos reRenderPhotos={this.props.reRenderPhotos} updatePhotos={this.props.updatePhotos} updateHome={this.props.updateHome} key={photo._id} photo={photo} />
+                            <RenderPhotos isLiked={this.props.isLiked} reRenderPhotos={this.props.reRenderPhotos} updatePhotos={this.props.updatePhotos} updateHome={this.props.updateHome} key={photo._id} photo={photo} />
                         </div>
                     )
                 });
