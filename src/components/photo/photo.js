@@ -29,12 +29,10 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-            console.log('Success:', data);
-            this.setStorage(id); 
-            this.setState({updateLikes: true})
-            // this.props.updateHome();
-            this.props.updatePhotos();
-            console.log('hello')
+                this.setStorage(id); 
+                this.setState({updateLikes: true})
+                this.props.updatePhotos();
+                this.addToFavorites(id)
             })
             .catch((error) => {
             console.error('Error:', error);
@@ -42,6 +40,30 @@ class RenderPhotos extends Component {
         } else {
             console.log('You already liked this photo')
         }
+    }
+
+    addToFavorites = (id) => {
+        const userId = window.sessionStorage.getItem('authorId');
+        const url = this.state.url + `/users/${userId}/favorites`;
+        if (userId) {
+            fetch(url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({"_id": id})
+                })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                })
+                .catch((error) => {
+                console.error('Error:', error);
+                });
+        } else {
+            console.log('You are not logged in')
+        }
+        
     }
 
     showModal = () => {

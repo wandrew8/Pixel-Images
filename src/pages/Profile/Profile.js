@@ -16,15 +16,26 @@ class Profile extends React.Component {
             data: {},
             photos: [],
             photoDeleted: false,
+            showLiked: false,
+            showPosted: true,
         }
         
     }
     componentDidMount() {
-        this.getAuthorInfo(this.props.author);
-        this.getAuthorPhotos(this.props.author)
+        this.getAuthorInfo();
+        this.getAuthorPhotos()
     }
 
-    getAuthorInfo = (id) => {
+    componentDidUpdate() {
+        if(this.state.showLiked) {
+            this.getLikedPhotos();
+        }
+        if (this.state.showPosted) {
+            this.getAuthorPhotos();
+        }
+    }
+
+    getAuthorInfo = () => {
         const url = `${this.state.url}/users/${this.props.author}`
         fetch(url)
         .then((response) => response.json())
@@ -35,6 +46,20 @@ class Profile extends React.Component {
             console.error('Error:', error);
         });
     } 
+
+    getLikedPhotos = () => {
+        const userId = window.sessionStorage.getItem('authorId');
+        const url = `${this.state.url}/users/${userId}/favorites`
+        fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log('Success:', data);
+            this.setState({photos: data, photoDeleted: false, showLiked: false, showPosted: false})
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
     
     getAuthorPhotos = () => {
         const url = `${this.state.url}/photos/author/${this.props.author}`
@@ -42,13 +67,19 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
-            this.setState({photos: data})
-            console.log(this.state.data)
-            this.setState({ photoDeleted: false });
+            this.setState({ photos: data, photoDeleted: false, showLiked: false, showPosted: false });
         })
         .catch((error) => {
             console.error('Error:', error);
         });
+    }
+
+    togglePosted = () => {
+        this.setState({ showLiked: false, showPosted: true });
+    };
+
+    toggleFavorites = () => {
+        this.setState({ showLiked: true, showPosted: false });
     }
 
     reRenderPhotos = () => {
@@ -68,7 +99,7 @@ class Profile extends React.Component {
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
-                <ProfileToggle author={this.state.data} />
+                <ProfileToggle togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
                 <PhotoEdit reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />
             </Fade>
         )

@@ -13,6 +13,17 @@ class ProfileToggle extends React.Component {
             happy: true,
         }
     }
+
+    togglePosted = () => {
+        this.setState({ togglePosted: true, toggleLiked: false });
+        this.props.togglePosted();
+    };
+
+    toggleFavorites = () => {
+        this.setState({ togglePosted: false, toggleLiked: true });
+        this.props.toggleFavorites();
+    }
+
     renderPhotos = () => {
         if (this.state.togglePosted) {
             return (
@@ -29,29 +40,14 @@ class ProfileToggle extends React.Component {
         console.log(this.state)
     }
 
-    getAuthorPhotos = () => {
-        const url = `${this.state.url}/photos/author/${this.props.author}`
-        fetch(url)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log('Success:', data);
-            this.setState({photos: data})
-            console.log(this.state.data)
-            this.setState({ photoDeleted: false });
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
-    }
-
     render() {
         return (
             <React.Fragment>
                 <div className="toggle">
-                    <div onClick={() => this.setState({toggleLiked: false, togglePosted: true})} className={this.state.togglePosted ? "toggleButton post highlight" : "toggleButton post"} >
+                    <div onClick={this.togglePosted} className={this.state.togglePosted ? "toggleButton post highlight" : "toggleButton post"} >
                         POSTED PHOTOS
                     </div>
-                    <div onClick={() => this.setState({toggleLiked: true, togglePosted: false})} className={this.state.toggleLiked ? "toggleButton highlight" : "toggleButton post"}>
+                    <div onClick={this.toggleFavorites} className={this.state.toggleLiked ? "toggleButton highlight" : "toggleButton post"}>
                         LIKED PHOTOS
                     </div>
                 </div>

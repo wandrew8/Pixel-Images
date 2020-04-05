@@ -1,5 +1,5 @@
 import React, { Component, useState } from 'react';
-import { Link, Redirect, useHistory  } from 'react-router-dom';
+import { Link, useHistory  } from 'react-router-dom';
 
 
 import './HomeHeader.scss';
@@ -69,7 +69,9 @@ export default class HomeHeader extends Component {
                     <Link to="/"><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
-                        <div className="formButton"><button><a href="/signup"><i className="fas fa-user"></i>Join</a></button></div>
+                        <div className="formButton"><button><Link to="/signup"><i className="fas fa-user"></i>Join</Link></button></div>
+                        <div className="formButton"><button><Link to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link></button></div>
+
                     </div>
                 </header>
                 <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
