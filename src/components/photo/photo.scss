@@ -131,10 +131,12 @@ h2 {
   justify-content: center;
   .photoGrid {
     display: grid;
-    grid-template-columns: minMax(500px, 3fr) minMax(200px, 1fr);
+    grid-template-columns: repeat(auto-fill, minMax(500px, 4fr) minMax(340px, 1fr));
     height: 100%;
+    width: 100%;
    
   }
+  
   .closeSinglePhoto {
     position: absolute;
     top: 3px;
@@ -250,3 +252,14 @@ h2 {
     text-align: center;
   }
 }
+
+@media all and (max-width: 1024px) {
+  .singlePhoto {
+    .photoGrid {
+      grid-template-columns: 1fr;
+      grid-template-rows: 2fr 1fr;
+      overflow: auto;
+    }
+  }
+ }
+ 

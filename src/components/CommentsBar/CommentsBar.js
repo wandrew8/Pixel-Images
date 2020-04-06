@@ -14,6 +14,15 @@ class CommentsBar extends React.Component {
                         <p>Posted: {moment(new Date(photo.createdAt)).startOf('day').fromNow()}</p>
                     </div>
                 </div>
+                <div className="commentsHolder">
+
+                </div>
+                <div className="addComment">
+                    <form id="addComment">
+                        <input name="comment" placeholder="Add a comment" />
+                        <button>Submit</button>
+                    </form>
+                </div>
             </div>
         )
     }
