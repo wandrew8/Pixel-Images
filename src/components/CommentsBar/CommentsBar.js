@@ -10,9 +10,18 @@ class CommentsBar extends React.Component {
         this.state = {
             url: 'http://localhost:3000',
             commentsData: [],
+            comment: '',
+
         }
         
     }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
 
     getComments = () => {
         const url = `${this.state.url}/photos/${this.props.photo._id}/comments`
@@ -31,16 +40,16 @@ class CommentsBar extends React.Component {
         if (this.state.commentsData.length > 0) {
             const comments = this.state.commentsData.map(comment => {
                 return (
-                    <div className="singleComment">
+                    <div key={comment._id} className="singleComment">
                         <div className="authorPhoto">
                             <img src={comment.author.userImage} alt={comment.author.firstName} />
                         </div>
                         <div className="commentText">
-                            <small>{`${comment.author.firstName} ${comment.author.lastName} | ${moment(new Date(comment.createdAt)).startOf('day').fromNow()}`}</small>
+                            <small>{`${comment.author.firstName} ${comment.author.lastName} | ${moment(new Date(comment.createdAt), "YYYYMMDD").fromNow()}`}</small>
                             <p>{comment.text}</p>
                             <div className="statusBar">
-                                    <i className="far fa-thumbs-up"></i><p>4</p>
-                                    <i className="far fa-thumbs-down"></i><p>10</p>
+                                    <i className="far fa-thumbs-up"></i><p>{comment.likes}</p>
+                                    <i className="far fa-thumbs-down"></i><p>{comment.dislikes}</p>
                                 <small>Reply</small>
                             </div>
                         </div>
@@ -55,14 +64,44 @@ class CommentsBar extends React.Component {
         }
     }
 
-    submitComment = () => {
-
+    postComment = (e) => {
+        e.preventDefault();
+        console.log('hello')
+        const authorId = window.sessionStorage.getItem('authorId')
+        if (authorId) {
+            const url = this.state.url + '/photos/' + this.props.photo._id + '/comments'
+            const comment = {
+                text: this.state.comment,
+                author: authorId,
+                likes: 0,
+                dislikes: 0,
+            }
+            fetch(url, {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                },
+                body: JSON.stringify(comment),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log('Success:', data);
+                this.setState({comment: ''}) 
+            })
+            .catch((error) => {
+            console.error('Error:', error);
+            });
+        } else {
+            console.log('Oops, you must be signed in to post a comment')
+        }
     }
 
     componentDidMount() {
         this.getComments();
     }
 
+   
 
     render() {
         const {photo} = this.props;
@@ -72,15 +111,20 @@ class CommentsBar extends React.Component {
                     <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
                     <div className="name">
                         <h3>{`${photo.author[0].firstName} ${photo.author[0].lastName}`}</h3>
-                        <p>Posted: {moment(new Date(photo.createdAt)).startOf('day').fromNow()}</p>
+                        <p>Posted: {moment(new Date(photo.createdAt), "YYYYMMDD").fromNow()}</p>
                     </div>
                 </div>
                 <div className="commentsHolder">
                     {this.RenderComments()}
                 </div>
                 <div className="addComment">
-                    <form id="addComment">
-                        <input name="comment" required placeholder="Add a comment" />
+                    <form onSubmit={this.postComment} id="addComment">
+                        <input 
+                            type="text"
+                            name="comment" 
+                            required 
+                            onChange={this.handleInputChange}
+                            placeholder="Add a comment" />
                         <button>Submit</button>
                     </form>
                 </div>
