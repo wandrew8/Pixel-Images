@@ -60,14 +60,56 @@
             }
           }
           .commentsHolder {
-            display: flex;
-            justify-content: center;
-            height: 80%;
-            background: yellow;
             padding: 1rem 0rem 1rem 2rem;
             border-top: solid lightgray 1px;
+            max-height: 55vh;
             overflow: auto;
+            text-align: left;
           }
+          .singleComment {
+              display: grid;
+              grid-template-columns: 50px 1fr;
+              align-items: flex-start;
+              justify-content: center;
+            
+          }
+          .commentText {
+            color: black;
+            text-align: left;
+            small {
+                font-size: 0.7rem;
+                color: gray;
+            }
+            p {
+                padding: 0.1rem 0rem;
+                margin: 0;
+                font-size: 0.85rem;
+            }
+          }
+          .authorPhoto {
+              img {
+                  height: 40px;
+                  width: 40px;
+                  border-radius: 50%;
+                  object-fit: cover;
+              }
+          }
+          .statusBar {
+              display: grid;
+              margin: 1rem 0rem;
+              grid-template-columns: 1fr 1fr 1fr 1fr 8fr;
+              align-items: center;
+              justify-content: center;
+              small {
+                  text-align: center;
+              }
+          }
+         .noComment {
+             color: gray;
+             text-align: center;
+             font-size: 0.8rem;
+
+         }
 }
 
 @media all and (max-width: 1024px) {
