@@ -40,6 +40,11 @@
       p {
         padding-left: 1rem;
       }
+      .stats {
+        display: flex;
+        justify-content: space-between;
+        flex-basis: 25%;
+      }
       .likes {
         display: flex;
         justify-content: center;

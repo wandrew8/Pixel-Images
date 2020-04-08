@@ -9,6 +9,7 @@ import ErrorPage from './pages/ErrorPage/ErrorPage';
 import IndividualUser from './pages/IndividualUser/IndividualUser';
 import User from './pages/User/User';
 import Profile from './pages/Profile/Profile';
+import SinglePhotoPage from './pages/SinglePhotoPage/SinglePhotoPage';
 import Search from './pages/Search/Search';
 
 class App extends React.Component {
@@ -26,6 +27,12 @@ class App extends React.Component {
       return (
         <Category category={match.params.category} /> 
         )
+    }
+
+    const PhotoPage = ({ match }) => {
+      return (
+        <SinglePhotoPage photo={match.params.photoId} />
+      )
     }
 
     const AuthorPage = ({ match }) => {
@@ -48,19 +55,20 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <Router>
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/category/:category" component={CategoryType} />} />
-              <Route exact path="/signup" component={Signup} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/user" component={User} />
-              <Route path="/author/:authorId" component={AuthorPage} />
-              <Route path="/search/:query" component={SearchPage} />
-              <Route path="/profile/:profileId" component={ProfilePage} />
-              <Route component={ErrorPage} />
-            </Switch>
-          </Router>
+          <Router>
+              <Switch>
+                  <Route exact path="/" component={Home} />
+                  <Route path="/category/:category" component={CategoryType} />} />
+                  <Route exact path="/signup" component={Signup} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/user" component={User} />
+                  <Route path="/photo/:photoId" component={PhotoPage} />
+                  <Route path="/author/:authorId" component={AuthorPage} />
+                  <Route path="/search/:query" component={SearchPage} />
+                  <Route path="/profile/:profileId" component={ProfilePage} />
+                  <Route component={ErrorPage} />
+              </Switch>
+            </Router>
       </div>
     );
   }

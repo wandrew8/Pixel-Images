@@ -11,6 +11,7 @@ class CommentsBar extends React.Component {
             url: 'http://localhost:3000',
             commentsData: [],
             comment: '',
+            error: '',
 
         }
         
@@ -88,11 +89,13 @@ class CommentsBar extends React.Component {
             .then((data) => {
                 console.log('Success:', data);
                 this.setState({comment: ''}) 
+
             })
             .catch((error) => {
             console.error('Error:', error);
             });
         } else {
+            this.setState({error: 'You must be signed in to post a comment'})
             console.log('Oops, you must be signed in to post a comment')
         }
     }
@@ -100,8 +103,6 @@ class CommentsBar extends React.Component {
     componentDidMount() {
         this.getComments();
     }
-
-   
 
     render() {
         const {photo} = this.props;
@@ -123,6 +124,7 @@ class CommentsBar extends React.Component {
                             type="text"
                             name="comment" 
                             required 
+                            value={this.state.comment}
                             onChange={this.handleInputChange}
                             placeholder="Add a comment" />
                         <button>Submit</button>

@@ -79,11 +79,14 @@ class RenderPhotos extends Component {
 
         if(this.props.photo) {
             return (
-                <React.Fragment>
-                    <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                <Link to={`/photo/${this.props.photo._id}`}>
+                    <img alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                     <div className="category">
                         <p>{this.props.photo.category}</p>
-                        <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                        <div className="stats">
+                            <div className="likes"><p>{this.props.photo.comments.length}</p><i class="far fa-comments"></i></div>
+                            <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                        </div>
                     </div>
                     <Link to={`/author/${this.props.photo.author[0]._id}`} >
                         <div className="author">
@@ -91,8 +94,8 @@ class RenderPhotos extends Component {
                             <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
                         </div>
                     </Link>
-                    <SinglePhoto incrementLikes={this.incrementLikes} photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/>
-                </React.Fragment>
+                    {/* <SinglePhoto incrementLikes={this.incrementLikes} photo={this.props.photo} show={this.state.show} handleClose={this.hideModal}/> */}
+                </Link>
         )
     } else {
         return (
