@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.2.1",
     "cloudinary": "^1.20.0",
     "cloudinary-react": "^1.4.0",
+    "lottie-react-web": "^2.1.4",
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "prop-types": "^15.6.0",

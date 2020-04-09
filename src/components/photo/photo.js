@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Lottie from '../Lottie/Lottie';
 import './Photo.scss';
 
 
@@ -9,6 +10,7 @@ class RenderPhotos extends Component {
         this.state = {
             show: false,
             url: 'http://localhost:3000',
+            playLottie: false,
         }
     }
 
@@ -30,7 +32,7 @@ class RenderPhotos extends Component {
             .then((response) => response.json())
             .then((data) => {
                 this.setStorage(id); 
-                this.setState({updateLikes: true})
+                this.setState({updateLikes: true, playLottie: true})
                 this.props.updatePhotos();
                 this.addToFavorites(id)
             })
@@ -124,7 +126,7 @@ class RenderPhotos extends Component {
             if(this.props.profile) {
                 return (
                     <React.Fragment>
-                        <Link to={`/photo/${this.props.photo._id}`}>
+                        <Link className="link" to={`/photo/${this.props.photo._id}`}>
                             <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                         </Link>
                         <div className="category">
@@ -133,6 +135,7 @@ class RenderPhotos extends Component {
                                 <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
                             }
                         </div>
+                        
                     </React.Fragment>
                 )
             } else {
@@ -150,7 +153,9 @@ class RenderPhotos extends Component {
                             </div>
                         </div>
                         <Link to={`/author/${this.props.photo.author[0]._id}`} >
+                        
                             <div className="author">
+                                <Lottie play={this.state.playLottie}/>
                                 <img alt="" src={this.props.photo.author[0].userImage}/>
                                 <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
                             </div>

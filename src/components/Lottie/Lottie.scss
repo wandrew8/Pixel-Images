@@ -1,0 +1,10 @@
+.lottieContainer {
+    position: absolute;
+    top: -27px;
+    right: -128px;
+    z-index: 90;
+    height: 100px;
+    .noDisplay {
+        display: none;
+    }
+}

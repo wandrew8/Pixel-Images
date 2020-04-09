@@ -15,16 +15,6 @@ class ProfileToggle extends React.Component {
         }
     }
 
-    togglePosted = () => {
-        this.setState({ togglePosted: true, toggleLiked: false });
-        this.props.togglePosted();
-    };
-
-    toggleFavorites = () => {
-        this.setState({ togglePosted: false, toggleLiked: true });
-        this.props.toggleFavorites();
-    }
-
     renderPhotos = () => {
         if (this.props.toggle === 'posted') {
             return (

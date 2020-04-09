@@ -32,14 +32,14 @@ class Profile extends React.Component {
         }
     }
 
-    componentDidUpdate() {
-        if(this.props.toggle === 'liked') {
-            this.getLikedPhotos();
-        }
-        if(this.props.toggle === 'posted') {
-            this.getAuthorPhotos();
-        }
-    }
+    // componentDidUpdate() {
+    //     if(this.props.toggle === 'liked') {
+    //         this.getLikedPhotos();
+    //     }
+    //     if(this.props.toggle === 'posted') {
+    //         this.getAuthorPhotos();
+    //     }
+    // }
 
     getAuthorInfo = () => {
         const url = `${this.state.url}/users/${this.props.author}`
@@ -74,7 +74,7 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
-            this.setState({isLiked: false, photos: data, photoDeleted: false, showLiked: false, showPosted: false });
+            this.setState({isLiked: false, photos: data});
         })
         .catch((error) => {
             this.setState({isLiked: false, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
@@ -107,8 +107,8 @@ class Profile extends React.Component {
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
-                <ProfileToggle author={this.state.data} toggle={this.props.toggle} togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
-                <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
+                <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
+                <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />
             </Fade>
         )
     }
