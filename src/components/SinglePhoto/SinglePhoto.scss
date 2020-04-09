@@ -132,5 +132,13 @@
       }
     }
     }
+    .singlePhotoPage {
+        background-color: rgba(0, 0, 0, 0.5);
+        height: 100%;
+        width: 100vw;
+        position: fixed;
+        z-index: 55;
+        top: 0;
+    }
 }
     

@@ -2,7 +2,7 @@ import React from 'react';
 import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
-import PhotoEdit from '../../components/PhotoEdit/PhotoEdit';
+import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
 import ProfileToggle from '../../components/ProfileToggle/ProfileToggle';
 import ProfileBanner from '../../components/ProfileBanner/ProfileBanner';
@@ -104,7 +104,7 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
-                <PhotoEdit reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
+                <Photo reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
             </Fade>
         )
     }

@@ -65,9 +65,12 @@ class CommentsBar extends React.Component {
         }
     }
 
-    postComment = (e) => {
+    handleSubmit = (e) => {
         e.preventDefault();
-        console.log('hello')
+        this.postComment()
+    }
+
+    postComment = (e) => {
         const authorId = window.sessionStorage.getItem('authorId')
         if (authorId) {
             const url = this.state.url + '/photos/' + this.props.photo._id + '/comments'
@@ -89,7 +92,7 @@ class CommentsBar extends React.Component {
             .then((data) => {
                 console.log('Success:', data);
                 this.setState({comment: ''}) 
-
+                this.getComments();
             })
             .catch((error) => {
             console.error('Error:', error);
@@ -119,7 +122,7 @@ class CommentsBar extends React.Component {
                     {this.RenderComments()}
                 </div>
                 <div className="addComment">
-                    <form onSubmit={this.postComment} id="addComment">
+                    <form onSubmit={this.handleSubmit} id="addComment">
                         <input 
                             type="text"
                             name="comment" 

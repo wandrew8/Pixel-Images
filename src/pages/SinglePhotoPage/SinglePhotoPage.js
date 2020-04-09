@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { useHistory } from "react-router-dom";
-
+import Photo from '../../components/Photo/Photo';
 import SinglePhoto from '../../components/SinglePhoto/SinglePhoto';
 import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
@@ -14,12 +13,36 @@ class SinglePhotoPage extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            show: false,
-            url: 'http://localhost:3000',
-            photo: [],
+            photos: [],
+            updatePhotos: false,
         }
     }
-
+        componentDidMount() {
+            this.getPhotos();
+        }
+    
+        componentDidUpdate() {
+            if(this.state.updatePhotos) {
+                this.getPhotos();
+                this.setState({updatePhotos: false});
+                console.log('Hit')
+            }
+        }
+    
+        updatePhotos = () => {
+            this.setState({updatePhotos: true})
+        }
+    
+        getPhotos = () => {
+            const url = "http://localhost:3000/photos"
+            fetch(url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+                this.setState({photos: data, updatePhotos: false})
+            })
+            .catch(err => console.log(err))
+        }
 
     render() {
         const token = window.sessionStorage.getItem('token');
@@ -31,11 +54,12 @@ class SinglePhotoPage extends Component {
                     delay={0} 
                     exitOpacity={0.1}
                     timingFn='ease-in-out' 
-                    duration={300}>
+                    duration={100}>
                     {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                     <Hero />
                     <CategoryHeader />
-                    <SinglePhoto photo={this.props.photo} />
+                    <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
+                        <SinglePhoto photo={this.props.photo} />
                 </Fade>
             )
     }; 

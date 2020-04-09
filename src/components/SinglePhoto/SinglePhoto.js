@@ -100,7 +100,9 @@ class SinglePhoto extends Component {
             )
         } else {
             return (
-                <div className="singlePhoto">
+                <React.Fragment>
+
+                <div className="singlePhoto">                    
                     <div onClick={this.goBack} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
                     <div className="photoGrid">
                         <div className="photo">
@@ -117,6 +119,9 @@ class SinglePhoto extends Component {
                         <CommentsBar photo={this.state.photo} />
                     </div>
                 </div>
+                <div className="singlePhotoPage"></div>
+                </React.Fragment>
+
             )   
         }
             
