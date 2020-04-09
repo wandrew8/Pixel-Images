@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './ProfileToggle.scss';
 
 class ProfileToggle extends React.Component {
@@ -25,7 +26,7 @@ class ProfileToggle extends React.Component {
     }
 
     renderPhotos = () => {
-        if (this.state.togglePosted) {
+        if (this.props.toggle === 'posted') {
             return (
                 <h1 className="heading">Your Posted Photos</h1>
             )
@@ -44,12 +45,12 @@ class ProfileToggle extends React.Component {
         return (
             <React.Fragment>
                 <div className="toggle">
-                    <div onClick={this.togglePosted} className={this.state.togglePosted ? "toggleButton post highlight" : "toggleButton post"} >
+                    <Link to={`/profile/${this.props.author._id}/posted`} className={this.props.toggle === 'posted' ? "toggleButton post highlight" : "toggleButton post"} >
                         POSTED PHOTOS
-                    </div>
-                    <div onClick={this.toggleFavorites} className={this.state.toggleLiked ? "toggleButton highlight" : "toggleButton post"}>
+                    </Link>
+                    <Link to={`/profile/${this.props.author._id}/liked`} className={this.props.toggle === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
                         LIKED PHOTOS
-                    </div>
+                    </Link>
                 </div>
                 {this.renderPhotos()}
             </React.Fragment>

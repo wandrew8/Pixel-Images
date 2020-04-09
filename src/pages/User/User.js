@@ -47,7 +47,7 @@ export default class User extends Component {
                 delay={0} 
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
-                duration={300}>
+                duration={100}>
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <CategoryHeader />

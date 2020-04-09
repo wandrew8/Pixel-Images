@@ -25,14 +25,18 @@ class Profile extends React.Component {
     }
     componentDidMount() {
         this.getAuthorInfo();
-        this.getAuthorPhotos()
+        if(this.props.toggle === 'posted') {
+            this.getAuthorPhotos();
+        } else {
+            this.getLikedPhotos();
+        }
     }
 
     componentDidUpdate() {
-        if(this.state.showLiked) {
+        if(this.props.toggle === 'liked') {
             this.getLikedPhotos();
         }
-        if (this.state.showPosted) {
+        if(this.props.toggle === 'posted') {
             this.getAuthorPhotos();
         }
     }
@@ -103,8 +107,8 @@ class Profile extends React.Component {
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
-                <ProfileToggle togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
-                <Photo profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
+                <ProfileToggle author={this.state.data} toggle={this.props.toggle} togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
+                <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
             </Fade>
         )
     }

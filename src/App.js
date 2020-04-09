@@ -49,7 +49,7 @@ class App extends React.Component {
 
     const ProfilePage = ({ match }) => {
       return (
-        <Profile author={match.params.profileId} /> 
+        <Profile author={match.params.profileId} toggle={match.params.toggle} /> 
         )
     }
 
@@ -65,7 +65,7 @@ class App extends React.Component {
                   <Route path="/photo/:photoId" component={PhotoPage} />
                   <Route path="/author/:authorId" component={AuthorPage} />
                   <Route path="/search/:query" component={SearchPage} />
-                  <Route path="/profile/:profileId" component={ProfilePage} />
+                  <Route path="/profile/:profileId/:toggle" component={ProfilePage} />
                   <Route component={ErrorPage} />
               </Switch>
             </Router>

@@ -89,7 +89,6 @@ class RenderPhotos extends Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                // this.props.reRenderPhotos()
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -124,15 +123,17 @@ class RenderPhotos extends Component {
         if(this.props.photo) {
             if(this.props.profile) {
                 return (
-                    <Link to={`/photo/${this.props.photo._id}`}>
-                        <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                    <React.Fragment>
+                        <Link to={`/photo/${this.props.photo._id}`}>
+                            <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                        </Link>
                         <div className="category">
                             {this.props.isLiked ? 
                                 <div onClick={this.unlikePhoto.bind(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove from Favorites</p></div> :
                                 <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
                             }
                         </div>
-                    </Link>
+                    </React.Fragment>
                 )
             } else {
                 return (
