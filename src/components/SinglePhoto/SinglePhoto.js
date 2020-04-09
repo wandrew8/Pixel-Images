@@ -84,11 +84,14 @@ class SinglePhoto extends Component {
         fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
-            this.setState({photo: data, isLoading: false})
-            console.log(this.state.photo)
-            console.log(this.state.photo.author[0].firstName)
-            console.log(this.state.photo.author[0])
+            if (!data) {
+                this.setState({photo: []})
+            } else {
+                this.setState({photo: data, isLoading: false})
+                console.log(this.state.photo)
+                console.log(this.state.photo.author[0].firstName)
+                console.log(this.state.photo.author[0])
+            }
         })
         .catch(err => console.log(err))
     }

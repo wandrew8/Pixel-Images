@@ -8,7 +8,7 @@ class UserBanner extends React.Component {
         const { firstName, lastName, userImage, createdAt } = this.props.author;
         return (
             <div className="banner">
-                <div className="editButton">Edit Profile<i class="fas fa-pencil-alt"></i></div>
+                <div className="editButton">Edit Profile<i className="fas fa-pencil-alt"></i></div>
                 <div className="userBanner">
                     <img src={userImage} alt={`${firstName}`} />
                     <div className="authorName">

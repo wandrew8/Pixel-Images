@@ -104,7 +104,7 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle togglePosted={this.togglePosted} toggleFavorites={this.toggleFavorites} />
-                <Photo reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
+                <Photo profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />
             </Fade>
         )
     }

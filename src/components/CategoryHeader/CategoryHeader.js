@@ -52,8 +52,8 @@ export default class CategoryHeader extends Component {
                 </Link>
                 
                 
-                <Link onClick={this.props.updatePhotos} to="/category/scenic" className="category">
-                    <div className="heading"><h2>Scenic</h2></div>
+                <Link onClick={this.props.updatePhotos} to="/category/nature" className="category">
+                    <div className="heading"><h2>Nature</h2></div>
                     <div className="photoGrid">
                         <div className="image">
                             <img alt="" src="https://images.unsplash.com/photo-1518495973542-4542c06a5843?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2000&q=60" />
