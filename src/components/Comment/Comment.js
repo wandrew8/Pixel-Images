@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import './Comment.scss';
 
@@ -87,10 +88,14 @@ class Comment extends Component {
         return (
             <div className="singleComment">
                 <div className="authorPhoto">
-                    <img src={comment.author.userImage} alt={comment.author.firstName} />
+                    <Link to={`/author/${comment.author._id}`}>
+                        <img src={comment.author.userImage} alt={comment.author.firstName} />
+                    </Link>
                 </div>
                 <div className="commentText">
-                    <small>{`${comment.author.firstName} ${comment.author.lastName} | ${moment(new Date(comment.createdAt), "YYYYMMDD").fromNow()}`}</small>
+                    <Link to={`/author/${comment.author._id}`}>
+                        <small>{`${comment.author.firstName} ${comment.author.lastName} | ${moment(new Date(comment.createdAt), "YYYYMMDD").fromNow()}`}</small>
+                    </Link>
                     <p>{comment.text}</p>
                     <div className="statusBar">
                             <i onClick={this.handleLike} className={ this.state.liked ? "fas fa-thumbs-up" : "far fa-thumbs-up"}></i><p>{this.state.likes}</p>

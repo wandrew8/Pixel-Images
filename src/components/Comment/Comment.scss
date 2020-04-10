@@ -6,6 +6,9 @@
     .commentText {
     color: black;
     text-align: left;
+    a {
+        text-decoration: none;
+    }
     small {
         font-size: 0.7rem;
         color: gray;
@@ -36,14 +39,15 @@
         grid-template-columns: 1fr 1fr 1fr 1fr 8fr;
         align-items: center;
         justify-content: center;
+       
         small {
             text-align: center;
+            color: black;
+            text-decoration: none;
+        }
+        &:hover {
+            cursor: pointer;
         }
     }
-    .icon {
-        color: black;
-    }
-    .iconHighlight {
-        color: blue;
-    }
+    
 }

@@ -179,7 +179,6 @@ class RenderPhotos extends Component {
 class Photo extends Component {
         render() {
             if (this.props.photos.length > 0) {
-
                 const photoCollection = this.props.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
@@ -187,12 +186,21 @@ class Photo extends Component {
                         </div>
                     )
                 });
-                return (
-                    <div className="photoContainer">
-                    {photoCollection}
-                </div>
-
-                )
+                if(this.props.photos.length < 10) {
+                    return (
+                        <div className="containerPhoto smallPhotoContainer">
+                            {photoCollection}
+                        </div>
+                    )
+                } else {
+                    return (
+                        <div className=" containerPhoto photoContainer">
+                            {photoCollection}
+                        </div>
+    
+                    )
+                }
+ 
             } else {
                 return (
                     <div className="error">

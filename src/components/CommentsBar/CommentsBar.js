@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Comment from '../Comment/Comment';
 import './CommentsBar.scss';
@@ -101,9 +102,13 @@ class CommentsBar extends React.Component {
         return(
             <div className="commentsGrid">
                 <div className="authorName">
-                    <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
+                    <Link to={`/author/${photo.author[0]._id}`}>
+                        <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
+                    </Link>
                     <div className="name">
-                        <h3>{`${photo.author[0].firstName} ${photo.author[0].lastName}`}</h3>
+                        <Link to={`/author/${photo.author[0]._id}`}>
+                            <h3>{`${photo.author[0].firstName} ${photo.author[0].lastName}`}</h3>
+                        </Link>
                         <p>Posted: {moment(new Date(photo.createdAt), "YYYYMMDD").fromNow()}</p>
                     </div>
                 </div>
