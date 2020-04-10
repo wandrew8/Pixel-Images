@@ -43,7 +43,7 @@ class CommentsBar extends React.Component {
         if (this.state.commentsData.length > 0) {
             const comments = this.state.commentsData.map(comment => {
                 return (
-                    <Comment key={comment._id} comment={comment} />
+                    <Comment photoId={this.props.photo._id} key={comment._id} comment={comment} />
                 )
             })
             return comments;
