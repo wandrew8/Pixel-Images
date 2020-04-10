@@ -1,0 +1,43 @@
+.singleComment {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    align-items: flex-start;
+    justify-content: center;
+    .commentText {
+    color: black;
+    text-align: left;
+    small {
+        font-size: 0.7rem;
+        color: gray;
+    }
+    p {
+        padding: 0.1rem 0rem;
+        margin: 0;
+        font-size: 0.85rem;
+    }
+    }
+    .authorPhoto {
+        img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+    }
+    img {
+        height: 50px;
+        width: 50px;
+        object-fit: cover;
+        border-radius: 50%;
+    }
+    .statusBar {
+        display: grid;
+        margin: 1rem 0rem;
+        grid-template-columns: 1fr 1fr 1fr 1fr 8fr;
+        align-items: center;
+        justify-content: center;
+        small {
+            text-align: center;
+        }
+    }
+}

@@ -74,6 +74,7 @@
         }
         i {
           padding: 0rem 0.5rem;
+          color: white;
         }
       }
     }
@@ -216,6 +217,9 @@ h2 {
         display: flex;
         justify-content: center;
         align-items: center;
+        i {
+          color: white;
+        }
         &:hover {
           cursor: pointer;
         }
@@ -278,6 +282,10 @@ h2 {
     text-align: center;
   }
   
+}
+
+.likes:hover i {
+  transform: scale(1.5);
 }
 
 @media all and (max-width: 1024px) {

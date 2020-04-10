@@ -148,7 +148,7 @@ class RenderPhotos extends Component {
                         <div className="category">
                             <p>{this.props.photo.category}</p>
                             <div className="stats">
-                                <div className="likes"><p>{this.props.photo.comments.length}</p><i className="far fa-comments"></i></div>
+                                <div className="likes"><p>{this.props.photo.comments.length}</p><Link to={`/photo/${this.props.photo._id}`} ><i className="far fa-comments"></i></Link></div>
                                 <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
                             </div>
                         </div>

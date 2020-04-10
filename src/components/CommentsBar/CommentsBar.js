@@ -1,5 +1,6 @@
 import React from 'react';
 import moment from 'moment';
+import Comment from '../Comment/Comment';
 import './CommentsBar.scss';
 
 
@@ -41,20 +42,7 @@ class CommentsBar extends React.Component {
         if (this.state.commentsData.length > 0) {
             const comments = this.state.commentsData.map(comment => {
                 return (
-                    <div key={comment._id} className="singleComment">
-                        <div className="authorPhoto">
-                            <img src={comment.author.userImage} alt={comment.author.firstName} />
-                        </div>
-                        <div className="commentText">
-                            <small>{`${comment.author.firstName} ${comment.author.lastName} | ${moment(new Date(comment.createdAt), "YYYYMMDD").fromNow()}`}</small>
-                            <p>{comment.text}</p>
-                            <div className="statusBar">
-                                    <i className="far fa-thumbs-up"></i><p>{comment.likes}</p>
-                                    <i className="far fa-thumbs-down"></i><p>{comment.dislikes}</p>
-                                <small>Reply</small>
-                            </div>
-                        </div>
-                    </div>
+                    <Comment key={comment._id} comment={comment} />
                 )
             })
             return comments;
