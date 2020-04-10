@@ -13,6 +13,7 @@ class CommentsBar extends React.Component {
             commentsData: [],
             comment: '',
             error: '',
+            
 
         }
         
