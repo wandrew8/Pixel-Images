@@ -109,14 +109,17 @@ export default class Signup extends Component {
                 <div className="container" style={divStyle}> 
                 <div className="headerTop">
                         <div className="titleHeader">
-                            <img src={logo} alt="" />
-                            <Link to="/"><h1>Pixel Images</h1></Link>
+                            <Link to="/">
+                                <img src={logo} alt="" />
+                            </Link>
+                            <Link to="/">
+                                <h1>Pixel Images</h1>
+                            </Link>
                         </div>
-
-                    </div>
-                    <div className="redirect">
-                        <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
-                    </div>
+                </div>
+                <div className="redirect">
+                    <p>Don't have an account? <Link to="/signup">Sign Up</Link></p>
+                </div>
                 <div className="overlay"></div>
                 <div className="formContainer">
                     <form onSubmit={this.handleFormSubmit} id="addPhotoForm">

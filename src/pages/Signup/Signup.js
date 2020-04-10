@@ -130,16 +130,19 @@ export default class Signup extends Component {
                 timingFn='ease-in-out' 
                 duration={300}>            
                 <div className="container" style={divStyle}> 
-                    <div className="headerTop">
-                        <div className="titleHeader">
+                <div className="headerTop">
+                    <div className="titleHeader">
+                        <Link to="/">
                             <img src={logo} alt="" />
-                            <Link to="/"><h1>Pixel Images</h1></Link>
-                        </div>
-
+                        </Link>
+                        <Link to="/">
+                            <h1>Pixel Images</h1>
+                        </Link>
                     </div>
-                    <div className="redirect">
-                        <p>Already have an account? <Link to="/login">Log in</Link></p>
-                    </div>
+                </div>
+                <div className="redirect">
+                    <p>Already have an account? <Link to="/login">Log in</Link></p>
+                </div>
                 <div className="overlay"></div>
                 <div className="formContainer">
                     <form onSubmit={this.handleFormSubmit} id="addPhotoForm">

@@ -16,7 +16,10 @@ export default class HomeHeader extends Component {
             imageUrl: '',
             uploadImage: false,
             query: '',
+            url: 'http://localhost:3000',
+            loggedOut: false,
         };
+        this.logoutUser = this.logoutUser.bind(this)
     }
     showModal = () => {
         this.setState({ show: true });
@@ -48,6 +51,19 @@ export default class HomeHeader extends Component {
             [name]: value
         });
     };
+
+    logoutUser(e) {
+        console.log('hello')
+        sessionStorage.clear();
+        this.setState({loggedOut: true})
+
+    }
+
+    renderRedirect = () => {
+        if (this.state.loggedOut) {
+            return <Redirect to='/' />
+        }
+    }
     
     listenToScroll = () => {
         const winScroll =
@@ -76,10 +92,12 @@ export default class HomeHeader extends Component {
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
                         <Link to={`/profile/${this.state.author}/posted`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</div>
+                        <div onClick={this.logoutUser} className="formButton"><button><i className="fas fa-sign-out-alt"></i>Logout</button></div>
                     </div>
                 </header>
                 <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
                 <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
+                {this.renderRedirect()}
             </div>
         )
     }
