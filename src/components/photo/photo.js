@@ -188,13 +188,13 @@ class Photo extends Component {
                 });
                 if(this.props.photos.length < 10) {
                     return (
-                        <div className="containerPhoto smallPhotoContainer">
+                        <div className="smallPhotoContainer">
                             {photoCollection}
                         </div>
                     )
                 } else {
                     return (
-                        <div className=" containerPhoto photoContainer">
+                        <div className="photoContainer">
                             {photoCollection}
                         </div>
     

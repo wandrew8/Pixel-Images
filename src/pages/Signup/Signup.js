@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Fade } from 'react-animation-components';
+import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './Signup.scss';
 
 
@@ -129,6 +130,16 @@ export default class Signup extends Component {
                 timingFn='ease-in-out' 
                 duration={300}>            
                 <div className="container" style={divStyle}> 
+                    <div className="headerTop">
+                        <div className="titleHeader">
+                            <img src={logo} alt="" />
+                            <Link to="/"><h1>Pixel Images</h1></Link>
+                        </div>
+
+                    </div>
+                    <div className="redirect">
+                        <p>Already have an account? <Link to="/login">Log in</Link></p>
+                    </div>
                 <div className="overlay"></div>
                 <div className="formContainer">
                     <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
@@ -196,6 +207,7 @@ export default class Signup extends Component {
                         </div>
                     </form>
                 </div>
+                
                 {this.renderRedirect()}
             </div>
         </Fade>
