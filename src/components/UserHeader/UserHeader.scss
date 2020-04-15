@@ -8,15 +8,22 @@ header {
   background-color: #fff;
   transition: 800ms ease-in;
   z-index: 50;
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 1rem;
+    text-decoration: none;
+    color: black;
+  }
+  .logo {
+    height: 50px;
+    width: 50px;
+  }
   h1 {
-    padding: 0.5rem 2rem;
     font-size: 1.5rem;
     font-weight: 400;
     text-transform: uppercase;
-    color: black;
-  }
-  a {
-    text-decoration: none;
     color: black;
   }
   .searchButton {
@@ -42,6 +49,8 @@ header {
       transition: 300ms ease-in;
       &:hover {
         background: black;
+        color: #fff;
+
       }
       &:hover a {
         color: #fff;

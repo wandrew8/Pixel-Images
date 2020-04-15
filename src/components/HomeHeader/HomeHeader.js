@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link, useHistory  } from 'react-router-dom';
+import logo from '../../assets/images/icons/android-chrome-512x512.png'
 
 
 import './HomeHeader.scss';
@@ -66,7 +67,7 @@ export default class HomeHeader extends Component {
         return (
             <div>
                 <header style={styledHeader}>
-                    <Link to="/"><h1>Pixel Images</h1></Link>
+                    <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
                         <div className="formButton"><button><Link to="/signup"><i className="fas fa-user"></i>Join</Link></button></div>

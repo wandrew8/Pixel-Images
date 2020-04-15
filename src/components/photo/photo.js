@@ -20,7 +20,7 @@ class RenderPhotos extends Component {
     }
 
     incrementLikes = (id) => {
-        const storageData = JSON.parse(localStorage.likedPhotos)
+        const storageData = JSON.parse(window.localStorage.getItem('likedPhotos')) || '';
         if(!storageData.includes(id)) {
             const url = this.state.url + `/photos/${id}`;
             fetch(url, {

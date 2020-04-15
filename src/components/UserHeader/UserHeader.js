@@ -1,6 +1,7 @@
 import React, { Component, useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
 import Toast from '../Toast/Toast';
+import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './UserHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -89,7 +90,7 @@ export default class HomeHeader extends Component {
         return (
             <div>
                 <header style={styledHeader}>
-                    <Link to="/user"><h1>Pixel Images</h1></Link>
+                    <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
                         <Link to={`/profile/${this.state.author}/posted`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
