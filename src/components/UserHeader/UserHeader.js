@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import Toast from '../Toast/Toast';
 import './UserHeader.scss';
 
 export default class HomeHeader extends Component {
@@ -219,9 +220,14 @@ class AddPhotoModal extends React.Component {
         this.setState({tags: this.state.tags.slice(0, index).concat(this.state.tags.slice(index + 1, this.state.tags.length))});
     }
 
+    showToast() {
+        return <Toast message={"You have added a photo"} />
+    }
+
     renderRedirect = () => {
         if (this.state.success) {
-            return <Redirect to='/user' />
+            this.showToast()
+            // return <Redirect to='/user' />
         }
     }
     
@@ -240,71 +246,73 @@ class AddPhotoModal extends React.Component {
         
         }
             return (
-                <div className={showHideClassName}>
-            <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
-                <h2>ADD YOUR OWN PHOTO</h2>
-                <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
-               
-                <div className="formGroup">
-                <label htmlFor="category">Category</label>
-                <select 
-                    onChange={this.change}
-                    value={this.state.category}
-                    required 
-                    name="category"
-                    id="category">
-                    <option value="">Select a category...</option>
-                    <option value="architecture">Architecture</option>
-                    <option value="animals">Animals</option>
-                    <option value="nature">Nature</option>
-                    <option value="aerial">Aerial</option>
-                    <option value="food">Food</option>
-                    <option value="portrait">Portrait</option>
-                    <option value="fashion">Fashion</option>
-                    <option value="activity">Activity</option>
-                    <option value="art">Art</option>
-                </select>
-                </div>
-                <div className="formGroup">
-                <label htmlFor="tags">Add some tags to describe your image</label>
-                <div className="row">
-                    <input 
-                    value={this.state.tag}
-                    onChange={this.handleInputChange}
-                    name="tag"
-                    list="tags" 
-                    id="tagInput" />
-                    <datalist id="tags">
-                    <option value="mountain"> </option>
-                    <option value="food"> </option>
-                    <option value="yoga"> </option>
-                    <option value="dogs"> </option>
-                    <option value="sunrise"> </option>
-                    <option value="travel"> </option>
-                    <option value="dinner"> </option>
-                    <option value="city"> </option>
-                    <option value="modern"> </option>
-                    <option value="blue"> </option>
-                    <option value="football"> </option>
-                    <option value="garden"> </option>
-                    <option value="animals"> </option>
-                    </datalist>
-                    <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
-                </div>
-                <div className="tagAnswers"><RenderTags /></div>
-                </div>
-                <div className="imageSample">
-                <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
-                    Upload Image
-                </button>
-                <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
-                </div>
-                <div className="formGroup">
-                <button disabled={this.state.uploadImage ? false : true}>Submit</button>
-                </div>
-            </form>
-            {this.renderRedirect()}
-            </div>
+                <React.Fragment>
+                    {this.state.success ? <Toast message="New Image Uploaded Successfully" /> : <div>Oh no</div>}
+                    <div className={showHideClassName}>
+                        <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
+                            <h2>ADD YOUR OWN PHOTO</h2>
+                            <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
+                        
+                            <div className="formGroup">
+                            <label htmlFor="category">Category</label>
+                            <select 
+                                onChange={this.change}
+                                value={this.state.category}
+                                required 
+                                name="category"
+                                id="category">
+                                <option value="">Select a category...</option>
+                                <option value="architecture">Architecture</option>
+                                <option value="animals">Animals</option>
+                                <option value="nature">Nature</option>
+                                <option value="aerial">Aerial</option>
+                                <option value="food">Food</option>
+                                <option value="portrait">Portrait</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="activity">Activity</option>
+                                <option value="art">Art</option>
+                            </select>
+                            </div>
+                            <div className="formGroup">
+                            <label htmlFor="tags">Add some tags to describe your image</label>
+                            <div className="row">
+                                <input 
+                                value={this.state.tag}
+                                onChange={this.handleInputChange}
+                                name="tag"
+                                list="tags" 
+                                id="tagInput" />
+                                <datalist id="tags">
+                                <option value="mountain"> </option>
+                                <option value="food"> </option>
+                                <option value="yoga"> </option>
+                                <option value="dogs"> </option>
+                                <option value="sunrise"> </option>
+                                <option value="travel"> </option>
+                                <option value="dinner"> </option>
+                                <option value="city"> </option>
+                                <option value="modern"> </option>
+                                <option value="blue"> </option>
+                                <option value="football"> </option>
+                                <option value="garden"> </option>
+                                <option value="animals"> </option>
+                                </datalist>
+                                <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
+                            </div>
+                            <div className="tagAnswers"><RenderTags /></div>
+                            </div>
+                            <div className="imageSample">
+                            <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
+                                Upload Image
+                            </button>
+                            <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
+                            </div>
+                            <div className="formGroup">
+                            <button disabled={this.state.uploadImage ? false : true}>Submit</button>
+                            </div>
+                        </form>
+                    </div>
+                </React.Fragment>
     )
     }
 }

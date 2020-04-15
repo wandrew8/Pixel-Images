@@ -211,7 +211,6 @@ export default class Signup extends Component {
                         </div>
                     </form>
                 </div>
-                
                 {this.renderRedirect()}
             </div>
         </Fade>
