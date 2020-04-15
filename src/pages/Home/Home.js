@@ -3,6 +3,7 @@ import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
+import Loader from '../../components/Loader/Loader';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
@@ -10,6 +11,9 @@ export default class Home extends Component {
     state = {
         photos: [],
         updatePhotos: false,
+        isLoading: true,
+        // url: 'http://localhost:3000',
+        url: "https://quiet-ravine-27369.herokuapp.com"
     }
     componentDidMount() {
         this.getPhotos();
@@ -28,12 +32,12 @@ export default class Home extends Component {
     }
 
     getPhotos = () => {
-        const url = "http://localhost:3000/photos"
+        const url = this.state.url + "/photos"
         fetch(url)
         .then(res => res.json())
         .then(data => {
             console.log(data)
-            this.setState({photos: data, updatePhotos: false})
+            this.setState({photos: data, isLoading: false, updatePhotos: false})
         })
         .catch(err => console.log(err))
     }
@@ -52,7 +56,7 @@ export default class Home extends Component {
             {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
             <Hero />
             <CategoryHeader />
-            <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
+            {this.state.isLoading ? <Loader /> : <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />}
             </Fade>
         )
     }

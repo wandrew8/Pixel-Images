@@ -4,6 +4,7 @@ import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
 import Hero from '../../components/Hero/Hero';
+import Loader from '../../components/Loader/Loader';
 import ProfileToggle from '../../components/ProfileToggle/ProfileToggle';
 import ProfileBanner from '../../components/ProfileBanner/ProfileBanner';
 import './Profile.scss';
@@ -12,34 +13,37 @@ class Profile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: "https://quiet-ravine-27369.herokuapp.com",
             data: {},
             photos: [],
             photoDeleted: false,
             showLiked: false,
             showPosted: true,
             isLiked: false,
+            isLoading: false,
             
         }
         
     }
     componentDidMount() {
         this.getAuthorInfo();
-        if(this.props.toggle === 'posted') {
+        if(this.state.showPosted) {
             this.getAuthorPhotos();
-        } else {
+        } 
+        if (this.state.showLiked) {
             this.getLikedPhotos();
         }
     }
 
-    // componentDidUpdate() {
-    //     if(this.props.toggle === 'liked') {
-    //         this.getLikedPhotos();
-    //     }
-    //     if(this.props.toggle === 'posted') {
-    //         this.getAuthorPhotos();
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if(this.props.toggle === "posted" && this.props.toggle !== prevProps.toggle) {
+            this.getAuthorPhotos();
+        }
+        if(this.props.toggle === "liked" && this.props.toggle !== prevProps.toggle) {
+            this.getLikedPhotos();
+        }
+    }
 
     getAuthorInfo = () => {
         const url = `${this.state.url}/users/${this.props.author}`
@@ -47,6 +51,7 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             this.setState({data: data})
+            
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -54,13 +59,14 @@ class Profile extends React.Component {
     } 
 
     getLikedPhotos = () => {
+        this.setState({isLoading: true, showLiked: true, showPosted: false})
         const userId = window.sessionStorage.getItem('authorId');
         const url = `${this.state.url}/users/${userId}/favorites`
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
             console.log('Success:', data);
-            this.setState({isLiked: true, photos: data, photoDeleted: false, showLiked: false, showPosted: false})
+            this.setState({isLiked: true, isLoading: false, photos: data, photoDeleted: false, showLiked: false, showPosted: false})
         })
         .catch((error) => {
             this.setState({isLiked: true, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
@@ -108,7 +114,7 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
-                <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />
+                {this.state.isLoading ? <Loader /> : <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />}
             </Fade>
         )
     }

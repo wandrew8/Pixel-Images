@@ -4,6 +4,7 @@ import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/Photo/Photo';
+import Loader from '../../components/Loader/Loader';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
@@ -29,7 +30,7 @@ export default class Category extends Component {
     }
 
     fetchPhotos = () => {
-        const url = `http://localhost:3000/photos/category/${this.props.category}`;
+        const url = `https://quiet-ravine-27369.herokuapp.com/photos/category/${this.props.category}`;
         fetch(url)
         .then(res => res.json())
         .then(data => {
@@ -54,7 +55,7 @@ export default class Category extends Component {
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <CategoryHeader updatePhotos={this.updatePhotos} />
-                <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
+                {this.state.isLoading ? <Loader /> :<Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />}
             </Fade>
         )
     }

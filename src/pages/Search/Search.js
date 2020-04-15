@@ -3,6 +3,7 @@ import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
+import Loader from '../../components/Loader/Loader';
 import Hero from '../../components/Hero/Hero';
 import './Search.scss';
 
@@ -10,7 +11,8 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: "https://quiet-ravine-27369.herokuapp.com",
             photos: [],
         }
     }
@@ -51,7 +53,7 @@ class Search extends React.Component {
                 duration={300}>
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
-                <Photo photos={this.state.photos} />
+                {this.state.isLoading ? <Loader /> : <Photo photos={this.state.photos} />}
             </Fade>
         )
     }

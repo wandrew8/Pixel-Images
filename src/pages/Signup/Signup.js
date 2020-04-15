@@ -16,7 +16,8 @@ export default class Signup extends Component {
                 "https://images.unsplash.com/photo-1526661309553-0b6c10fb4302?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2176&q=80"
             ],
         index: 0,
-        url: 'http://localhost:3000',
+        // url: 'http://localhost:3000',
+        url: "https://quiet-ravine-27369.herokuapp.com",
         firstName: '',
         lastName: '',
         username: '',

@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import Photo from '../../components/Photo/Photo';
 import SinglePhoto from '../../components/SinglePhoto/SinglePhoto';
 import { Fade } from 'react-animation-components';
-import HomeHeader from '../../components/HomeHeader/HomeHeader';
-import Hero from '../../components/Hero/Hero';
-import UserHeader from '../../components/UserHeader/UserHeader';
-import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 import './SinglePhotoPage.scss';
+// import Photo from '../../components/Photo/Photo';
+// import HomeHeader from '../../components/HomeHeader/HomeHeader';
+// import Hero from '../../components/Hero/Hero';
+// import UserHeader from '../../components/UserHeader/UserHeader';
+// import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 
 
 class SinglePhotoPage extends Component {
@@ -34,7 +34,9 @@ class SinglePhotoPage extends Component {
         }
     
         getPhotos = () => {
-            const url = "http://localhost:3000/photos"
+            // const url = "http://localhost:3000/photos"
+            const url = "https://quiet-ravine-27369.herokuapp.com"
+
             fetch(url)
             .then(res => res.json())
             .then(data => {
@@ -45,8 +47,8 @@ class SinglePhotoPage extends Component {
         }
 
     render() {
-        const token = window.sessionStorage.getItem('token');
-        const authorId = window.sessionStorage.getItem('authorId');
+        // const token = window.sessionStorage.getItem('token');
+        // const authorId = window.sessionStorage.getItem('authorId');
         
             return(
                 <Fade
@@ -55,11 +57,14 @@ class SinglePhotoPage extends Component {
                     exitOpacity={0.1}
                     timingFn='ease-in-out' 
                     duration={100}>
-                    {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
-                    <Hero />
-                    <CategoryHeader />
-                    <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />
-                        <SinglePhoto photo={this.props.photo} />
+                    {/* {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />} */}
+                    {/* <Hero /> */}
+                    {/* <CategoryHeader /> */}
+                    {/* <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} /> */}
+                    <SinglePhoto photo={this.props.photo} />
+                    <div className="background"></div>
+                    <div className="backgroundOverlay"></div>
+
                 </Fade>
             )
     }; 

@@ -8,7 +8,8 @@ class ProfileToggle extends React.Component {
         this.state = {
             togglePosted: true,
             toggleLiked: false,
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
             data: {},
             photos: [],
             happy: true,

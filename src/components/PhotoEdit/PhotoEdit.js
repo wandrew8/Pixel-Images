@@ -8,7 +8,8 @@ class RenderPhotos extends Component {
         super(props)
         this.state = {
             show: false,
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
         }
     }
 

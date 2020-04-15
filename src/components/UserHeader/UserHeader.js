@@ -16,7 +16,8 @@ export default class HomeHeader extends Component {
             imageUrl: '',
             uploadImage: false,
             query: '',
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
             loggedOut: false,
         };
         this.logoutUser = this.logoutUser.bind(this)
@@ -138,7 +139,8 @@ class AddPhotoModal extends React.Component {
             imageUrl: '',
             author: window.sessionStorage.getItem('authorId'),
             uploadImage: false,
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
             tag: '',
             success: false,
         };

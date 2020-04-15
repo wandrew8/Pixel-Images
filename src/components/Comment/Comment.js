@@ -12,7 +12,8 @@ class Comment extends Component {
             text: this.props.comment.text,
             liked: false,
             disliked: false,
-            url: 'http://localhost:3000'
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
 
         }
         this.handleLike = this.handleLike.bind(this);

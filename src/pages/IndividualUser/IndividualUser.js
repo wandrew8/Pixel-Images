@@ -3,6 +3,7 @@ import './IndividualUser.scss';
 import { Fade } from 'react-animation-components';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/Photo/Photo';
+import Loader from '../../components/Loader/Loader';
 import Hero from '../../components/Hero/Hero';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import UserBanner from '../../components/UserBanner/UserBanner';
@@ -11,7 +12,8 @@ class IndividualUser extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: "https://quiet-ravine-27369.herokuapp.com",
             data: {},
             photos: [],
         }
@@ -61,7 +63,7 @@ class IndividualUser extends React.Component {
                     {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                     <Hero />
                     <UserBanner author={this.state.data} />
-                    <Photo photos={this.state.photos} />
+                    {this.state.isLoading ? <Loader /> :<Photo photos={this.state.photos} />}
                 </Fade>
         )
     }

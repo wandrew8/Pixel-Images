@@ -9,7 +9,8 @@ class SinglePhoto extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            url: 'http://localhost:3000',
+            // url: 'http://localhost:3000',
+            url: 'https://quiet-ravine-27369.herokuapp.com',
             photo: [],
             isLoading: true,
         }
