@@ -19,11 +19,11 @@ export default class HomeHeader extends Component {
     }
     showModal = () => {
         this.setState({ show: true });
-      }
-      
-      hideModal = () => {
-        this.setState({ show: false });
-      }
+    }
+    
+    hideModal = () => {
+      this.setState({ show: false });
+    }
 
       componentDidMount() {
         window.addEventListener('scroll', this.listenToScroll)

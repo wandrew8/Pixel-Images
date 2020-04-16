@@ -1,9 +1,31 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './SmallHeader.scss';
 
-
+const Modal = ({ handleClose, show, history }) => {
+    const [query, setQuery] = useState('')  
+    const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
+    const historyObj = history();
+  
+      function submitForm(e) {
+        e.preventDefault();
+        console.log(query)
+        console.log(historyObj)
+        if(query) historyObj.push('/search/' + query);
+      }
+        return (
+        <div className={showHideClassName}>
+          <div onClick={handleClose} className="closeBar"><i className="far fa-times-circle"></i></div>
+          <form id="searchForm">
+              <input required onChange={e => setQuery(e.target.value)} name="query" id="searchTags" />
+              <button id="submitSearch" onClick={submitForm}>
+                <i className="fas fa-search"></i> Search
+              </button>
+          </form>
+        </div>
+      );
+  }; 
 
 class SmallHeader extends React.Component {
     constructor(props) {
@@ -40,7 +62,27 @@ class SmallHeader extends React.Component {
         console.log(this.state.showNav)
         this.setState({ showNav: !this.state.showNav })
     }
+
+    showModal = () => {
+        this.setState({ show: true });
+    }
+      
+    hideModal = () => {
+    this.setState({ show: false });
+    }
     
+    handleQuery(e) {
+        e.preventDefault();
+        console.log(this.state.query)
+        
+    }
+
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
 
     
 
@@ -55,7 +97,7 @@ class SmallHeader extends React.Component {
             return (
                 <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
                     <ul>
-                        <li className="searchButton"><i className="fas fa-search"></i>Search</li>
+                        <li onClick={props.showModal} className="searchButton"><i className="fas fa-search"></i>Search</li>
                         <li className="formButton"><Link to="/signup"><i className="fas fa-user"></i>Join</Link></li>
                         <li className="formButton"><Link to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link></li>
                     </ul>
@@ -71,7 +113,8 @@ class SmallHeader extends React.Component {
                         <i onClick={this.showNav} className="fas fa-chevron-down"></i>
                     </div>
                 </header>
-                    {this.state.showNav ? <MenuBar scrollPosition={this.state.scrollPosition} /> : null}
+                <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} /> 
+                {this.state.showNav ? <MenuBar showModal={this.showModal} scrollPosition={this.state.scrollPosition} /> : null}
             </div>
             
         )

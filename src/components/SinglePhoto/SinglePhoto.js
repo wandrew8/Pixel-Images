@@ -113,10 +113,10 @@ class SinglePhoto extends Component {
             return (
                 <React.Fragment>
                     {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
-                    <div className="singlePhoto">                    
+                    <div id="singlePhoto" className="singlePhoto">                    
                         <div onClick={this.goBack} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
-                        <div className="photoGrid">
-                            <div className="photo">
+                        <div id="photoGrid" className="photoGrid">
+                            <div id="photo" className="photo">
                                 <img alt="" data-id={this.state.photo._id} className="image" width="200" height="200" src={this.state.photo.imageUrl} />
                                 <div className="category">
                                     <p>{this.state.photo.category}</p>
