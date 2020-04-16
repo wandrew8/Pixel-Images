@@ -98,8 +98,8 @@ class SmallHeader extends React.Component {
                 <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
                     <ul>
                         <li onClick={props.showModal} className="searchButton"><i className="fas fa-search"></i>Search</li>
-                        <li className="formButton"><Link to="/signup"><i className="fas fa-user"></i>Join</Link></li>
-                        <li className="formButton"><Link to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link></li>
+                        <Link to="/signup"><li className="formButton"><i className="fas fa-user"></i>Join</li></Link>
+                        <Link to="/login"><li className="formButton"><i className="fas fa-sign-in-alt"></i>Login</li></Link>
                     </ul>
                 </div>
             )

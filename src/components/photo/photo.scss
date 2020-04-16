@@ -594,7 +594,7 @@ h2 {
 
 
 
-@media all and (max-width: 1024px) {
+@media all and (max-width: 1078px) {
   #singlePhoto {
     height: 85vh;
     width: 85vw;
@@ -625,6 +625,9 @@ h2 {
         input {
           width: 100%;
         }
+      }
+      .statusBar {
+        max-width: 300px;
       }
     }
   }

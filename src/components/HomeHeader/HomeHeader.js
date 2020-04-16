@@ -14,7 +14,7 @@ export default class HomeHeader extends Component {
             show: false,
             scrollPosition: 0,
             query: '',
-            width: 0,
+            width: window.innerWidth,
         };
     }
     showModal = () => {
@@ -55,6 +55,10 @@ export default class HomeHeader extends Component {
         console.log(this.state.query)
         
       }
+
+      listenResize = () => {
+        this.setState({width: window.innerWidth})
+    }
 
       handleInputChange = event => {
         const { name, value } = event.target;

@@ -1,19 +1,40 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
-import SmallHeader2 from '../SmallHeader2/SmallHeader2';
 import Toast from '../Toast/Toast';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
-import './UserHeader.scss';
+import './SmallHeader2.scss';
 
-export default class HomeHeader extends Component {
+const Modal = ({ handleClose, show, history }) => {
+    const [query, setQuery] = useState('')  
+    const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
+    const historyObj = history();
+  
+      function submitForm(e) {
+        e.preventDefault();
+        console.log(query)
+        console.log(historyObj)
+        if(query) historyObj.push('/search/' + query);
+      }
+        return (
+        <div className={showHideClassName}>
+          <div onClick={handleClose} className="closeBar"><i className="far fa-times-circle"></i></div>
+          <form id="searchForm">
+              <input required onChange={e => setQuery(e.target.value)} name="query" id="searchTags" />
+              <button id="submitSearch" onClick={submitForm}>
+                <i className="fas fa-search"></i> Search
+              </button>
+          </form>
+        </div>
+      );
+  }; 
+
+class SmallHeader2 extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
-            show: false,
-            scrollPosition: 0,
-            addPhoto: false,
-            author: window.sessionStorage.getItem('authorId'),
+            scroll: 0,
+            loggedOut: false,
+            showNav: false,
             category: '',
             tags: [],
             imageUrl: '',
@@ -21,17 +42,18 @@ export default class HomeHeader extends Component {
             query: '',
             // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
-            loggedOut: false,
-            width: window.innerWidth,
-        };
-        this.logoutUser = this.logoutUser.bind(this)
+            addPhoto: false,
+            author: window.sessionStorage.getItem('authorId'),
+
+        }
+        this.showNav = this.showNav.bind(this)
     }
-    showModal = () => {
-        this.setState({ show: true });
+    componentDidMount() {
+        window.addEventListener('scroll', this.listenToScroll)
     }
     
-    hideModal = () => {
-    this.setState({ show: false });
+    componentWillUnmount() {
+        window.removeEventListener('scroll', this.listenToScroll)
     }
 
     openPhotoModal = () => {
@@ -42,19 +64,44 @@ export default class HomeHeader extends Component {
     this.setState({ addPhoto: false })
     }
 
-    componentDidMount() {
-    window.addEventListener('scroll', this.listenToScroll)
-    window.addEventListener('resize', this.listenResize);
+    logoutUser = (e) => {
+        console.log('hello')
+        sessionStorage.clear();
+        this.setState({loggedOut: true})
+
+    }
+      
+    listenToScroll = () => {
+        const winScroll =
+            document.body.scrollTop || document.documentElement.scrollTop
+        
+        const height =
+            document.documentElement.scrollHeight -
+            document.documentElement.clientHeight
+        
+        const scrolled = winScroll / height
+        this.setState({
+            scrollPosition: scrolled,
+        })
+    }
+
+    showNav() {
+        console.log(this.state.showNav)
+        this.setState({ showNav: !this.state.showNav })
+    }
+
+    showModal = () => {
+        this.setState({ show: true });
+    }
+      
+    hideModal = () => {
+    this.setState({ show: false });
     }
     
-    componentWillUnmount() {
-    window.removeEventListener('scroll', this.listenToScroll)
-    window.removeEventListener('resize', this.listenResize);
-
-    }
-
-    listenResize = () => {
-        this.setState({width: window.innerWidth})
+    handleQuery(e) {
+        e.preventDefault();
+        console.log(this.state.query)
+        
     }
 
     handleInputChange = event => {
@@ -64,87 +111,53 @@ export default class HomeHeader extends Component {
         });
     };
 
-    logoutUser(e) {
-        console.log('hello')
-        sessionStorage.clear();
-        this.setState({loggedOut: true})
-
-    }
-
     renderRedirect = () => {
         if (this.state.loggedOut) {
             return <Redirect to='/' />
         }
     }
+
     
-    listenToScroll = () => {
-        const winScroll =
-          document.body.scrollTop || document.documentElement.scrollTop
-      
-        const height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight
-      
-        const scrolled = winScroll / height
-        this.setState({
-          scrollPosition: scrolled,
-        })
-    }
-    render() {
+
+    render () {
         const styledHeader = {
             height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
-        }
-        if (this.state.width > 800) {
 
-        return (
+        }
+
+        function MenuBar(props) {    
+            return (
+                <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
+                    <ul>
+                        <li onClick={props.showModal} className="searchButton"><i className="fas fa-search"></i>Search</li>
+                        <Link to={`/profile/${props.author}/posted`} className="searchButton"><li><i className="fas fa-user-circle"></i>View Profile</li></Link>
+                        <li onClick={props.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</li>
+                        <li onClick={props.logoutUser} className="formButton"><i className="fas fa-sign-out-alt"></i>Logout</li>
+                    </ul>
+                    <AddPhotoModal show={props.addPhoto} handleClose={props.closePhotoModal} />
+                    {props.renderRedirect()}
+                </div>
+            )
+        }
+
+        return(
             <div>
                 <header style={styledHeader}>
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
-                    <div className="tools">
-                        <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
-                        <Link to={`/profile/${this.state.author}/posted`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
-                        <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</div>
-                        <div onClick={this.logoutUser} className="formButton"><button><i className="fas fa-sign-out-alt"></i>Logout</button></div>
+                    <div className="mobileHeader">
+                        <i onClick={this.showNav} className="fas fa-chevron-down"></i>
                     </div>
                 </header>
-                <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
-                <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
-                {this.renderRedirect()}
+                <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} /> 
+                {this.state.showNav ? <MenuBar closePhotoModal={this.closePhotoModal} renderRedirect={this.renderRedirect} addPhoto={this.state.addPhoto} logoutUser={this.logoutUser} closeModal={this.closeModal} openPhotoModal={this.openPhotoModal} author={this.state.author} showModal={this.showModal} scrollPosition={this.state.scrollPosition} /> : null}
             </div>
+            
         )
-        } else {
-            return (
-                <SmallHeader2 />
-            )
-        }
     }
 }
 
-const Modal = ({ handleClose, show , history}) => {
-    const [query, setQuery] = useState('')  
-    const showHideClassName = show ? 'searchbar' : 'searchbar hideSearchBar';
-    const historyObj = history();
-  
-    function submitForm(e) {
-    e.preventDefault();
-    console.log(query)
-    console.log(historyObj)
-    if(query) historyObj.push('/search/' + query);
-    }  
-    return (
-      <div className={showHideClassName}>
-        <div onClick={handleClose} className="closeBar"><i className="far fa-times-circle"></i></div>
-        <form onSubmit={submitForm} id="searchForm">
-            <input required onChange={e => setQuery(e.target.value)} name="query" id="searchTags" />
-            <button id="submitSearch" type="submit">
-            <i className="fas fa-search"></i> Search
-            </button>
-        </form>
-      </div>
-    );
-}; 
-
+export default SmallHeader2;
 
 class AddPhotoModal extends React.Component {
     constructor(props) {
@@ -263,7 +276,7 @@ class AddPhotoModal extends React.Component {
         }
             return (
                 <React.Fragment>
-                    {this.state.success ? <Toast message="New Image Uploaded Successfully" /> : <div>Oh no</div>}
+                    {this.state.success ? <Toast message="New Image Uploaded Successfully" /> : null}
                     <div className={showHideClassName}>
                         <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
                             <h2>ADD YOUR OWN PHOTO</h2>
@@ -332,5 +345,4 @@ class AddPhotoModal extends React.Component {
     )
     }
 }
-
 
