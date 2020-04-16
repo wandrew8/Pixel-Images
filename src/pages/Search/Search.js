@@ -21,8 +21,10 @@ class Search extends React.Component {
         this.searchQuery()
     }
 
-    componentDidUpdate() {
-        this.searchQuery()
+    componentDidUpdate(prevProps) {
+        if(this.props.query !== prevProps.query) {
+            this.searchQuery();
+        }
     }
 
     searchQuery() {

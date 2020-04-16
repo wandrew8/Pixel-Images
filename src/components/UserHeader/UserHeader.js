@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link, Redirect, useHistory } from 'react-router-dom';
+import SmallHeader from '../SmallHeader/SmallHeader';
 import Toast from '../Toast/Toast';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './UserHeader.scss';
@@ -21,6 +22,7 @@ export default class HomeHeader extends Component {
             // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             loggedOut: false,
+            width: window.innerWidth,
         };
         this.logoutUser = this.logoutUser.bind(this)
     }
@@ -42,10 +44,17 @@ export default class HomeHeader extends Component {
 
     componentDidMount() {
     window.addEventListener('scroll', this.listenToScroll)
+    window.addEventListener('resize', this.listenResize);
     }
     
     componentWillUnmount() {
     window.removeEventListener('scroll', this.listenToScroll)
+    window.removeEventListener('resize', this.listenResize);
+
+    }
+
+    listenResize = () => {
+        this.setState({width: window.innerWidth})
     }
 
     handleInputChange = event => {
@@ -86,6 +95,7 @@ export default class HomeHeader extends Component {
             height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
         }
+        if (this.state.width > 800) {
 
         return (
             <div>
@@ -103,6 +113,11 @@ export default class HomeHeader extends Component {
                 {this.renderRedirect()}
             </div>
         )
+        } else {
+            return (
+                <SmallHeader />
+            )
+        }
     }
 }
 

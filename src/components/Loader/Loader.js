@@ -5,7 +5,7 @@ function Loader() {
     return (
         <div className="loader">
             <p>Loading...</p>
-            <i class="fas fa-spin fa-circle-notch"></i>
+            <i className="fas fa-spin fa-circle-notch"></i>
         </div>
     )
 }

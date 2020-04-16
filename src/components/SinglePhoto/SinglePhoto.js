@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
+import Lottie from '../Lottie/Lottie';
+import Toast from '../Toast/Toast';
+import Loader from '../Loader/Loader';
 
 import CommentsBar from '../../components/CommentsBar/CommentsBar';
 import './SinglePhoto.scss';
@@ -13,6 +16,8 @@ class SinglePhoto extends Component {
             url: 'https://quiet-ravine-27369.herokuapp.com',
             photo: [],
             isLoading: true,
+            playLottie: false,
+            updateLikes: false,
         }
     }
 
@@ -21,7 +26,8 @@ class SinglePhoto extends Component {
     }
 
     incrementLikes = (id) => {
-        const storageData = JSON.parse(localStorage.likedPhotos)
+        this.setState({ showToast: false })
+        const storageData = JSON.parse(window.localStorage.getItem('likedPhotos')) || '';
         if(!storageData.includes(id)) {
             const url = this.state.url + `/photos/${id}`;
             fetch(url, {
@@ -34,7 +40,7 @@ class SinglePhoto extends Component {
             .then((response) => response.json())
             .then((data) => {
                 this.setStorage(id); 
-                this.setState({updateLikes: true})
+                this.setState({updateLikes: true, playLottie: true})
                 this.props.updatePhotos();
                 this.addToFavorites(id)
             })
@@ -42,6 +48,7 @@ class SinglePhoto extends Component {
             console.error('Error:', error);
             });
         } else {
+            this.setState({ showToast: true })
             console.log('You already liked this photo')
         }
     }
@@ -100,30 +107,31 @@ class SinglePhoto extends Component {
     render() {
         if(this.state.isLoading) {
             return (
-                <div>Loading...</div>
+                <Loader />
             )
         } else {
             return (
                 <React.Fragment>
-
-                <div className="singlePhoto">                    
-                    <div onClick={this.goBack} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
-                    <div className="photoGrid">
-                        <div className="photo">
-                            <img alt="" data-id={this.state.photo._id} className="image" width="200" height="200" src={this.state.photo.imageUrl} />
-                            <div className="category">
-                                <p>{this.state.photo.category}</p>
-                                <div onClick={this.incrementLikes.bind(null, this.state.photo._id)} className="likes"><p>{this.state.photo.likes}</p><i className="far fa-heart"></i></div>
-                            </div>
-                            <Link className="author" to={`/author/${this.state.photo.author[0]._id}`} >
+                    {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
+                    <div className="singlePhoto">                    
+                        <div onClick={this.goBack} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
+                        <div className="photoGrid">
+                            <div className="photo">
+                                <img alt="" data-id={this.state.photo._id} className="image" width="200" height="200" src={this.state.photo.imageUrl} />
+                                <div className="category">
+                                    <p>{this.state.photo.category}</p>
+                                    <div onClick={this.incrementLikes.bind(null, this.state.photo._id)} className="likes"><p>{this.state.photo.likes}</p><i className="far fa-heart"></i></div>
+                                </div>
+                                <Link className="author" to={`/author/${this.state.photo.author[0]._id}`} >
+                                    <Lottie play={this.state.playLottie}/>
                                     <img alt="" src={this.state.photo.author[0].userImage} />
                                     <p>{this.state.photo.author[0].firstName} {this.state.photo.author[0].lastName}</p>
-                            </Link>
+                                </Link>
+                            </div>
+                            <CommentsBar photo={this.state.photo} />
                         </div>
-                        <CommentsBar photo={this.state.photo} />
                     </div>
-                </div>
-                <div className="singlePhotoPage"></div>
+                    <div className="singlePhotoPage"></div>
                 </React.Fragment>
 
             )   

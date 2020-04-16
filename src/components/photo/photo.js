@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Lottie from '../Lottie/Lottie';
+import Toast from '../Toast/Toast';
 import './Photo.scss';
 
 
@@ -12,6 +13,7 @@ class RenderPhotos extends Component {
             // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             playLottie: false,
+            showToast: false,
         }
     }
 
@@ -20,6 +22,7 @@ class RenderPhotos extends Component {
     }
 
     incrementLikes = (id) => {
+        this.setState({ showToast: false })
         const storageData = JSON.parse(window.localStorage.getItem('likedPhotos')) || '';
         if(!storageData.includes(id)) {
             const url = this.state.url + `/photos/${id}`;
@@ -41,6 +44,7 @@ class RenderPhotos extends Component {
             console.error('Error:', error);
             });
         } else {
+            this.setState({ showToast: true })
             console.log('You already liked this photo')
         }
     }
@@ -114,7 +118,7 @@ class RenderPhotos extends Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
-                // this.props.reRenderPhotos()
+                this.props.reRenderPhotos()
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -127,6 +131,7 @@ class RenderPhotos extends Component {
             if(this.props.profile) {
                 return (
                     <React.Fragment>
+                        {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
                         <Link className="link" to={`/photo/${this.props.photo._id}`}>
                             <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                         </Link>
@@ -142,7 +147,7 @@ class RenderPhotos extends Component {
             } else {
                 return (
                     <React.Fragment>
-
+                    {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
                     <Link to={`/photo/${this.props.photo._id}`}>
                         <img alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                     </Link>

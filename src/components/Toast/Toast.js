@@ -16,7 +16,9 @@ class Toast extends React.Component {
     }
 
     componentWillUnmount() {
-        clearTimeout()
+        clearTimeout(() => {
+            this.setState({ isShown: false })
+        }, 3000)
     }
 
     render() {

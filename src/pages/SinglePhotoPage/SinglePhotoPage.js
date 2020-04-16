@@ -25,7 +25,6 @@ class SinglePhotoPage extends Component {
             if(this.state.updatePhotos) {
                 this.getPhotos();
                 this.setState({updatePhotos: false});
-                console.log('Hit')
             }
         }
     
@@ -47,9 +46,7 @@ class SinglePhotoPage extends Component {
         }
 
     render() {
-        // const token = window.sessionStorage.getItem('token');
-        // const authorId = window.sessionStorage.getItem('authorId');
-        
+    
             return(
                 <Fade
                     in
@@ -57,11 +54,7 @@ class SinglePhotoPage extends Component {
                     exitOpacity={0.1}
                     timingFn='ease-in-out' 
                     duration={100}>
-                    {/* {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />} */}
-                    {/* <Hero /> */}
-                    {/* <CategoryHeader /> */}
-                    {/* <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} /> */}
-                    <SinglePhoto photo={this.props.photo} />
+                    <SinglePhoto updatePhotos={this.updatePhotos}  photo={this.props.photo} />
                     <div className="background"></div>
                     <div className="backgroundOverlay"></div>
 

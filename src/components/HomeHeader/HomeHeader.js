@@ -1,5 +1,6 @@
 import React, { Component, useState } from 'react';
 import { Link, useHistory  } from 'react-router-dom';
+import SmallHeader from '../SmallHeader/SmallHeader';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
 
 
@@ -13,6 +14,7 @@ export default class HomeHeader extends Component {
             show: false,
             scrollPosition: 0,
             query: '',
+            width: 0,
         };
     }
     showModal = () => {
@@ -25,11 +27,14 @@ export default class HomeHeader extends Component {
 
       componentDidMount() {
         window.addEventListener('scroll', this.listenToScroll)
-      }
-      
-      componentWillUnmount() {
+        window.addEventListener('resize', this.listenResize);
+        }
+        
+        componentWillUnmount() {
         window.removeEventListener('scroll', this.listenToScroll)
-      }
+        window.removeEventListener('resize', this.listenResize);
+    
+        }
       
       listenToScroll = () => {
         const winScroll =
@@ -64,7 +69,9 @@ export default class HomeHeader extends Component {
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
 
         }
-        return (
+        if (this.state.width > 800) {
+
+          return (
             <div>
                 <header style={styledHeader}>
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
@@ -77,7 +84,12 @@ export default class HomeHeader extends Component {
                 </header>
                 <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
             </div>
-        )
+          )
+        } else {
+          return (
+            <SmallHeader />
+          )
+        }
     }
 }
 
