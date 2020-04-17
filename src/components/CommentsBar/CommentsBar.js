@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
 import Comment from '../Comment/Comment';
+import Toast from '../Toast/Toast';
 import './CommentsBar.scss';
 
 
@@ -15,6 +16,7 @@ class CommentsBar extends React.Component {
             commentsData: [],
             comment: '',
             error: '',
+            showToast: false,
             
 
         }
@@ -89,7 +91,7 @@ class CommentsBar extends React.Component {
             console.error('Error:', error);
             });
         } else {
-            this.setState({error: 'You must be signed in to post a comment'})
+            this.setState({error: 'You must be signed in to post a comment', showToast: true})
             console.log('Oops, you must be signed in to post a comment')
         }
     }
@@ -102,6 +104,7 @@ class CommentsBar extends React.Component {
         const {photo} = this.props;
         return(
             <div className="commentsGrid">
+            {this.state.showToast ? <Toast message="Sign in to post a comment" /> : null }
                 <div className="authorName">
                     <Link to={`/author/${photo.author[0]._id}`}>
                         <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
