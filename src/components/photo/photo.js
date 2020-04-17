@@ -126,6 +126,13 @@ class RenderPhotos extends Component {
     }
 
     render() {
+        const RenderDescription = () => {
+            return (
+                <div className="view">
+                    <p>{this.props.photo.description}</p>
+                </div>
+            )
+        }
        
         if(this.props.photo) {
             if(this.props.profile) {
@@ -150,7 +157,7 @@ class RenderPhotos extends Component {
                     {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
                     <Link to={`/photo/${this.props.photo._id}`}>
                         <div className="read"></div>
-                        <div className="view"></div>
+                        {this.props.photo.description ? <RenderDescription /> : null}
                         <img alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                     </Link>
                         <div className="category">
@@ -163,7 +170,6 @@ class RenderPhotos extends Component {
                         <Link to={`/author/${this.props.photo.author[0]._id}`} >
                         
                             <div className="author">
-                                <p>{this.props.photo.description}</p>
                                 <Lottie play={this.state.playLottie}/>
                                 <img alt="" src={this.props.photo.author[0].userImage}/>
                                 <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>

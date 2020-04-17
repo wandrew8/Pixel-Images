@@ -18,6 +18,7 @@ class SinglePhoto extends Component {
             isLoading: true,
             playLottie: false,
             updateLikes: false,
+            likes: 0,
         }
     }
 
@@ -40,7 +41,7 @@ class SinglePhoto extends Component {
             .then((response) => response.json())
             .then((data) => {
                 this.setStorage(id); 
-                this.setState({updateLikes: true, playLottie: true})
+                this.setState({updateLikes: true, playLottie: true, likes: this.state.likes + 1})
                 this.props.updatePhotos();
                 this.addToFavorites(id)
             })
@@ -95,7 +96,7 @@ class SinglePhoto extends Component {
             if (!data) {
                 this.setState({photo: []})
             } else {
-                this.setState({photo: data, isLoading: false})
+                this.setState({photo: data, isLoading: false, likes: data.likes})
                 console.log(this.state.photo)
                 console.log(this.state.photo.author[0].firstName)
                 console.log(this.state.photo.author[0])
@@ -120,7 +121,7 @@ class SinglePhoto extends Component {
                                 <img alt="" data-id={this.state.photo._id} className="image" width="200" height="200" src={this.state.photo.imageUrl} />
                                 <div className="category">
                                     <p>{this.state.photo.category}</p>
-                                    <div onClick={this.incrementLikes.bind(null, this.state.photo._id)} className="likes"><p>{this.state.photo.likes}</p><i className="far fa-heart"></i></div>
+                                    <div onClick={this.incrementLikes.bind(null, this.state.photo._id)} className="likes"><p>{this.state.likes}</p><i className="far fa-heart"></i></div>
                                 </div>
                                 <Link className="author" to={`/author/${this.state.photo.author[0]._id}`} >
                                     <Lottie play={this.state.playLottie}/>
