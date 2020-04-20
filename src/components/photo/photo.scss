@@ -330,33 +330,30 @@ h2 {
     display: inline-block;
     position: relative;
     transition: 200ms ease-in;
+    box-sizing: border-box;
 
     .likes i {
       transition: 200ms ease-in;
     }
     &:hover .view {
       opacity: 1;
-      position: absolute;
-      padding: 2rem 1rem 1rem 1rem;
-      text-align: center;
-      color: white;
-      transition: 200ms ease-in;
       
     }
     .view {
       opacity: 0;
+      box-sizing: border-box;
       border-radius: 5px 5px 0px 0px;
-      transition: 300ms ease-in;
-      width: 90%;
       position: absolute;
       top: 1px;
       left: 1px;
+      width: 100%;
       padding: 2rem 1rem 1rem 1rem;
       text-align: center;
       color: white;
       background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3), rgba(0,0,0,0));
       font-size: 0.9rem;
-      transition: 600ms ease-in;
+      transition: 200ms ease-in;
+      
       &:hover {
         transition: 200ms ease-in;
         padding: 4rem 1rem 2rem 1rem;
