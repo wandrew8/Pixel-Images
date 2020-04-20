@@ -114,7 +114,7 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
-                {this.state.isLoading ? <Loader /> : <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} photos={this.state.photos} />}
+                {this.state.isLoading ? <Loader /> : <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />}
             </Fade>
         )
     }

@@ -329,32 +329,43 @@ h2 {
     margin: 0 1rem 1rem 0;
     display: inline-block;
     position: relative;
+    transition: 200ms ease-in;
+
     .likes i {
       transition: 200ms ease-in;
     }
     &:hover .view {
       opacity: 1;
       position: absolute;
-      padding: 2rem 1rem 1rem 2rem;
+      padding: 2rem 1rem 1rem 1rem;
       text-align: center;
       color: white;
-      border-radius: 5px 5px 0px 0px;
+      transition: 200ms ease-in;
+      
     }
     .view {
       opacity: 0;
+      border-radius: 5px 5px 0px 0px;
       transition: 300ms ease-in;
+      width: 90%;
       position: absolute;
       top: 1px;
       left: 1px;
-      padding: 2rem 1rem 1rem 2rem;
+      padding: 2rem 1rem 1rem 1rem;
       text-align: center;
       color: white;
       background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3), rgba(0,0,0,0));
-      border-radius: 4px 4px 0px 0px;
       font-size: 0.9rem;
+      transition: 600ms ease-in;
+      &:hover {
+        transition: 200ms ease-in;
+        padding: 4rem 1rem 2rem 1rem;
+        background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7), rgba(0,0,0,0.6), rgba(0,0,0,0.5), rgba(0,0,0,0));
+      }
     }
     &:hover .category {
       opacity: 1;
+
     }
     &:hover .author {
       opacity: 1;
@@ -402,6 +413,7 @@ h2 {
       height: 50px;
       align-items: center;
       opacity: 0;
+      
       p {
         padding-left: 1rem;
       }

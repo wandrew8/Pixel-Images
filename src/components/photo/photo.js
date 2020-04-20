@@ -14,6 +14,7 @@ class RenderPhotos extends Component {
             url: 'https://quiet-ravine-27369.herokuapp.com',
             playLottie: false,
             showToast: false,
+            actionTaken: false,
         }
     }
 
@@ -53,20 +54,25 @@ class RenderPhotos extends Component {
         const userId = window.sessionStorage.getItem('authorId');
         const url = this.state.url + `/users/${userId}/favorites`;
         if (userId) {
-            fetch(url, {
-                method: 'POST', 
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({"_id": id})
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    console.log(data)
-                })
-                .catch((error) => {
-                console.error('Error:', error);
-                });
+            console.log(this.props.photo.author[0])
+            if (userId !== this.props.photo.author[0]._id) {
+                fetch(url, {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({"_id": id})
+                    })
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data)
+                    })
+                    .catch((error) => {
+                    console.error('Error:', error);
+                    });
+            } else {
+                console.log("You cannot add your own photos to favorites")
+            }
         } else {
             console.log('You are not logged in')
         }
@@ -96,6 +102,7 @@ class RenderPhotos extends Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log('Success:', data);
+                this.props.reRenderPhotos();
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -135,56 +142,55 @@ class RenderPhotos extends Component {
         }
        
         if(this.props.photo) {
-            if(this.props.profile) {
-                return (
-                    <React.Fragment>
-                        {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
-                        <Link className="link" to={`/photo/${this.props.photo._id}`}>
-                            <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
-                        </Link>
-                        <div className="category">
-                            {this.props.isLiked ? 
-                                <div onClick={this.unlikePhoto.bind(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove from Favorites</p></div> :
-                                <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
-                            }
-                        </div>
-                        
-                    </React.Fragment>
-                )
-            } else {
-                return (
-                    <React.Fragment>
-                    {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
-                    <Link to={`/photo/${this.props.photo._id}`}>
-                        <div className="read"></div>
-                        {this.props.photo.description ? <RenderDescription /> : null}
-                        <img alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
-                    </Link>
-                        <div className="category">
-                            <p>{this.props.photo.category}</p>
-                            <div className="stats">
-                                <div className="likes"><p>{this.props.photo.comments.length}</p><Link to={`/photo/${this.props.photo._id}`} ><i className="far fa-comments"></i></Link></div>
-                                <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                if(this.props.profile) {
+                    return (
+                        <React.Fragment>
+                            {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
+                            <Link className="link" to={`/photo/${this.props.photo._id}`}>
+                                <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                            </Link>
+                            <div className="category">
+                                {this.props.isLiked ? 
+                                    <div onClick={this.unlikePhoto.bind(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove from Favorites</p></div> :
+                                    <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
+                                }
                             </div>
-                        </div>
-                        <Link to={`/author/${this.props.photo.author[0]._id}`} >
-                        
-                            <div className="author">
-                                <Lottie play={this.state.playLottie}/>
-                                <img alt="" src={this.props.photo.author[0].userImage}/>
-                                <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
-                            </div>
-                        </Link>
-                    </React.Fragment>
+                            
+                        </React.Fragment>
                     )
-            }
-    } else {
-        return (
-            <div className="error">
-                <p>Oops, We couldn't find any photos</p>
-            </div>
-        )
-    }
+                } else {
+                    return (
+                        <React.Fragment>
+                            {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
+                            <Link to={`/photo/${this.props.photo._id}`}>
+                                <div className="read"></div>
+                                {this.props.photo.description ? <RenderDescription /> : null}
+                                <img alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
+                            </Link>
+                                <div className="category">
+                                    <p>{this.props.photo.category}</p>
+                                    <div className="stats">
+                                        <div className="likes"><p>{this.props.photo.comments.length}</p><Link to={`/photo/${this.props.photo._id}`} ><i className="far fa-comments"></i></Link></div>
+                                        <div onClick={this.incrementLikes.bind(null, this.props.photo._id)} className="likes"><p>{this.props.photo.likes}</p><i className="far fa-heart"></i></div>
+                                    </div>
+                                </div>
+                            <Link to={`/author/${this.props.photo.author[0]._id}`} >
+                                <div className="author">
+                                    <Lottie play={this.state.playLottie}/>
+                                    <img alt="" src={this.props.photo.author[0].userImage}/>
+                                    <p>{this.props.photo.author[0].firstName} {this.props.photo.author[0].lastName}</p>
+                                </div>
+                            </Link>
+                        </React.Fragment>
+                        )
+                }
+        } else {
+            return (
+                <div className="error">
+                    <p>Oops, We couldn't find any photos</p>
+                </div>
+            )
+        }
     }
 };
 
@@ -197,7 +203,14 @@ class Photo extends Component {
                 const photoCollection = this.props.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
-                            <RenderPhotos profile={this.props.profile} updatePhotos={this.props.updatePhotos} updateHome={this.props.updateHome} key={photo._id} photo={photo} />
+                            <RenderPhotos 
+                                isLiked={this.props.isLiked} 
+                                profile={this.props.profile} 
+                                reRenderPhotos={this.props.reRenderPhotos} 
+                                updatePhotos={this.props.updatePhotos} 
+                                updateHome={this.props.updateHome} 
+                                key={photo._id} 
+                                photo={photo} />
                         </div>
                     )
                 });
