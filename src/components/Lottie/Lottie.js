@@ -1,7 +1,7 @@
 import React from 'react';
 import Lottie from 'lottie-react-web';
-import './Lottie.scss';
 import animation from '../../assets/images/heart.json';
+import './Lottie.scss';
 
 function LottieComponent (props) {
     return (

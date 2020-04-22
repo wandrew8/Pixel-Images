@@ -2,7 +2,7 @@ import React from 'react';
 import { Fade } from 'react-animation-components';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
-import Photo from '../../components/Photo/Photo';
+import Photo from '../../components/PhotoComponent/PhotoComponent';
 import Hero from '../../components/Hero/Hero';
 import Loader from '../../components/Loader/Loader';
 import ProfileToggle from '../../components/ProfileToggle/ProfileToggle';

@@ -2,12 +2,6 @@ import React, { Component } from 'react';
 import SinglePhoto from '../../components/SinglePhoto/SinglePhoto';
 import { Fade } from 'react-animation-components';
 import './SinglePhotoPage.scss';
-// import Photo from '../../components/Photo/Photo';
-// import HomeHeader from '../../components/HomeHeader/HomeHeader';
-// import Hero from '../../components/Hero/Hero';
-// import UserHeader from '../../components/UserHeader/UserHeader';
-// import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
-
 
 class SinglePhotoPage extends Component {
     constructor(props) {
