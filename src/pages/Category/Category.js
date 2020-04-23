@@ -3,7 +3,7 @@ import { Fade } from 'react-animation-components';
 import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
-import Photo from '../../components/Photo/Photo';
+import Photo from '../../components/PhotoComponent/PhotoComponent';
 import Loader from '../../components/Loader/Loader';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
