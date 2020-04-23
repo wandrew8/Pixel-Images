@@ -52,11 +52,11 @@ export default class Home extends Component {
                 delay={0} 
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
-                duration={300}>
-            {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
-            <Hero />
-            <CategoryHeader />
-            {this.state.isLoading ? <Loader /> : <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />}
+                    duration={300}>
+                {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
+                <Hero />
+                <CategoryHeader />
+                {this.state.isLoading ? <Loader /> : <Photo updatePhotos={this.updatePhotos} photos={this.state.photos} />}
             </Fade>
         )
     }

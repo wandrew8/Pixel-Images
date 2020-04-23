@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Fade } from 'react-animation-components';
-import './Category.scss';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Hero from '../../components/Hero/Hero';
 import Photo from '../../components/PhotoComponent/PhotoComponent';
 import Loader from '../../components/Loader/Loader';
 import UserHeader from '../../components/UserHeader/UserHeader';
 import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
+import './Category.scss';
 
 export default class Category extends Component {
     state = {
@@ -16,7 +16,6 @@ export default class Category extends Component {
 
     componentDidMount() {
        this.fetchPhotos()
-       
     }
 
     componentDidUpdate() {

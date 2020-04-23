@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Lottie from '../Lottie/Lottie';
 import Toast from '../Toast/Toast';
-import './Photo.scss';
-
+import './PhotoComponent.scss';
 
 class RenderPhotos extends Component {
     constructor(props) {
@@ -83,7 +82,7 @@ class RenderPhotos extends Component {
         this.setState({ show: true });
     }
       
-      hideModal = () => {
+    hideModal = () => {
         this.setState({ show: false });
     }
 

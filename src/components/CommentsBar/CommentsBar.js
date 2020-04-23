@@ -5,8 +5,6 @@ import Comment from '../Comment/Comment';
 import Toast from '../Toast/Toast';
 import './CommentsBar.scss';
 
-
-
 class CommentsBar extends React.Component {
     constructor(props) {
         super(props) 
@@ -17,10 +15,7 @@ class CommentsBar extends React.Component {
             comment: '',
             error: '',
             showToast: false,
-            
-
         }
-        
     }
 
     handleInputChange = event => {

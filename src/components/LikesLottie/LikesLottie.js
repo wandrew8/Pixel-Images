@@ -11,7 +11,6 @@ export default class LikesLottie extends Component {
     }
 
     render() {
-
         const defaultOptions = {
             loop: false,
             autoplay: false,

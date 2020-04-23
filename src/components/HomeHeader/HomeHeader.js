@@ -2,11 +2,9 @@ import React, { Component, useState } from 'react';
 import { Link, useHistory  } from 'react-router-dom';
 import SmallHeader from '../SmallHeader/SmallHeader';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
-
-
 import './HomeHeader.scss';
 
-export default class HomeHeader extends Component {
+class HomeHeader extends Component {
     constructor(props) {
         super(props);
 
@@ -121,4 +119,4 @@ const Modal = ({ handleClose, show, history }) => {
     );
 }; 
 
-  
+export default HomeHeader;
