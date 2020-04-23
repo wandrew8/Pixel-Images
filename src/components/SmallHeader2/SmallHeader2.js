@@ -11,8 +11,6 @@ const Modal = ({ handleClose, show, history }) => {
   
       function submitForm(e) {
         e.preventDefault();
-        console.log(query)
-        console.log(historyObj)
         if(query) historyObj.push('/search/' + query);
       }
         return (
@@ -40,7 +38,6 @@ class SmallHeader2 extends React.Component {
             imageUrl: '',
             uploadImage: false,
             query: '',
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             addPhoto: false,
             author: window.sessionStorage.getItem('authorId'),
@@ -61,11 +58,10 @@ class SmallHeader2 extends React.Component {
     }
 
     closePhotoModal = () => {
-    this.setState({ addPhoto: false })
+        this.setState({ addPhoto: false })
     }
 
     logoutUser = (e) => {
-        console.log('hello')
         sessionStorage.clear();
         this.setState({loggedOut: true})
 
@@ -86,7 +82,6 @@ class SmallHeader2 extends React.Component {
     }
 
     showNav() {
-        console.log(this.state.showNav)
         this.setState({ showNav: !this.state.showNav })
     }
 
@@ -95,12 +90,11 @@ class SmallHeader2 extends React.Component {
     }
       
     hideModal = () => {
-    this.setState({ show: false });
+        this.setState({ show: false });
     }
     
     handleQuery(e) {
         e.preventDefault();
-        console.log(this.state.query)
         
     }
 
@@ -169,7 +163,6 @@ class AddPhotoModal extends React.Component {
             imageUrl: '',
             author: window.sessionStorage.getItem('authorId'),
             uploadImage: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             tag: '',
             success: false,
@@ -228,10 +221,9 @@ class AddPhotoModal extends React.Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
             })
             .catch((error) => {
-            console.error('Error:', error);
+                console.error('Error:', error);
             });
             this.props.handleClose();
             this.setState({

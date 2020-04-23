@@ -9,7 +9,6 @@ class CommentsBar extends React.Component {
     constructor(props) {
         super(props) 
         this.state = {
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             commentsData: [],
             comment: '',
@@ -30,7 +29,6 @@ class CommentsBar extends React.Component {
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log(data)
             this.setState({commentsData: data})
         })
         .catch((error) => {
@@ -78,7 +76,6 @@ class CommentsBar extends React.Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
                 this.setState({comment: ''}) 
                 this.getComments();
             })
@@ -87,7 +84,6 @@ class CommentsBar extends React.Component {
             });
         } else {
             this.setState({error: 'You must be signed in to post a comment', showToast: true})
-            console.log('Oops, you must be signed in to post a comment')
         }
     }
 

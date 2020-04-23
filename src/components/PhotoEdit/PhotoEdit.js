@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import './PhotoEdit.scss';
 
 
@@ -8,7 +7,6 @@ class RenderPhotos extends Component {
         super(props)
         this.state = {
             show: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
         }
     }
@@ -30,7 +28,6 @@ class RenderPhotos extends Component {
     deletePhoto = (id) => {
         const url = this.state.url + '/photos/' + id;
         const token = window.sessionStorage.getItem('token');
-        console.log(token)
         fetch(url, {
             method: 'DELETE', 
             headers: {
@@ -41,7 +38,6 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
                 this.props.reRenderPhotos()
             })
             .catch((error) => {
@@ -64,7 +60,6 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
                 this.props.reRenderPhotos()
             })
             .catch((error) => {

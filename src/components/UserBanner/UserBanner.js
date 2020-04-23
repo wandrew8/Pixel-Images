@@ -1,6 +1,6 @@
 import React from 'react';
-import './UserBanner.scss';
 import moment from 'moment';
+import './UserBanner.scss';
 
 
 class UserBanner extends React.Component {

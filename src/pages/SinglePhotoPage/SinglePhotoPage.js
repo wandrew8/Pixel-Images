@@ -27,13 +27,11 @@ class SinglePhotoPage extends Component {
         }
     
         getPhotos = () => {
-            // const url = "http://localhost:3000/photos"
             const url = "https://quiet-ravine-27369.herokuapp.com"
 
             fetch(url)
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 this.setState({photos: data, updatePhotos: false})
             })
             .catch(err => console.log(err))
@@ -51,7 +49,6 @@ class SinglePhotoPage extends Component {
                     <SinglePhoto updatePhotos={this.updatePhotos}  photo={this.props.photo} />
                     <div className="background"></div>
                     <div className="backgroundOverlay"></div>
-
                 </Fade>
             )
     }; 

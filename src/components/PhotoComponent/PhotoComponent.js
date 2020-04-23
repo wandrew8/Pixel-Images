@@ -9,7 +9,6 @@ class RenderPhotos extends Component {
         super(props)
         this.state = {
             show: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             playLottie: false,
             showToast: false,
@@ -45,7 +44,6 @@ class RenderPhotos extends Component {
             });
         } else {
             this.setState({ showToast: true })
-            console.log('You already liked this photo')
         }
     }
 
@@ -53,7 +51,6 @@ class RenderPhotos extends Component {
         const userId = window.sessionStorage.getItem('authorId');
         const url = this.state.url + `/users/${userId}/favorites`;
         if (userId) {
-            console.log(this.props.photo.author[0])
             if (userId !== this.props.photo.author[0]._id) {
                 fetch(url, {
                     method: 'POST', 
@@ -64,7 +61,6 @@ class RenderPhotos extends Component {
                     })
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data)
                     })
                     .catch((error) => {
                     console.error('Error:', error);
@@ -89,7 +85,6 @@ class RenderPhotos extends Component {
     deletePhoto = (id) => {
         const url = this.state.url + '/photos/' + id;
         const token = window.sessionStorage.getItem('token');
-        console.log(token)
         fetch(url, {
             method: 'DELETE', 
             headers: {
@@ -100,7 +95,6 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
                 this.props.reRenderPhotos();
             })
             .catch((error) => {
@@ -123,8 +117,7 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log('Success:', data);
-                this.props.reRenderPhotos()
+                this.props.unlikePhoto(id);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -196,9 +189,19 @@ class RenderPhotos extends Component {
 
 
 class Photo extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            photos: this.props.photos,
+        }
+    }
+
+    unlikePhoto = (id) => {
+        return this.setState({ photos: this.state.photos.filter(photo => photo._id !== id)})
+    }
         render() {
             if (this.props.photos.length > 0) {
-                const photoCollection = this.props.photos.map(photo => {
+                const photoCollection = this.state.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
                             <RenderPhotos 
@@ -208,6 +211,7 @@ class Photo extends Component {
                                 updatePhotos={this.props.updatePhotos} 
                                 updateHome={this.props.updateHome} 
                                 key={photo._id} 
+                                unlikePhoto={this.unlikePhoto}
                                 photo={photo} />
                         </div>
                     )

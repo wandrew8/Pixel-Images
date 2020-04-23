@@ -15,7 +15,6 @@ export default class Signup extends Component {
                 "https://images.unsplash.com/photo-1584598173971-b7cc2b0a5ff3?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3900&q=80"
             ],
         index: 0,
-        // url: 'http://localhost:3000',
         url: "https://quiet-ravine-27369.herokuapp.com",
         firstName: '',
         lastName: '',
@@ -72,13 +71,12 @@ export default class Signup extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-            console.log('Success:', data);
-            this.setState({
-                username: '',
-                password: '',
-                errMess: null
-            });
-            this.setSession(data.token, data.userId); 
+                this.setState({
+                    username: '',
+                    password: '',
+                    errMess: null
+                });
+                this.setSession(data.token, data.userId); 
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -97,9 +95,7 @@ export default class Signup extends Component {
             backgroundImage: 'url(' + this.state.images[this.state.index] + ')',
             transition: '2000ms ease-in',
           };
-
-        
-        
+          
         return (
             <Fade
                 in

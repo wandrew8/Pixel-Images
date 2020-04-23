@@ -13,7 +13,6 @@ class Profile extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // url: 'http://localhost:3000',
             url: "https://quiet-ravine-27369.herokuapp.com",
             data: {},
             photos: [],
@@ -21,8 +20,7 @@ class Profile extends React.Component {
             showLiked: false,
             showPosted: true,
             isLiked: false,
-            isLoading: false,
-            
+            isLoading: false, 
         }
         
     }
@@ -51,7 +49,6 @@ class Profile extends React.Component {
         .then((response) => response.json())
         .then((data) => {
             this.setState({data: data})
-            
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -65,7 +62,6 @@ class Profile extends React.Component {
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
             this.setState({isLiked: true, isLoading: false, photos: data, photoDeleted: false, showLiked: false, showPosted: false})
         })
         .catch((error) => {
@@ -79,7 +75,6 @@ class Profile extends React.Component {
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            console.log('Success:', data);
             this.setState({isLiked: false, photos: data});
         })
         .catch((error) => {

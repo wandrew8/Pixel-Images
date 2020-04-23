@@ -11,7 +11,6 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = { 
-            // url: 'http://localhost:3000',
             url: "https://quiet-ravine-27369.herokuapp.com",
             photos: [],
         }
@@ -32,11 +31,10 @@ class Search extends React.Component {
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-        console.log('Success:', data);
-        this.setState({photos: data})
+            this.setState({photos: data})
         })
         .catch((error) => {
-        console.error('Error:', error);
+            console.error('Error:', error);
         });
     }
 

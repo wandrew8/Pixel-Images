@@ -6,7 +6,10 @@ import './LikesLottie.scss';
 export default class LikesLottie extends Component {
     constructor(props) {
         super(props)
-        this.state = {isStopped: false, isPaused: false}
+        this.state = {
+            isStopped: false, 
+            isPaused: false
+        }
 
     }
 
@@ -16,17 +19,17 @@ export default class LikesLottie extends Component {
             autoplay: false,
             animationData: animationData,
             rendererSettings: {
-              preserveAspectRatio: 'xMidYMid slice'
+            preserveAspectRatio: 'xMidYMid slice'
             }
-          };
+        };
         
         const playOptions = {
-        loop: false,
-        autoplay: true,
-        animationData: animationData,
-        rendererSettings: {
+            loop: false,
+            autoplay: true,
+            animationData: animationData,
+            rendererSettings: {
             preserveAspectRatio: 'xMidYMid slice'
-        }
+            }
         };
 
         return (

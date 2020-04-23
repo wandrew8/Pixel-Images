@@ -12,7 +12,6 @@ class IndividualUser extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            // url: 'http://localhost:3000',
             url: "https://quiet-ravine-27369.herokuapp.com",
             data: {},
             photos: [],
@@ -29,10 +28,10 @@ class IndividualUser extends React.Component {
             fetch(url)
             .then((response) => response.json())
             .then((data) => {
-            this.setState({data: data})
+                this.setState({data: data})
             })
             .catch((error) => {
-            console.error('Error:', error);
+                console.error('Error:', error);
             });
         } 
 
@@ -41,12 +40,10 @@ class IndividualUser extends React.Component {
             fetch(url)
             .then((response) => response.json())
             .then((data) => {
-            console.log('Success:', data);
-            this.setState({photos: data})
-            console.log(this.state.data)
+                this.setState({photos: data})
             })
             .catch((error) => {
-            console.error('Error:', error);
+                console.error('Error:', error);
             });
         }
         render() {

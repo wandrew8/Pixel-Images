@@ -10,15 +10,13 @@ class Toast extends React.Component {
     }
     componentDidMount() {
         this.setState({ isShown: true })
-        setTimeout(() => {
+        this.timer = setTimeout(() => {
             this.setState({ isShown: false })
         }, 3000)
     }
 
     componentWillUnmount() {
-        clearTimeout(() => {
-            this.setState({ isShown: false })
-        }, 3000)
+        clearTimeout(this.timer)
     }
 
     render() {

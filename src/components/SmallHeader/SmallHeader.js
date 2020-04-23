@@ -10,8 +10,6 @@ const Modal = ({ handleClose, show, history }) => {
   
       function submitForm(e) {
         e.preventDefault();
-        console.log(query)
-        console.log(historyObj)
         if(query) historyObj.push('/search/' + query);
       }
         return (
@@ -59,7 +57,6 @@ class SmallHeader extends React.Component {
     }
 
     showNav() {
-        console.log(this.state.showNav)
         this.setState({ showNav: !this.state.showNav })
     }
 
@@ -68,12 +65,11 @@ class SmallHeader extends React.Component {
     }
       
     hideModal = () => {
-    this.setState({ show: false });
+        this.setState({ show: false });
     }
     
     handleQuery(e) {
         e.preventDefault();
-        console.log(this.state.query)
         
     }
 

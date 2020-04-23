@@ -7,7 +7,6 @@ import './HomeHeader.scss';
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
-
         this.state = {
             show: false,
             scrollPosition: 0,
@@ -49,9 +48,7 @@ class HomeHeader extends Component {
       }
 
       handleQuery(e) {
-        e.preventDefault();
-        console.log(this.state.query)
-        
+        e.preventDefault();        
       }
 
       listenResize = () => {
@@ -69,7 +66,6 @@ class HomeHeader extends Component {
         const styledHeader = {
             height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
-
         }
         if (this.state.width > 800) {
 
@@ -102,8 +98,6 @@ const Modal = ({ handleClose, show, history }) => {
 
     function submitForm(e) {
       e.preventDefault();
-      console.log(query)
-      console.log(historyObj)
       if(query) historyObj.push('/search/' + query);
     }
       return (

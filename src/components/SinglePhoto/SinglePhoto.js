@@ -3,7 +3,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Lottie from '../Lottie/Lottie';
 import Toast from '../Toast/Toast';
 import Loader from '../Loader/Loader';
-
 import CommentsBar from '../../components/CommentsBar/CommentsBar';
 import './SinglePhoto.scss';
 
@@ -12,7 +11,6 @@ class SinglePhoto extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             photo: [],
             isLoading: true,
@@ -50,7 +48,6 @@ class SinglePhoto extends Component {
             });
         } else {
             this.setState({ showToast: true })
-            console.log('You already liked this photo')
         }
     }
 
@@ -80,7 +77,6 @@ class SinglePhoto extends Component {
 
     goBack = () => {
         const { history } = this.props;
-        console.log(history)
         if(history) history.goBack();
     }
 
@@ -97,15 +93,19 @@ class SinglePhoto extends Component {
                 this.setState({photo: []})
             } else {
                 this.setState({photo: data, isLoading: false, likes: data.likes})
-                console.log(this.state.photo)
-                console.log(this.state.photo.author[0].firstName)
-                console.log(this.state.photo.author[0])
             }
         })
         .catch(err => console.log(err))
     }
 
     render() {
+        const RenderDescription = () => {
+            return (
+                <div id="view">
+                    <p>{this.state.photo.description}</p>
+                </div>
+            )
+        }
         if(this.state.isLoading) {
             return (
                 <Loader />
@@ -118,12 +118,13 @@ class SinglePhoto extends Component {
                         <div onClick={this.goBack} className="closeSinglePhoto"><i className="far fa-times-circle"></i></div>
                         <div id="photoGrid" className="photoGrid">
                             <div id="photo" className="photo">
+                                {this.state.photo.description ? <RenderDescription /> : null}
                                 <img alt="" data-id={this.state.photo._id} className="image" width="200" height="200" src={this.state.photo.imageUrl} />
-                                <div className="category">
+                                <div id="category">
                                     <p>{this.state.photo.category}</p>
                                     <div onClick={this.incrementLikes.bind(null, this.state.photo._id)} className="likes"><p>{this.state.likes}</p><i className="far fa-heart"></i></div>
                                 </div>
-                                <Link className="author" to={`/author/${this.state.photo.author[0]._id}`} >
+                                <Link id="author" to={`/author/${this.state.photo.author[0]._id}`} >
                                     <Lottie play={this.state.playLottie}/>
                                     <img alt="" src={this.state.photo.author[0].userImage} />
                                     <p>{this.state.photo.author[0].firstName} {this.state.photo.author[0].lastName}</p>

@@ -11,7 +11,6 @@ export default class User extends Component {
     state = {
         photos: [],
         updatePhotos: false,
-        // url: 'http://localhost:3000',
         url: "https://quiet-ravine-27369.herokuapp.com"
     }
 
@@ -34,8 +33,7 @@ export default class User extends Component {
         fetch(url)
         .then(res => res.json())
         .then(data => {
-        console.log(data)
-        this.setState({photos: data, updatePhotos: false})
+            this.setState({photos: data, updatePhotos: false})
     })
     .catch(err => console.log(err))
     }

@@ -12,7 +12,6 @@ class Comment extends Component {
             text: this.props.comment.text,
             liked: false,
             disliked: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
 
         }
@@ -45,7 +44,6 @@ class Comment extends Component {
             dislikes: this.state.dislikes,
             text: this.state.text,
         }
-        console.log(body)
         const url = `${this.state.url}/photos/${this.props.photoId}/comments/${this.props.comment._id}`;
         fetch(url, {
             method: 'PUT', 
@@ -57,7 +55,9 @@ class Comment extends Component {
             })
             .then(response => response.json())
             .then(data => {
-                console.log(data)
+            })
+            .catch(err => {
+                console.log(err)
             })
     }
 
@@ -69,19 +69,16 @@ class Comment extends Component {
     decrementLikes() {
         this.setState({ likes: this.state.likes - 1 })
         this.updateData();
-
     }
 
     incrementDislikes() {
         this.setState({ dislikes: this.state.dislikes + 1 })
         this.updateData();
-
     }
 
     decrementDislikes() {
         this.setState({ dislikes: this.state.dislikes - 1 })
         this.updateData();
-
     }
 
     render() {

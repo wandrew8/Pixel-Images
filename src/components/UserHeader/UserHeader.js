@@ -20,7 +20,6 @@ export default class HomeHeader extends Component {
             description: '',
             uploadImage: false,
             query: '',
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             loggedOut: false,
             width: window.innerWidth,
@@ -129,8 +128,6 @@ const Modal = ({ handleClose, show , history}) => {
   
     function submitForm(e) {
     e.preventDefault();
-    console.log(query)
-    console.log(historyObj)
     if(query) historyObj.push('/search/' + query);
     }  
     return (
@@ -158,7 +155,6 @@ class AddPhotoModal extends React.Component {
             description: '',
             author: window.sessionStorage.getItem('authorId'),
             uploadImage: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             tag: '',
             success: false,
@@ -218,7 +214,6 @@ class AddPhotoModal extends React.Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
             })
             .catch((error) => {
             console.error('Error:', error);
@@ -247,7 +242,6 @@ class AddPhotoModal extends React.Component {
     renderRedirect = () => {
         if (this.state.success) {
             this.showToast()
-            // return <Redirect to='/user' />
         }
     }
     

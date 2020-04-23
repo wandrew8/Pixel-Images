@@ -12,7 +12,6 @@ export default class Home extends Component {
         photos: [],
         updatePhotos: false,
         isLoading: true,
-        // url: 'http://localhost:3000',
         url: "https://quiet-ravine-27369.herokuapp.com"
     }
     componentDidMount() {
@@ -23,7 +22,6 @@ export default class Home extends Component {
         if(this.state.updatePhotos) {
             this.getPhotos();
             this.setState({updatePhotos: false});
-            console.log('Hit')
         }
     }
 
@@ -36,7 +34,6 @@ export default class Home extends Component {
         fetch(url)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             this.setState({photos: data, isLoading: false, updatePhotos: false})
         })
         .catch(err => console.log(err))

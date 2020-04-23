@@ -16,7 +16,6 @@ export default class Signup extends Component {
                 "https://images.unsplash.com/photo-1526661309553-0b6c10fb4302?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2176&q=80"
             ],
         index: 0,
-        // url: 'http://localhost:3000',
         url: "https://quiet-ravine-27369.herokuapp.com",
         firstName: '',
         lastName: '',
@@ -78,7 +77,7 @@ export default class Signup extends Component {
             firstName: this.state.firstName,
             lastName: this.state.lastName,
             username: this.state.username,
-            userImage: this.state.userImage,
+            userImage: this.state.uploadImage ? this.state.userImage : "https://res.cloudinary.com/dcokaa0ia/image/upload/v1587662103/pixelUser/qjwzgivfrr8sx6szynso.png",
             password: this.state.password,
         }
         console.log(body)
