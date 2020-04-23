@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/pixel-images/static/css/main.2ee667a2.chunk.css",
-    "main.js": "/pixel-images/static/js/main.90bc46dc.chunk.js",
-    "main.js.map": "/pixel-images/static/js/main.90bc46dc.chunk.js.map",
-    "runtime-main.js": "/pixel-images/static/js/runtime-main.9205d084.js",
-    "runtime-main.js.map": "/pixel-images/static/js/runtime-main.9205d084.js.map",
-    "static/js/2.b0a2b054.chunk.js": "/pixel-images/static/js/2.b0a2b054.chunk.js",
-    "static/js/2.b0a2b054.chunk.js.map": "/pixel-images/static/js/2.b0a2b054.chunk.js.map",
-    "index.html": "/pixel-images/index.html",
-    "precache-manifest.9390e6259bff5abd7da2970cd70e6830.js": "/pixel-images/precache-manifest.9390e6259bff5abd7da2970cd70e6830.js",
-    "service-worker.js": "/pixel-images/service-worker.js",
-    "static/css/main.2ee667a2.chunk.css.map": "/pixel-images/static/css/main.2ee667a2.chunk.css.map",
-    "static/js/2.b0a2b054.chunk.js.LICENSE.txt": "/pixel-images/static/js/2.b0a2b054.chunk.js.LICENSE.txt",
-    "static/media/android-chrome-512x512.png": "/pixel-images/static/media/android-chrome-512x512.ed59d81f.png"
+    "main.css": "/Pixel-Images/static/css/main.3d52be57.chunk.css",
+    "main.js": "/Pixel-Images/static/js/main.dd269b23.chunk.js",
+    "main.js.map": "/Pixel-Images/static/js/main.dd269b23.chunk.js.map",
+    "runtime-main.js": "/Pixel-Images/static/js/runtime-main.6ce78c58.js",
+    "runtime-main.js.map": "/Pixel-Images/static/js/runtime-main.6ce78c58.js.map",
+    "static/js/2.b0a2b054.chunk.js": "/Pixel-Images/static/js/2.b0a2b054.chunk.js",
+    "static/js/2.b0a2b054.chunk.js.map": "/Pixel-Images/static/js/2.b0a2b054.chunk.js.map",
+    "index.html": "/Pixel-Images/index.html",
+    "precache-manifest.b76909f29000e1c8063579957d021323.js": "/Pixel-Images/precache-manifest.b76909f29000e1c8063579957d021323.js",
+    "service-worker.js": "/Pixel-Images/service-worker.js",
+    "static/css/main.3d52be57.chunk.css.map": "/Pixel-Images/static/css/main.3d52be57.chunk.css.map",
+    "static/js/2.b0a2b054.chunk.js.LICENSE.txt": "/Pixel-Images/static/js/2.b0a2b054.chunk.js.LICENSE.txt",
+    "static/media/android-chrome-512x512.png": "/Pixel-Images/static/media/android-chrome-512x512.ed59d81f.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.9205d084.js",
+    "static/js/runtime-main.6ce78c58.js",
     "static/js/2.b0a2b054.chunk.js",
-    "static/css/main.2ee667a2.chunk.css",
-    "static/js/main.90bc46dc.chunk.js"
+    "static/css/main.3d52be57.chunk.css",
+    "static/js/main.dd269b23.chunk.js"
   ]
 }
