@@ -44,7 +44,7 @@ class SinglePhoto extends Component {
                 this.addToFavorites(id)
             })
             .catch((error) => {
-            console.error('Error:', error);
+            
             });
         } else {
             this.setState({ showToast: true })
@@ -126,8 +126,8 @@ class SinglePhoto extends Component {
                                 </div>
                                 <Link id="author" to={`/author/${this.state.photo.author[0]._id}`} >
                                     <Lottie play={this.state.playLottie}/>
-                                    <img alt="" src={this.state.photo.author[0].userImage} />
-                                    <p>{this.state.photo.author[0].firstName} {this.state.photo.author[0].lastName}</p>
+                                    {/* <img alt="" src={this.state.photo.author[0].userImage} />
+                                    <p>{this.state.photo.author[0].firstName} {this.state.photo.author[0].lastName}</p> */}
                                 </Link>
                             </div>
                             <CommentsBar photo={this.state.photo} />

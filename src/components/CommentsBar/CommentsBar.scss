@@ -67,9 +67,10 @@
           .commentsHolder {
             padding: 1rem 0rem 1rem 2rem;
             border-top: solid lightgray 1px;
-            max-height: 55vh;
             overflow: auto;
+            display: block;
             text-align: left;
+            height: calc(100% - 35px);
           }
           
          .noComment {

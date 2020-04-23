@@ -91,9 +91,6 @@ class Profile extends React.Component {
         this.setState({ showLiked: true, showPosted: false });
     }
 
-    reRenderPhotos = () => {
-        this.getAuthorPhotos();
-    }
     render() {     
         const token = window.sessionStorage.getItem('token');
         const authorId = window.sessionStorage.getItem('authorId');
@@ -109,7 +106,14 @@ class Profile extends React.Component {
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
-                {this.state.isLoading ? <Loader /> : <Photo toggle={this.props.toggle} profile={true} reRenderPhotos={this.reRenderPhotos} isLiked={this.state.isLiked} photos={this.state.photos} />}
+                {this.state.isLoading ? <Loader /> : <Photo 
+                                getLikedPhotos={this.getLikedPhotos} 
+                                toggle={this.props.toggle} 
+                                profile={true} 
+                                reRenderPhotos={this.reRenderPhotos} 
+                                getAuthorPhotos={this.getAuthorPhotos} 
+                                isLiked={this.state.isLiked} 
+                                photos={this.state.photos} />}
             </Fade>
         )
     }

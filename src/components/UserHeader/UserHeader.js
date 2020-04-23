@@ -223,7 +223,6 @@ class AddPhotoModal extends React.Component {
                 category: '',
                 tags: [],
                 imageUrl: '',
-                author: '',
                 description: '',
                 success: true
             });
@@ -242,6 +241,8 @@ class AddPhotoModal extends React.Component {
     renderRedirect = () => {
         if (this.state.success) {
             this.showToast()
+            const url = `/profile/${this.state.author}/posted`
+            return <Redirect to={url} />
         }
     }
     
@@ -338,6 +339,7 @@ class AddPhotoModal extends React.Component {
                             </div>
                         </form>
                     </div>
+                    {this.renderRedirect()}
                 </React.Fragment>
     )
     }

@@ -95,7 +95,7 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                this.props.reRenderPhotos();
+                this.props.getAuthorPhotos();
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -117,7 +117,7 @@ class RenderPhotos extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
-                this.props.unlikePhoto(id);
+                this.props.getLikedPhotos();
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -196,22 +196,21 @@ class Photo extends Component {
         }
     }
 
-    unlikePhoto = (id) => {
-        return this.setState({ photos: this.state.photos.filter(photo => photo._id !== id)})
-    }
         render() {
             if (this.props.photos.length > 0) {
-                const photoCollection = this.state.photos.map(photo => {
+                const photoCollection = this.props.photos.map(photo => {
                     return (
                         <div key={photo._id} className="photo" >
                             <RenderPhotos 
                                 isLiked={this.props.isLiked} 
                                 profile={this.props.profile} 
+                                getAuthorPhotos={this.props.getAuthorPhotos}
                                 reRenderPhotos={this.props.reRenderPhotos} 
                                 updatePhotos={this.props.updatePhotos} 
                                 updateHome={this.props.updateHome} 
                                 key={photo._id} 
-                                unlikePhoto={this.unlikePhoto}
+                                getLikedPhotos={this.props.getLikedPhotos}
+                                unlikePhoto={this.props.updateLikedPhotos}
                                 photo={photo} />
                         </div>
                     )

@@ -510,12 +510,17 @@
     transform: translate(-50%, -50%);
     align-content: center;
     justify-content: center;
-    .photoGrid {
+    #photoGrid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minMax(500px, 4fr) minMax(340px, 1fr));
       height: 100%;
       width: 100%;
-     
+     .commentsGrid {
+       height: calc(100% - 35px);
+       overflow: hidden;
+       display: grid;
+       grid-template-rows: 75px 1fr;
+     }
     }
     
     .closeSinglePhoto {
@@ -652,7 +657,7 @@
       
       #photoGrid {
         grid-template-columns: 1fr;
-        grid-template-rows: 50% 50%;
+        grid-template-rows: 50% calc(50% - 35px);
         
         .photo {
           height: 100%;
@@ -661,9 +666,9 @@
           display: block;
         }
         .commentsGrid {
-          position: absolute;
-          top: 50%;
-          width: 85vw;
+          display: grid;
+          grid-template-rows: 75px 1fr;
+          overflow: hidden;
         }
         .authorName {
           width: 100%;

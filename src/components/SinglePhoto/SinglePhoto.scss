@@ -21,8 +21,8 @@
     .photoGrid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minMax(500px, 4fr) minMax(340px, 1fr));
-      height: 100%;
-      width: 100%;
+      grid-template-rows: 100%;
+      overflow: hidden;
      
     }
     #view {

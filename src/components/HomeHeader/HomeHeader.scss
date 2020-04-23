@@ -3,7 +3,7 @@ header {
   position: fixed;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   color: black;
   background-color: #fff;
   transition: 800ms ease-in;
@@ -35,6 +35,7 @@ header {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-right: 2rem;
     div {
       padding: 0.5rem 1rem;
     }
