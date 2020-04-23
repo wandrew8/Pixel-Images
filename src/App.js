@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { HashRouter, Route, Switch } from "react-router-dom";
 import Home from './pages/Home/Home';
 import Signup from './pages/Signup/Signup';
 import Login from './pages/Login/Login';
@@ -55,7 +55,7 @@ class App extends React.Component {
 
     return (
       <div className="App">
-          <Router>
+          <HashRouter basename="/">
               <Switch>
                   <Route exact path="/" component={Home} />
                   <Route path="/category/:category" component={CategoryType} />} />
@@ -68,7 +68,7 @@ class App extends React.Component {
                   <Route path="/profile/:profileId/:toggle" component={ProfilePage} />
                   <Route component={ErrorPage} />
               </Switch>
-            </Router>
+            </HashRouter>
       </div>
     );
   }
