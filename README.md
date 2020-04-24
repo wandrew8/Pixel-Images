@@ -2,6 +2,8 @@
 
 Full-stack MERN photo sharing and social media application. Pixel Image allows users to post images; view, like and comment on other images; register for an account; log into an existing account and more. Data is persistant through the use of MongoDB and authentication is through passport JWT strategy. The frontend was built using React and all components were created from scratch along with Sass for styling and CSS grid and flexbox for positioning and layout.
 
+You can find the deployed site [here](https://wandrew8.github.io/Pixel-Images/).
+
 ## Tech Used
 ### Frontend Technologies
 * SCSS / Sass

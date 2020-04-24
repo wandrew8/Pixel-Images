@@ -129,7 +129,7 @@ class RenderPhotos extends Component {
         const RenderDescription = () => {
             return (
                 <div className="view">
-                    <p>{this.props.photo.description}This is the rendered item</p>
+                    <p>{this.props.photo.description}</p>
                 </div>
             )
         }
