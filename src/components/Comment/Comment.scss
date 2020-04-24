@@ -14,7 +14,7 @@
         color: gray;
     }
     p {
-        padding: 0.1rem 0rem;
+        padding: 0.1rem 0.1rem;
         margin: 0;
         font-size: 0.85rem;
     }
@@ -35,7 +35,7 @@
     }
     .statusBar {
         display: grid;
-        margin: 1rem 0rem;
+        margin: 0.6rem 0rem;
         grid-template-columns: 1fr 1fr 1fr 1fr 8fr;
         align-items: center;
         justify-content: center;
