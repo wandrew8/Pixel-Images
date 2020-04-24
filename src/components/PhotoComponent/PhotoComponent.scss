@@ -13,13 +13,37 @@
       display: inline-block;
       position: relative;
       width: 100%;
+      &:hover .view {
+        opacity: 1;
+        
+      }
       &:hover .category {
         opacity: 1;
       }
       &:hover .author {
         opacity: 1;
       }
-      
+      .view {
+        opacity: 0;
+        box-sizing: border-box;
+        border-radius: 5px 5px 0px 0px;
+        position: absolute;
+        top: 1px;
+        left: 1px;
+        width: 100%;
+        padding: 2rem 1rem 1rem 1rem;
+        text-align: center;
+        color: white;
+        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.3), rgba(0,0,0,0));
+        font-size: 0.9rem;
+        transition: 200ms ease-in;
+        
+        &:hover {
+          transition: 200ms ease-in;
+          padding: 4rem 1rem 2rem 1rem;
+          background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.7), rgba(0,0,0,0.6), rgba(0,0,0,0.5), rgba(0,0,0,0));
+        }
+      }
       i {
         transition: 200ms ease-in;
         
@@ -333,6 +357,9 @@
       position: relative;
       transition: 200ms ease-in;
       box-sizing: border-box;
+      &:hover .statText {
+        transform: translateX(0px);
+      }
       &:hover #stats {
         opacity: 1;
       }
