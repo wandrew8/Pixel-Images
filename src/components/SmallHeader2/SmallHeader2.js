@@ -30,7 +30,7 @@ class SmallHeader2 extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            scroll: 0,
+            scrollPosition: 100,
             loggedOut: false,
             showNav: false,
             category: '',
@@ -63,7 +63,7 @@ class SmallHeader2 extends React.Component {
 
     logoutUser = (e) => {
         sessionStorage.clear();
-        this.setState({loggedOut: true})
+        this.setState({ loggedOut: true })
 
     }
       
@@ -125,6 +125,7 @@ class SmallHeader2 extends React.Component {
                 <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
                     <ul>
                         <li onClick={props.showModal} className="searchButton"><i className="fas fa-search"></i>Search</li>
+                        <Link to="/" className="searchButton"><li><i className="fas fa-home"></i>Home</li></Link>
                         <Link to={`/profile/${props.author}/posted`} className="searchButton"><li><i className="fas fa-user-circle"></i>View Profile</li></Link>
                         <li onClick={props.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</li>
                         <li onClick={props.logoutUser} className="formButton"><i className="fas fa-sign-out-alt"></i>Logout</li>
@@ -161,6 +162,7 @@ class AddPhotoModal extends React.Component {
             category: '',
             tags: [],
             imageUrl: '',
+            description: '',
             author: window.sessionStorage.getItem('authorId'),
             uploadImage: false,
             url: 'https://quiet-ravine-27369.herokuapp.com',
@@ -208,6 +210,7 @@ class AddPhotoModal extends React.Component {
             tags: this.state.tags,
             imageUrl: this.state.imageUrl,
             author: this.state.author,
+            description: this.state.description,
         }
         const token = window.sessionStorage.getItem('token');
         const url = this.state.url + '/photos';
@@ -223,14 +226,14 @@ class AddPhotoModal extends React.Component {
             .then((data) => {
             })
             .catch((error) => {
-                console.error('Error:', error);
+            console.error('Error:', error);
             });
             this.props.handleClose();
             this.setState({
                 category: '',
                 tags: [],
                 imageUrl: '',
-                author: '',
+                description: '',
                 success: true
             });
         
@@ -248,7 +251,8 @@ class AddPhotoModal extends React.Component {
     renderRedirect = () => {
         if (this.state.success) {
             this.showToast()
-            // return <Redirect to='/user' />
+            const url = `/profile/${this.state.author}/posted`
+            return <Redirect to={url} />
         }
     }
     
@@ -273,7 +277,16 @@ class AddPhotoModal extends React.Component {
                         <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
                             <h2>ADD YOUR OWN PHOTO</h2>
                             <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
-                        
+                            <div className="imageSample">
+                            <div className="formGroup">
+                                
+                            <label>Choose an image to upload</label>
+                            <div onClick={this.openWidget} id="upload_widget" className="addPhoto-button uploadButton">
+                                Upload Image
+                            </div>
+                            </div>
+                            <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
+                            </div>
                             <div className="formGroup">
                             <label htmlFor="category">Category</label>
                             <select 
@@ -295,44 +308,35 @@ class AddPhotoModal extends React.Component {
                             </select>
                             </div>
                             <div className="formGroup">
+                            <label htmlFor="description">Description (optional)</label>
+                                <textarea 
+                                    rows="4" 
+                                    placeholder="Describe your picture..."
+                                    cols="50" 
+                                    name="description" 
+                                    id="description" 
+                                    onChange={this.handleInputChange} 
+                                    value={this.state.description} />
+                            </div>
+                            <div className="formGroup">
                             <label htmlFor="tags">Add some tags to describe your image</label>
                             <div className="row">
                                 <input 
-                                value={this.state.tag}
-                                onChange={this.handleInputChange}
-                                name="tag"
-                                list="tags" 
-                                id="tagInput" />
-                                <datalist id="tags">
-                                <option value="mountain"> </option>
-                                <option value="food"> </option>
-                                <option value="yoga"> </option>
-                                <option value="dogs"> </option>
-                                <option value="sunrise"> </option>
-                                <option value="travel"> </option>
-                                <option value="dinner"> </option>
-                                <option value="city"> </option>
-                                <option value="modern"> </option>
-                                <option value="blue"> </option>
-                                <option value="football"> </option>
-                                <option value="garden"> </option>
-                                <option value="animals"> </option>
-                                </datalist>
+                                    value={this.state.tag}
+                                    onChange={this.handleInputChange}
+                                    name="tag"
+                                    placeholder="Choose or type a tag name and press enter"
+                                    id="tagInput" />
                                 <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
                             </div>
                             <div className="tagAnswers"><RenderTags /></div>
-                            </div>
-                            <div className="imageSample">
-                            <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
-                                Upload Image
-                            </button>
-                            <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                             </div>
                             <div className="formGroup">
                             <button disabled={this.state.uploadImage ? false : true}>Submit</button>
                             </div>
                         </form>
                     </div>
+                    {this.renderRedirect()}
                 </React.Fragment>
     )
     }

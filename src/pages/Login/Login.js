@@ -95,7 +95,7 @@ export default class Signup extends Component {
             backgroundImage: 'url(' + this.state.images[this.state.index] + ')',
             transition: '2000ms ease-in',
           };
-          
+
         return (
             <Fade
                 in
@@ -128,10 +128,9 @@ export default class Signup extends Component {
                             id="username"
                             name="username"
                             minLength="8"
-                            maxLength="20"
                             value={this.state.username}
                             onChange={this.handleInputChange}
-                            placeholder="Enter a username or email..."
+                            placeholder="Enter your username..."
                             required
                         />
                         </div>
@@ -143,7 +142,7 @@ export default class Signup extends Component {
                             name="password"
                             value={this.state.password}
                             onChange={this.handleInputChange}
-                            placeholder="Create a password..."
+                            placeholder="Enter your password..."
                             required
                             minLength="8"
                             maxLength="20"

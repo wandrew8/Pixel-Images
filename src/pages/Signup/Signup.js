@@ -180,7 +180,6 @@ export default class Signup extends Component {
                                 id="username"
                                 name="username"
                                 minLength="8"
-                                maxLength="20"
                                 value={this.state.username}
                                 onChange={this.handleInputChange}
                                 placeholder="Enter a username or email..."
@@ -195,14 +194,14 @@ export default class Signup extends Component {
                                 name="password"
                                 value={this.state.password}
                                 onChange={this.handleInputChange}
-                                placeholder="Create a password..."
+                                placeholder="Create a password (at least 8 characters)..."
                                 required
                                 minLength="8"
                                 maxLength="20"
                             />
                         </div>
                         <div className="imageSample">
-                            <button onClick={this.openWidget} type="button" className="addPhoto-button">{this.state.uploadImage ? <span>Image Uploaded</span> : "Upload Image"}</button>
+                            <button onClick={this.openWidget} type="button" className="addPhoto-button">{this.state.uploadImage ? <span>Image Uploaded</span> : "Upload User Image"}</button>
                             <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                         </div>
                         <div className="formGroup">

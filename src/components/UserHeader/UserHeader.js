@@ -25,6 +25,7 @@ export default class HomeHeader extends Component {
             width: window.innerWidth,
         };
         this.logoutUser = this.logoutUser.bind(this)
+        this.listenToScroll = this.listenResize.bind(this);
     }
     showModal = () => {
         this.setState({ show: true });
@@ -77,7 +78,7 @@ export default class HomeHeader extends Component {
         }
     }
     
-    listenToScroll = () => {
+    listenToScroll() {
         const winScroll =
           document.body.scrollTop || document.documentElement.scrollTop
       
@@ -87,7 +88,7 @@ export default class HomeHeader extends Component {
       
         const scrolled = winScroll / height
         this.setState({
-          scrollPosition: scrolled,
+          scrollPosition: scrolled
         })
     }
     render() {
@@ -95,7 +96,7 @@ export default class HomeHeader extends Component {
             height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
         }
-        if (this.state.width > 800) {
+        if (this.state.width > 925) {
 
         return (
             <div>
@@ -103,6 +104,7 @@ export default class HomeHeader extends Component {
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
+                        <Link to="/" className="searchButton"><i className="fas fa-home"></i>Home</Link>
                         <Link to={`/profile/${this.state.author}/posted`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</div>
                         <div onClick={this.logoutUser} className="formButton"><button><i className="fas fa-sign-out-alt"></i>Logout</button></div>
@@ -240,7 +242,6 @@ class AddPhotoModal extends React.Component {
 
     renderRedirect = () => {
         if (this.state.success) {
-            this.showToast()
             const url = `/profile/${this.state.author}/posted`
             return <Redirect to={url} />
         }
@@ -262,12 +263,21 @@ class AddPhotoModal extends React.Component {
         }
             return (
                 <React.Fragment>
-                    {this.state.success ? <Toast message="New Image Uploaded Successfully" /> : <div>Oh no</div>}
+                    {this.state.success ? <Toast message="New Image Uploaded Successfully" /> : null}
                     <div className={showHideClassName}>
                         <form onSubmit={this.handleFormSubmit} id="addPhotoForm">
                             <h2>ADD YOUR OWN PHOTO</h2>
                             <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>
-                        
+                            <div className="imageSample">
+                            <div className="formGroup">
+                                
+                            <label>Choose an image to upload</label>
+                            <div onClick={this.openWidget} id="upload_widget" className="addPhoto-button uploadButton">
+                                Upload Image
+                            </div>
+                            </div>
+                            <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
+                            </div>
                             <div className="formGroup">
                             <label htmlFor="category">Category</label>
                             <select 
@@ -300,39 +310,17 @@ class AddPhotoModal extends React.Component {
                                     value={this.state.description} />
                             </div>
                             <div className="formGroup">
-                            <label htmlFor="tagInput">Add some tags to describe your image</label>
+                            <label htmlFor="tags">Add some tags to describe your image</label>
                             <div className="row">
                                 <input 
-                                value={this.state.tag}
-                                onChange={this.handleInputChange}
-                                name="tag"
-                                placeholder="Choose or type a tag name and press enter"
-                                list="tags" 
-                                id="tagInput" />
-                                <datalist id="tags">
-                                <option value="mountain"> </option>
-                                <option value="food"> </option>
-                                <option value="yoga"> </option>
-                                <option value="dogs"> </option>
-                                <option value="sunrise"> </option>
-                                <option value="travel"> </option>
-                                <option value="dinner"> </option>
-                                <option value="city"> </option>
-                                <option value="modern"> </option>
-                                <option value="blue"> </option>
-                                <option value="football"> </option>
-                                <option value="garden"> </option>
-                                <option value="animals"> </option>
-                                </datalist>
+                                    value={this.state.tag}
+                                    onChange={this.handleInputChange}
+                                    name="tag"
+                                    placeholder="Choose or type a tag name and press enter"
+                                    id="tagInput" />
                                 <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
                             </div>
                             <div className="tagAnswers"><RenderTags /></div>
-                            </div>
-                            <div className="imageSample">
-                                <button onClick={this.openWidget} id="upload_widget" className="addPhoto-button">
-                                    Upload Image
-                                </button>
-                                <div className="imageSampleHolder">{this.state.uploadImage ? <RenderImage /> : ''}</div>
                             </div>
                             <div className="formGroup">
                             <button disabled={this.state.uploadImage ? false : true}>Submit</button>

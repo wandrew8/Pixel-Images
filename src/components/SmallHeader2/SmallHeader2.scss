@@ -61,3 +61,17 @@
         padding-right: 0.5rem;
     }
 }
+
+.uploadButton {
+    border: solid black 1px;
+    padding: 0.5rem;
+    font-size: 0.8rem;
+    width: 100px;
+    text-align: center;
+    transition: 300ms ease-in;
+    cursor: pointer;
+    &:hover {
+        background: black;
+        color: white;
+    }
+}

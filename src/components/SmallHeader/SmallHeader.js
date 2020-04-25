@@ -29,7 +29,7 @@ class SmallHeader extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            scroll: 0,
+            scrollPosition: 0,
             showNav: false,
         }
         this.showNav = this.showNav.bind(this)
@@ -94,6 +94,7 @@ class SmallHeader extends React.Component {
                 <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
                     <ul>
                         <li onClick={props.showModal} className="searchButton"><i className="fas fa-search"></i>Search</li>
+                        <Link to="/" className="searchButton"><li><i className="fas fa-home"></i>Home</li></Link>
                         <Link to="/signup"><li className="formButton"><i className="fas fa-user"></i>Join</li></Link>
                         <Link to="/login"><li className="formButton"><i className="fas fa-sign-in-alt"></i>Login</li></Link>
                     </ul>

@@ -223,13 +223,16 @@ header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 1rem 0.5rem;
+    margin-bottom: -0.75rem;
     img {
       height: 60px;
       width: 80px;
       border-radius: 5px;
       object-fit: cover;
     }
+  }
+  .imageSampleHolder {
+    align-self: flex-end;
   }
 }
 

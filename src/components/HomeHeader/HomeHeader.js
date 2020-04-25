@@ -7,13 +7,31 @@ import './HomeHeader.scss';
 class HomeHeader extends Component {
     constructor(props) {
         super(props);
+
         this.state = {
             show: false,
             scrollPosition: 0,
             query: '',
+            initialScroll: false,
             width: window.innerWidth,
+            happy: false,
         };
     }
+
+    listenToScroll = () => {
+      const winScroll =
+        document.body.scrollTop || document.documentElement.scrollTop
+      const height =
+        document.documentElement.scrollHeight -
+        document.documentElement.clientHeight
+        console.log(height)
+
+      const scrolled = winScroll / height
+      this.setState({
+        scrollPosition: scrolled, initialScroll: true
+      })
+    }
+    
     showModal = () => {
         this.setState({ show: true });
     }
@@ -22,40 +40,28 @@ class HomeHeader extends Component {
       this.setState({ show: false });
     }
 
-      componentDidMount() {
-        window.addEventListener('scroll', this.listenToScroll)
-        window.addEventListener('resize', this.listenResize);
-        }
-        
-        componentWillUnmount() {
-        window.removeEventListener('scroll', this.listenToScroll)
-        window.removeEventListener('resize', this.listenResize);
-    
-        }
+    componentDidMount() {
+      window.addEventListener('scroll', this.listenToScroll)
+      // window.addEventListener('resize', this.listenResize);
+    }
       
-      listenToScroll = () => {
-        const winScroll =
-          document.body.scrollTop || document.documentElement.scrollTop
-      
-        const height =
-          document.documentElement.scrollHeight -
-          document.documentElement.clientHeight
-      
-        const scrolled = winScroll / height
-        this.setState({
-          scrollPosition: scrolled,
-        })
-      }
+      componentWillUnmount() {
+      window.removeEventListener('scroll', this.listenToScroll)
+      window.removeEventListener('resize', this.listenResize);
+  
+    }
 
-      handleQuery(e) {
-        e.preventDefault();        
-      }
+    handleQuery(e) {
+      e.preventDefault();
+      console.log(this.state.query)
+      
+    }
 
-      listenResize = () => {
+    listenResize = () => {
         this.setState({width: window.innerWidth})
     }
 
-      handleInputChange = event => {
+    handleInputChange = event => {
         const { name, value } = event.target;
         this.setState({
             [name]: value
@@ -66,6 +72,7 @@ class HomeHeader extends Component {
         const styledHeader = {
             height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
             opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
+
         }
         if (this.state.width > 800) {
 
@@ -98,6 +105,8 @@ const Modal = ({ handleClose, show, history }) => {
 
     function submitForm(e) {
       e.preventDefault();
+      console.log(query)
+      console.log(historyObj)
       if(query) historyObj.push('/search/' + query);
     }
       return (
