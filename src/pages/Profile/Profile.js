@@ -21,6 +21,7 @@ class Profile extends React.Component {
             showPosted: true,
             isLiked: false,
             isLoading: false, 
+            update: false
         }
         
     }
@@ -75,7 +76,7 @@ class Profile extends React.Component {
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            this.setState({isLiked: false, photos: data});
+            this.setState({ isLiked: false, photos: data, update: false });
         })
         .catch((error) => {
             this.setState({isLiked: false, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
@@ -91,6 +92,16 @@ class Profile extends React.Component {
         this.setState({ showLiked: true, showPosted: false });
     }
 
+    updateAuthorPhotos = () => {
+        this.setState({ update: true })
+    }
+
+    updatePhotos = () => {
+        if(this.state.update) {
+            this.getAuthorPhotos();
+        }
+    }
+
     render() {     
         const token = window.sessionStorage.getItem('token');
         const authorId = window.sessionStorage.getItem('authorId');
@@ -102,18 +113,18 @@ class Profile extends React.Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-                {token && authorId ?  <UserHeader getAuthorPhotos={this.getAuthorPhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
+                {token && authorId ?  <UserHeader updateAuthorPhotos={this.updateAuthorPhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
                 {this.state.isLoading ? <Loader /> : <Photo 
                                 getLikedPhotos={this.getLikedPhotos} 
+                                getAuthorPhotos={this.getAuthorPhotos} 
                                 toggle={this.props.toggle} 
                                 profile={true} 
-                                reRenderPhotos={this.reRenderPhotos} 
-                                getAuthorPhotos={this.getAuthorPhotos} 
                                 isLiked={this.state.isLiked} 
                                 photos={this.state.photos} />}
+                {this.updatePhotos()}
             </Fade>
         )
     }

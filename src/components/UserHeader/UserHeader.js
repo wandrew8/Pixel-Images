@@ -107,7 +107,7 @@ export default class UserHeader extends Component {
                     </div>
                 </header>
                 <Modal history={useHistory} show={this.state.show} handleInputChange={this.handleInputChange.bind(this)} handleQuery={this.handleQuery} handleClose={this.hideModal} />
-                <AddPhotoModal show={this.state.addPhoto} handleClose={this.closePhotoModal} />
+                <AddPhotoModal updateAuthorPhotos={this.props.updateAuthorPhotos} show={this.state.addPhoto} handleClose={this.closePhotoModal} />
                 {this.renderRedirect()}
             </div>
         )

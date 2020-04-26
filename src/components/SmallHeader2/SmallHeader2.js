@@ -114,12 +114,6 @@ class SmallHeader2 extends React.Component {
     
 
     render () {
-        const styledHeader = {
-            height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
-            opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
-
-        }
-
         function MenuBar(props) {    
             return (
                 <div className={props.scrollPosition > 0.05 ? "menuShort" : "menu"}>
