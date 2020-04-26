@@ -138,7 +138,7 @@ class SmallHeader2 extends React.Component {
 
         return(
             <div>
-                <header style={styledHeader}>
+                <header className="header">
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="mobileHeader">
                         <i onClick={this.showNav} className="fas fa-chevron-down"></i>

@@ -5,7 +5,7 @@ import Toast from '../Toast/Toast';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './UserHeader.scss';
 
-export default class HomeHeader extends Component {
+export default class UserHeader extends Component {
     constructor(props) {
         super(props);
 
@@ -92,15 +92,11 @@ export default class HomeHeader extends Component {
         })
     }
     render() {
-        const styledHeader = {
-            height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
-            opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
-        }
         if (this.state.width > 925) {
 
         return (
             <div>
-                <header style={styledHeader}>
+                <header className="header">
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>

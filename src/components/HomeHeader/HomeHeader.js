@@ -14,7 +14,6 @@ class HomeHeader extends Component {
             query: '',
             initialScroll: false,
             width: window.innerWidth,
-            happy: false,
         };
     }
 
@@ -24,7 +23,6 @@ class HomeHeader extends Component {
       const height =
         document.documentElement.scrollHeight -
         document.documentElement.clientHeight
-        console.log(height)
 
       const scrolled = winScroll / height
       this.setState({
@@ -42,7 +40,7 @@ class HomeHeader extends Component {
 
     componentDidMount() {
       window.addEventListener('scroll', this.listenToScroll)
-      // window.addEventListener('resize', this.listenResize);
+      window.addEventListener('resize', this.listenResize);
     }
       
       componentWillUnmount() {
@@ -69,16 +67,11 @@ class HomeHeader extends Component {
     };
 
     render() {
-        const styledHeader = {
-            height: this.state.scrollPosition > 0.05 ? '60px' : '100px',
-            opacity: this.state.scrollPosition > 0.05 ? '0.8' : '1',
-
-        }
         if (this.state.width > 800) {
 
           return (
             <div>
-                <header style={styledHeader}>
+                <header className="header">
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>

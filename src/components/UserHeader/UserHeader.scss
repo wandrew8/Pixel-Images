@@ -8,6 +8,9 @@ header {
   background-color: #fff;
   transition: 800ms ease-in;
   z-index: 50;
+  height: 75px;
+
+  
   a {
     display: flex;
     justify-content: center;
@@ -238,4 +241,9 @@ header {
 
 .hideModal {
   display: none;
+}
+
+.header {
+  opacity: 0.95;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }

@@ -102,7 +102,7 @@ class Profile extends React.Component {
                 exitOpacity={0.1}
                 timingFn='ease-in-out' 
                 duration={300}>
-                {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
+                {token && authorId ?  <UserHeader getAuthorPhotos={this.getAuthorPhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
                 <ProfileToggle author={this.state.data} toggle={this.props.toggle} />

@@ -109,11 +109,11 @@ class UpdateProfileForm extends React.Component {
                             type="text"
                             id="bio"
                             name="bio"
-                            maxLength="100"
+                            maxLength="500"
                             value={this.state.bio}
                             onChange={this.handleInputChange}
                             className="textarea"
-                            placeholder="Share some info about yourself (100 characters or less)..."
+                            placeholder="Share some info about yourself (500 characters or less)..."
                         />
                         </div>
 

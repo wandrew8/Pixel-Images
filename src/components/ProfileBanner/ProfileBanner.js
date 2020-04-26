@@ -83,7 +83,7 @@ class UserBanner extends React.Component {
                                 <p>Joined: {moment(new Date(createdAt)).format("MMMM Do, YYYY")}</p>
                             </div>
                         </div>
-                        {bio && bio.length > 0 ? <RenderBio bio={bio} /> : null}
+                        {bio ? <RenderBio bio={bio} /> : null}
                     </div>
                     {this.state.showForm ? this.renderForm() : null}
                 </div>

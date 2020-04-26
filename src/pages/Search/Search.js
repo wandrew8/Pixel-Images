@@ -4,6 +4,7 @@ import UserHeader from '../../components/UserHeader/UserHeader';
 import HomeHeader from '../../components/HomeHeader/HomeHeader';
 import Photo from '../../components/PhotoComponent/PhotoComponent';
 import Loader from '../../components/Loader/Loader';
+import CategoryHeader from '../../components/CategoryHeader/CategoryHeader';
 import Hero from '../../components/Hero/Hero';
 import './Search.scss';
 
@@ -53,6 +54,7 @@ class Search extends React.Component {
                 duration={300}>
                 {token && authorId ?  <UserHeader updatePhotos={this.updatePhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
+                <CategoryHeader />
                 {this.state.isLoading ? <Loader /> : <Photo photos={this.state.photos} />}
             </Fade>
         )
