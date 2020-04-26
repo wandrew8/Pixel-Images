@@ -1,0 +1,16 @@
+.textarea {
+    width: 100%;
+    height: 50px;
+    border: solid 1px black;
+    font-family: "Playfair Display", serif;
+}
+.closeBar {
+    position: absolute;
+    top: 0.5rem;
+    right: 2rem;
+    font-size: 1.5rem;
+    &:hover {
+      cursor: pointer;
+      transform: scale(1.2);
+    }
+  }
