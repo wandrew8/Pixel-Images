@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "bad636c7ce6bf7eceab9041604ca3f60",
+    "revision": "24a03eb79232582ad46000886611f317",
     "url": "/Pixel-Images/index.html"
   },
   {
-    "revision": "15255a453b310df4db7a",
-    "url": "/Pixel-Images/static/css/main.fa3e891d.chunk.css"
+    "revision": "f303ead7d9e6a8ca9fc2",
+    "url": "/Pixel-Images/static/css/main.22cebd30.chunk.css"
   },
   {
-    "revision": "a65b70158db68eb65628",
-    "url": "/Pixel-Images/static/js/2.c6d51789.chunk.js"
+    "revision": "ca611bee8ae333dc7bfb",
+    "url": "/Pixel-Images/static/js/2.882c93e4.chunk.js"
   },
   {
     "revision": "fa6965d26a9a6baf24f856735056b065",
-    "url": "/Pixel-Images/static/js/2.c6d51789.chunk.js.LICENSE.txt"
+    "url": "/Pixel-Images/static/js/2.882c93e4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "15255a453b310df4db7a",
-    "url": "/Pixel-Images/static/js/main.11cc7cc5.chunk.js"
+    "revision": "f303ead7d9e6a8ca9fc2",
+    "url": "/Pixel-Images/static/js/main.df6369db.chunk.js"
   },
   {
     "revision": "528bff961bea04b21be8",
