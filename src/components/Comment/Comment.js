@@ -38,12 +38,7 @@ class Comment extends Component {
         }
     }
 
-    updateData() {
-        const body = {
-            likes: this.state.likes,
-            dislikes: this.state.dislikes,
-            text: this.state.text,
-        }
+    updateData(data) {
         const url = `${this.state.url}/photos/${this.props.photoId}/comments/${this.props.comment._id}`;
         fetch(url, {
             method: 'PUT', 
@@ -51,10 +46,11 @@ class Comment extends Component {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            body: JSON.stringify(body),
+            body: JSON.stringify(data),
             })
             .then(response => response.json())
             .then(data => {
+                console.log('success', data)
             })
             .catch(err => {
                 console.log(err)
@@ -62,23 +58,43 @@ class Comment extends Component {
     }
 
     incrementLikes() {
+        const body = {
+            likes: this.state.likes + 1,
+            dislikes: this.state.dislikes,
+            text: this.state.text,
+        }
+        this.updateData(body);
         this.setState({ likes: this.state.likes + 1 })
-        this.updateData();
     }
 
     decrementLikes() {
+        const body = {
+            likes: this.state.likes - 1,
+            dislikes: this.state.dislikes,
+            text: this.state.text,
+        }
+        this.updateData(body);
         this.setState({ likes: this.state.likes - 1 })
-        this.updateData();
     }
 
     incrementDislikes() {
+        const body = {
+            likes: this.state.likes,
+            dislikes: this.state.dislikes + 1,
+            text: this.state.text,
+        }
+        this.updateData(body);
         this.setState({ dislikes: this.state.dislikes + 1 })
-        this.updateData();
     }
 
     decrementDislikes() {
+        const body = {
+            likes: this.state.likes,
+            dislikes: this.state.dislikes - 1,
+            text: this.state.text,
+        }
+        this.updateData(body);
         this.setState({ dislikes: this.state.dislikes - 1 })
-        this.updateData();
     }
 
     render() {
