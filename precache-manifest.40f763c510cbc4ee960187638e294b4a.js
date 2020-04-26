@@ -1,11 +1,11 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "02500dcecb46b60f015a4cdc1b62be73",
+    "revision": "5a97cd9001ddf0877b947564febf2741",
     "url": "/Pixel-Images/index.html"
   },
   {
-    "revision": "6bfe882f71cd1b00938c",
-    "url": "/Pixel-Images/static/css/main.c1606f19.chunk.css"
+    "revision": "6b3fb4659b04ae0bccb2",
+    "url": "/Pixel-Images/static/css/main.c9ce11ea.chunk.css"
   },
   {
     "revision": "ca611bee8ae333dc7bfb",
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Pixel-Images/static/js/2.882c93e4.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "6bfe882f71cd1b00938c",
-    "url": "/Pixel-Images/static/js/main.1a8eda2e.chunk.js"
+    "revision": "6b3fb4659b04ae0bccb2",
+    "url": "/Pixel-Images/static/js/main.ba7159f1.chunk.js"
   },
   {
     "revision": "528bff961bea04b21be8",
