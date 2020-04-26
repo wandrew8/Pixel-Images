@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect, Link } from "react-router-dom";
 import { Fade } from 'react-animation-components';
+import Toast from '../../components/Toast/Toast';
 import logo from '../../assets/images/icons/android-chrome-512x512.png'
 import './Login.scss';
 
@@ -23,6 +24,7 @@ export default class Signup extends Component {
         userImage: '',
         uploadImage: false,
         token: false,
+        loginError: false,
         errMess: '',
         }
         
@@ -55,6 +57,7 @@ export default class Signup extends Component {
     }
     
     handleFormSubmit = async (event) => {
+        this.setState({ loginError: false })
         event.preventDefault();
         const body = {
             username: this.state.username,
@@ -71,15 +74,16 @@ export default class Signup extends Component {
             })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                 this.setState({
                     username: '',
                     password: '',
-                    errMess: null
                 });
                 this.setSession(data.token, data.userId); 
             })
             .catch((error) => {
                 console.error('Error:', error);
+                this.setState({ loginError: true })
             });
         
     };
@@ -153,7 +157,7 @@ export default class Signup extends Component {
                         </div>
                     </form>
                 </div>
-                
+                {this.state.loginError ? <Toast message="Username and Password not recognized. Please try again." /> : null }
                 {this.renderRedirect()}
             </div>
         </Fade>
