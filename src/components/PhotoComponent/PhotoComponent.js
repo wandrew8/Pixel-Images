@@ -162,7 +162,7 @@ class RenderPhotos extends Component {
                     } else {
                         return (
                             <React.Fragment>
-                                {this.state.showUpdatePhotoModal ? <UpdatePhotoForm photo={this.props.photo} handleClose={this.closeUpdatePhotoModal} /> : null}
+                                {this.state.showUpdatePhotoModal ? <UpdatePhotoForm updateAuthorPhotos={this.props.updateAuthorPhotos} photo={this.props.photo} handleClose={this.closeUpdatePhotoModal} /> : null}
                                 {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
                                 <Link className="link" to={`/photo/${this.props.photo._id}`}>
                                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
@@ -234,6 +234,7 @@ class Photo extends Component {
                                 updatePhotos={this.props.updatePhotos} 
                                 updateHome={this.props.updateHome} 
                                 key={photo._id} 
+                                updateAuthorPhotos={this.props.updateAuthorPhotos}
                                 getLikedPhotos={this.props.getLikedPhotos}
                                 unlikePhoto={this.props.updateLikedPhotos}
                                 photo={photo} />

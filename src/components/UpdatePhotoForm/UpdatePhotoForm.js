@@ -1,5 +1,6 @@
 import React from 'react';
 import Toast from '../Toast/Toast';
+import { Redirect } from 'react-router-dom';
 import './UpdatePhotoForm.scss';
 
 class UpdatePhotoForm extends React.Component {
@@ -53,14 +54,18 @@ class UpdatePhotoForm extends React.Component {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data)
+                
             })
             .catch((error) => {
             console.error('Error:', error);
             });
-            this.props.handleClose();
             this.setState({
-                success: true
+                success: true,
             });
+            setTimeout(() => {
+                this.props.handleClose()
+            }, 3000)
+            
         
     };
     removeItem = event => {
@@ -68,6 +73,8 @@ class UpdatePhotoForm extends React.Component {
         const index = this.state.tags.indexOf(value);
         this.setState({tags: this.state.tags.slice(0, index).concat(this.state.tags.slice(index + 1, this.state.tags.length))});
     }
+
+
     
     render() {
         
@@ -76,12 +83,13 @@ class UpdatePhotoForm extends React.Component {
                 return (<p onClick={this.removeItem} key={tag} className="smallTag">{tag}</p>);
             })
             return tags;
-        
         }
+
+        const url = `${this.state.url}/photo/${this.props.photo._id}`
             return (
                 <React.Fragment>
-                    {this.state.success ? <Toast message="Image Successfully Updated" /> : null}
-                    <div className="formModal updatePhotoModal">
+                    {this.state.success ? <Toast message="Successfully Updated Photo" /> : null}
+                    <div className={this.state.success ? "formModal updatePhotoModal hidePhotoUpdateForm" : "formModal updatePhotoModal"}>
                         <form onSubmit={this.handleFormSubmit}>
                             <h2>UPDATE YOUR PHOTO</h2>
                             <div onClick={this.props.handleClose} className="closeModal"><i className="far fa-times-circle"></i></div>

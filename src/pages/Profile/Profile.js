@@ -122,6 +122,7 @@ class Profile extends React.Component {
                                 getAuthorPhotos={this.getAuthorPhotos} 
                                 toggle={this.props.toggle} 
                                 profile={true} 
+                                updateAuthorPhotos={this.updateAuthorPhotos}
                                 isLiked={this.state.isLiked} 
                                 photos={this.state.photos} />}
                 {this.updatePhotos()}
