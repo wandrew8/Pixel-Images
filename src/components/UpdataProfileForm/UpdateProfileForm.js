@@ -76,7 +76,7 @@ class UpdateProfileForm extends React.Component {
             <React.Fragment>
                 <div onClick={this.props.closeForm} className="closeBar"><i className="far fa-times-circle"></i></div>
                 <form onSubmit={this.handleSubmit}>
-                    <h2>Update Profile</h2>
+                    <h2>UPDATE PROFILE</h2>
                     <div className="splitInputs">
                         <div className="formGroup">
                         <label htmlFor="firstName">First Name:</label>

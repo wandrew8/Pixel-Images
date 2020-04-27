@@ -312,7 +312,7 @@ class AddPhotoModal extends React.Component {
                                     value={this.state.tag}
                                     onChange={this.handleInputChange}
                                     name="tag"
-                                    placeholder="Choose or type a tag name and press enter"
+                                    placeholder="Type a tag name and press enter"
                                     id="tagInput" />
                                 <button disabled={this.state.tag ? false : true} onClick={this.updateTags} id="addTagButton"><i className="fas fa-plus"></i></button>
                             </div>

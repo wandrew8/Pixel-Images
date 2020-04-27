@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Lottie from '../Lottie/Lottie';
 import Toast from '../Toast/Toast';
 import PhotoStats from '../PhotoStats/PhotoStats';
+import UpdatePhotoForm from '../UpdatePhotoForm/UpdatePhotoForm';
 import './PhotoComponent.scss';
 
 class RenderPhotos extends Component {
@@ -14,6 +15,7 @@ class RenderPhotos extends Component {
             playLottie: false,
             showToast: false,
             actionTaken: false,
+            showUpdatePhotoModal: false,
         }
     }
 
@@ -104,6 +106,15 @@ class RenderPhotos extends Component {
         
     }
 
+    updatePhoto = () => {
+        console.log('Hello, you')
+        this.setState({ showUpdatePhotoModal: true })
+    }
+
+    closeUpdatePhotoModal = () => {
+        this.setState({ showUpdatePhotoModal: false })
+    }
+
     unlikePhoto = (id) => {
         const authorId = window.sessionStorage.getItem('authorId');
         const url = this.state.url + '/users/' + authorId + '/favorites/' + id;
@@ -143,20 +154,22 @@ class RenderPhotos extends Component {
                                 <Link className="link" to={`/photo/${this.props.photo._id}`}>
                                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                                 </Link>
-                                <div className="category">
-                                    <div onClick={this.unlikePhoto.bind(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove from Favorites</p></div> :
+                                <div id="posted" className="category">
+                                    <div onClick={this.unlikePhoto(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove Photo</p></div>
                                 </div>
                             </React.Fragment>
                         )
                     } else {
                         return (
                             <React.Fragment>
+                                {this.state.showUpdatePhotoModal ? <UpdatePhotoForm photo={this.props.photo} handleClose={this.closeUpdatePhotoModal} /> : null}
                                 {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
                                 <Link className="link" to={`/photo/${this.props.photo._id}`}>
                                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                                 </Link>
-                                <div className="category">
-                                    <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Remove Photo</p></div> 
+                                <div id="posted" className="category">
+                                    <div onClick={this.deletePhoto.bind(null, this.props.photo._id)} className="delete"><i className="fas fa-trash-alt"></i><p>Delete</p></div>
+                                    <div onClick={this.updatePhoto} className="edit"><p>Edit Photo</p><i className="fas fa-edit"></i></div>  
                                 </div>
                                 <PhotoStats photo={this.props.photo} />
                             </React.Fragment>

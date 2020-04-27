@@ -1,0 +1,15 @@
+.updatePhotoModal {
+    label, h2, p, i {
+        color: black;
+    }
+    h2 {
+        text-align: center;
+        font-weight: 300;
+    }
+    .imageSample .img img {
+        height: 140px;
+        width: 100%;
+        border-radius: 5px;
+        object-fit: cover;
+    }
+}

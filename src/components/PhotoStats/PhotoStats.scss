@@ -1,14 +1,13 @@
 #stats {
     display: flex;
     flex-direction: column;
-    z-index:50;
     position: absolute;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 0px 0px 4px 4px;
-    bottom: 0;
+    bottom: 6px;
     text-align: center;
     transition: 300ms ease-in;
-    opacity: 0;
+    opacity: 1;
     width: 100%;
     transform: translate(1px, 1px);
     .statText {
@@ -64,9 +63,32 @@
     top: 50%;
     transform: translate(-50%, -50%);
     transition: 300ms ease-in-out;
-    opacity: 0;
+    opacity: 1;
     &:hover {
         background-color: rgba(0,0,0,0.1);
         box-shadow: 2px 2px 5px rgba(0,0,0,0.5)
     }
 }
+
+#posted {
+    opacity: 1;
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+.edit {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover {
+        cursor: pointer;
+    }
+    &:hover i {
+        cursor: pointer;
+        transform: scale(1.5);
+      }
+      i {
+      transition: 200ms ease-in;
+      margin: 0rem 2rem 0rem 1rem;
+    }
+  }
