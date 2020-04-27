@@ -1,0 +1,40 @@
+.pagination {
+    display: flex;
+    justify-content: center;
+}
+.paginationContainer {
+    background-color: rgba(0,0,0,0.4);
+    padding: 1rem 0rem 3rem 0rem;
+    width: 100%;
+    text-align: center;
+    h3 {
+        color: white;
+        font-family: "Playfair Display", serif;
+        text-transform: uppercase;
+        font-weight: 300;
+    }
+    button {
+        font-family: "Playfair Display", serif;
+        padding: 1rem 3rem;
+        margin: 0rem 1rem;
+        color: white;
+        background-color: rgba(0, 0, 0, 0.4);
+        text-decoration: none;
+        text-transform: uppercase;
+        font-weight: 300;
+        border-radius: 4px;
+        border: solid white 1px;
+        transition: 300ms ease-in-out;
+        opacity: 1;
+        &:hover {
+            background-color: rgba(0,0,0,0.1);
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.5)
+        }
+    }
+    .next {
+        padding-left: 1rem;
+    }
+    .prev {
+        padding-right: 1rem;
+    }
+}
