@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/Pixel-Images/static/css/main.7ce257e2.chunk.css",
-    "main.js": "/Pixel-Images/static/js/main.46f9303f.chunk.js",
-    "main.js.map": "/Pixel-Images/static/js/main.46f9303f.chunk.js.map",
+    "main.css": "/Pixel-Images/static/css/main.d1e2f209.chunk.css",
+    "main.js": "/Pixel-Images/static/js/main.61814a6a.chunk.js",
+    "main.js.map": "/Pixel-Images/static/js/main.61814a6a.chunk.js.map",
     "runtime-main.js": "/Pixel-Images/static/js/runtime-main.6ce78c58.js",
     "runtime-main.js.map": "/Pixel-Images/static/js/runtime-main.6ce78c58.js.map",
     "static/js/2.512ded5e.chunk.js": "/Pixel-Images/static/js/2.512ded5e.chunk.js",
     "static/js/2.512ded5e.chunk.js.map": "/Pixel-Images/static/js/2.512ded5e.chunk.js.map",
     "index.html": "/Pixel-Images/index.html",
-    "precache-manifest.783f4d869d7919c6d7cd1b9c58141554.js": "/Pixel-Images/precache-manifest.783f4d869d7919c6d7cd1b9c58141554.js",
+    "precache-manifest.8d5b0d9610d3179c4c157c47515c60ec.js": "/Pixel-Images/precache-manifest.8d5b0d9610d3179c4c157c47515c60ec.js",
     "service-worker.js": "/Pixel-Images/service-worker.js",
-    "static/css/main.7ce257e2.chunk.css.map": "/Pixel-Images/static/css/main.7ce257e2.chunk.css.map",
+    "static/css/main.d1e2f209.chunk.css.map": "/Pixel-Images/static/css/main.d1e2f209.chunk.css.map",
     "static/js/2.512ded5e.chunk.js.LICENSE.txt": "/Pixel-Images/static/js/2.512ded5e.chunk.js.LICENSE.txt",
     "static/media/android-chrome-512x512.png": "/Pixel-Images/static/media/android-chrome-512x512.ed59d81f.png"
   },
   "entrypoints": [
     "static/js/runtime-main.6ce78c58.js",
     "static/js/2.512ded5e.chunk.js",
-    "static/css/main.7ce257e2.chunk.css",
-    "static/js/main.46f9303f.chunk.js"
+    "static/css/main.d1e2f209.chunk.css",
+    "static/js/main.61814a6a.chunk.js"
   ]
 }
