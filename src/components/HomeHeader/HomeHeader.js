@@ -75,6 +75,7 @@ class HomeHeader extends Component {
                     <Link to="/"><img className="logo" src={logo} alt="" /><h1>Pixel Images</h1></Link>
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
+                        <Link to="/" className="searchButton"><i className="fas fa-home"></i>Home</Link>
                         <div className="formButton"><button><Link to="/signup"><i className="fas fa-user"></i>Join</Link></button></div>
                         <div className="formButton"><button><Link to="/login"><i className="fas fa-sign-in-alt"></i>Login</Link></button></div>
 
