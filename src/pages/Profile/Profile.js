@@ -57,26 +57,29 @@ class Profile extends React.Component {
     } 
 
     getLikedPhotos = () => {
-        this.setState({isLoading: true, showLiked: true, showPosted: false})
+        this.setState({isLoading: true })
         const userId = window.sessionStorage.getItem('authorId');
         const url = `${this.state.url}/users/${userId}/favorites`
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            this.setState({isLiked: true, isLoading: false, photos: data, photoDeleted: false, showLiked: false, showPosted: false})
+            console.log("Collected liked photos no problem");
+            console.log(data)
+            this.setState({ photos: data, isLoading: false });
         })
         .catch((error) => {
-            this.setState({isLiked: true, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
             console.error('Error:', error);
         });
     }
     
     getAuthorPhotos = () => {
+        this.setState({isLoading: true })
         const url = `${this.state.url}/photos/author/${this.props.author}`
         fetch(url)
         .then((response) => response.json())
         .then((data) => {
-            this.setState({ isLiked: false, photos: data, update: false });
+            console.log(data)
+            this.setState({ photos: data, isLoading: false });
         })
         .catch((error) => {
             this.setState({isLiked: false, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
@@ -116,7 +119,7 @@ class Profile extends React.Component {
                 {token && authorId ?  <UserHeader updateAuthorPhotos={this.updateAuthorPhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
-                <ProfileToggle author={this.state.data} toggle={this.props.toggle} />
+                <ProfileToggle author={this.state.data} toggle={this.props.toggle} toggleFavorites={this.toggleFavorites} togglePosted={this.togglePosted} />
                 {this.state.isLoading ? <Loader /> : <Photo 
                                 getLikedPhotos={this.getLikedPhotos} 
                                 getAuthorPhotos={this.getAuthorPhotos} 

@@ -1,6 +1,5 @@
 import React from 'react';
 import Toast from '../Toast/Toast';
-import { Redirect } from 'react-router-dom';
 import './UpdatePhotoForm.scss';
 
 class UpdatePhotoForm extends React.Component {
@@ -85,7 +84,6 @@ class UpdatePhotoForm extends React.Component {
             return tags;
         }
 
-        const url = `${this.state.url}/photo/${this.props.photo._id}`
             return (
                 <React.Fragment>
                     {this.state.success ? <Toast message="Successfully Updated Photo" /> : null}

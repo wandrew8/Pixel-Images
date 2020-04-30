@@ -8,11 +8,9 @@ class ProfileToggle extends React.Component {
         this.state = {
             togglePosted: true,
             toggleLiked: false,
-            // url: 'http://localhost:3000',
             url: 'https://quiet-ravine-27369.herokuapp.com',
             data: {},
             photos: [],
-            happy: true,
         }
     }
 
@@ -28,18 +26,14 @@ class ProfileToggle extends React.Component {
         }
     }
 
-    componentDidMount() {
-        console.log(this.state)
-    }
-
     render() {
         return (
             <React.Fragment>
                 <div className="toggle">
-                    <Link to={`/profile/${this.props.author._id}/posted`} className={this.props.toggle === 'posted' ? "toggleButton post highlight" : "toggleButton post"} >
+                    <Link onClick={this.props.togglePosted} to={`/profile/${this.props.author._id}/posted`} className={this.props.toggle === 'posted' ? "toggleButton post highlight" : "toggleButton post"} >
                         POSTED PHOTOS
                     </Link>
-                    <Link to={`/profile/${this.props.author._id}/liked`} className={this.props.toggle === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
+                    <Link onClick={this.props.toggleFavorites} to={`/profile/${this.props.author._id}/liked`} className={this.props.toggle === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
                         LIKED PHOTOS
                     </Link>
                 </div>
