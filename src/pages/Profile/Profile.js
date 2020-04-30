@@ -19,9 +19,10 @@ class Profile extends React.Component {
             photoDeleted: false,
             showLiked: false,
             showPosted: true,
-            isLiked: false,
+            liked: false,
             isLoading: false, 
-            update: false
+            update: false,
+            page: "posted"
         }
         
     }
@@ -36,10 +37,10 @@ class Profile extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.toggle === "posted" && this.props.toggle !== prevProps.toggle) {
+        if(this.state.page === "posted" && this.state.page !== prevProps.page && this.state.update) {
             this.getAuthorPhotos();
         }
-        if(this.props.toggle === "liked" && this.props.toggle !== prevProps.toggle) {
+        if(this.state.page === "liked" && this.state.page !== prevProps.page && this.state.update) {
             this.getLikedPhotos();
         }
     }
@@ -57,7 +58,7 @@ class Profile extends React.Component {
     } 
 
     getLikedPhotos = () => {
-        this.setState({isLoading: true })
+        this.setState({isLoading: true, update: false, liked: true })
         const userId = window.sessionStorage.getItem('authorId');
         const url = `${this.state.url}/users/${userId}/favorites`
         fetch(url)
@@ -65,7 +66,7 @@ class Profile extends React.Component {
         .then((data) => {
             console.log("Collected liked photos no problem");
             console.log(data)
-            this.setState({ photos: data, isLoading: false });
+            this.setState({ photos: data, isLoading: false, liked: false });
         })
         .catch((error) => {
             console.error('Error:', error);
@@ -73,7 +74,7 @@ class Profile extends React.Component {
     }
     
     getAuthorPhotos = () => {
-        this.setState({isLoading: true })
+        this.setState({isLoading: true, update: false })
         const url = `${this.state.url}/photos/author/${this.props.author}`
         fetch(url)
         .then((response) => response.json())
@@ -82,27 +83,12 @@ class Profile extends React.Component {
             this.setState({ photos: data, isLoading: false });
         })
         .catch((error) => {
-            this.setState({isLiked: false, photos: [], photoDeleted: false, showLiked: false, showPosted: false})
             console.error('Error:', error);
         });
     }
 
-    togglePosted = () => {
-        this.setState({ showLiked: false, showPosted: true });
-    };
-
-    toggleFavorites = () => {
-        this.setState({ showLiked: true, showPosted: false });
-    }
-
-    updateAuthorPhotos = () => {
-        this.setState({ update: true })
-    }
-
-    updatePhotos = () => {
-        if(this.state.update) {
-            this.getAuthorPhotos();
-        }
+    toggle = (pageLink) => {
+        this.setState({ page: pageLink, update: true })
     }
 
     render() {     
@@ -119,16 +105,16 @@ class Profile extends React.Component {
                 {token && authorId ?  <UserHeader updateAuthorPhotos={this.updateAuthorPhotos} /> : <HomeHeader updatePhotos={this.updatePhotos} />}
                 <Hero />
                 <ProfileBanner author={this.state.data} />
-                <ProfileToggle author={this.state.data} toggle={this.props.toggle} toggleFavorites={this.toggleFavorites} togglePosted={this.togglePosted} />
+                <ProfileToggle author={this.state.data} page={this.state.page} toggle={this.toggle} />
                 {this.state.isLoading ? <Loader /> : <Photo 
                                 getLikedPhotos={this.getLikedPhotos} 
                                 getAuthorPhotos={this.getAuthorPhotos} 
-                                toggle={this.props.toggle} 
                                 profile={true} 
                                 updateAuthorPhotos={this.updateAuthorPhotos}
-                                isLiked={this.state.isLiked} 
-                                photos={this.state.photos} />}
-                {this.updatePhotos()}
+                                page={this.state.page} 
+                                photos={this.state.photos} 
+                />}
+                
             </Fade>
         )
     }

@@ -1,13 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import './ProfileToggle.scss';
 
 class ProfileToggle extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            togglePosted: true,
-            toggleLiked: false,
             url: 'https://quiet-ravine-27369.herokuapp.com',
             data: {},
             photos: [],
@@ -15,7 +12,7 @@ class ProfileToggle extends React.Component {
     }
 
     renderPhotos = () => {
-        if (this.props.toggle === 'posted') {
+        if (this.props.page === 'posted') {
             return (
                 <h1 className="heading">Your Posted Photos</h1>
             )
@@ -30,12 +27,12 @@ class ProfileToggle extends React.Component {
         return (
             <React.Fragment>
                 <div className="toggle">
-                    <Link onClick={this.props.togglePosted} to={`/profile/${this.props.author._id}/posted`} className={this.props.toggle === 'posted' ? "toggleButton post highlight" : "toggleButton post"} >
+                    <div onClick={this.props.toggle.bind(this, "posted")} className={this.props.page === 'posted' ? "toggleButton post highlight" : "toggleButton post"} >
                         POSTED PHOTOS
-                    </Link>
-                    <Link onClick={this.props.toggleFavorites} to={`/profile/${this.props.author._id}/liked`} className={this.props.toggle === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
+                    </div>
+                    <div onClick={this.props.toggle.bind(this, "liked")} className={this.props.page === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
                         LIKED PHOTOS
-                    </Link>
+                    </div>
                 </div>
                 {this.renderPhotos()}
             </React.Fragment>

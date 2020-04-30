@@ -147,7 +147,7 @@ class RenderPhotos extends Component {
        
         if(this.props.photo) {
                 if(this.props.profile) {
-                    if(this.props.isLiked) {
+                    if(this.props.page === "liked") {
                         return (
                             <React.Fragment>
                                 {this.state.showToast ? <Toast message="You already liked this photo" /> : null}
@@ -155,9 +155,10 @@ class RenderPhotos extends Component {
                                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                                 </Link>
                                 <div id="posted" className="category">
-                                    <div onClick={this.unlikePhoto(null, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove Photo</p></div>
+                                    <div onClick={this.unlikePhoto.bind(this, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove Photo</p></div>
                                 </div>
                             </React.Fragment>
+                            
                         )
                     } else {
                         return (
@@ -227,7 +228,6 @@ class Photo extends Component {
                     return (
                         <div key={photo._id} className="photo" >
                             <RenderPhotos 
-                                isLiked={this.props.isLiked} 
                                 profile={this.props.profile} 
                                 getAuthorPhotos={this.props.getAuthorPhotos}
                                 reRenderPhotos={this.props.reRenderPhotos} 
@@ -237,6 +237,7 @@ class Photo extends Component {
                                 updateAuthorPhotos={this.props.updateAuthorPhotos}
                                 getLikedPhotos={this.props.getLikedPhotos}
                                 unlikePhoto={this.props.updateLikedPhotos}
+                                page={this.props.page}
                                 photo={photo} />
                         </div>
                     )

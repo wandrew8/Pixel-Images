@@ -101,7 +101,7 @@ export default class UserHeader extends Component {
                     <div className="tools">
                         <div onClick={this.showModal} className="searchButton"><i className="fas fa-search"></i>Search</div>
                         <Link to="/" className="searchButton"><i className="fas fa-home"></i>Home</Link>
-                        <Link to={`/profile/${this.state.author}/posted`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
+                        <Link to={`/profile/${this.state.author}`} className="searchButton"><i className="fas fa-user-circle"></i>Profile</Link>
                         <div onClick={this.openPhotoModal} className="searchButton"><i className="fas fa-camera-retro"></i>Add Photo</div>
                         <div onClick={this.logoutUser} className="formButton"><button><i className="fas fa-sign-out-alt"></i>Logout</button></div>
                     </div>
