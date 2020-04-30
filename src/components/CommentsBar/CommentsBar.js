@@ -94,35 +94,37 @@ class CommentsBar extends React.Component {
     render() {
         const {photo} = this.props;
         return(
-            <div className="commentsGrid">
-            {this.state.showToast ? <Toast message="Sign in to post a comment" /> : null }
-                <div className="authorName">
-                    <Link to={`/author/${photo.author[0]._id}`}>
-                        <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
-                    </Link>
-                    <div className="name">
+            <React.Fragment>
+                <div className="commentsGrid">
+                    <div className="authorName">
                         <Link to={`/author/${photo.author[0]._id}`}>
-                            <h3>{`${photo.author[0].firstName} ${photo.author[0].lastName}`}</h3>
+                            <img src={photo.author[0].userImage} alt={photo.author[0].firstName} />
                         </Link>
-                        <p>Posted: {moment(new Date(photo.createdAt), "YYYYMMDD").fromNow()}</p>
+                        <div className="name">
+                            <Link to={`/author/${photo.author[0]._id}`}>
+                                <h3>{`${photo.author[0].firstName} ${photo.author[0].lastName}`}</h3>
+                            </Link>
+                            <p>Posted: {moment(new Date(photo.createdAt), "YYYYMMDD").fromNow()}</p>
+                        </div>
+                    </div>
+                    <div className="commentsHolder">
+                        {this.RenderComments()}
+                    </div>
+                    <div className="addComment">
+                        <form onSubmit={this.handleSubmit} id="addComment">
+                            <input 
+                                type="text"
+                                name="comment" 
+                                required 
+                                value={this.state.comment}
+                                onChange={this.handleInputChange}
+                                placeholder="Add a comment" />
+                            <button>Submit</button>
+                        </form>
                     </div>
                 </div>
-                <div className="commentsHolder">
-                    {this.RenderComments()}
-                </div>
-                <div className="addComment">
-                    <form onSubmit={this.handleSubmit} id="addComment">
-                        <input 
-                            type="text"
-                            name="comment" 
-                            required 
-                            value={this.state.comment}
-                            onChange={this.handleInputChange}
-                            placeholder="Add a comment" />
-                        <button>Submit</button>
-                    </form>
-                </div>
-            </div>
+                {this.state.showToast ? <Toast message="Sign in to post a comment" /> : null }
+            </React.Fragment>
         )
     }
 }
