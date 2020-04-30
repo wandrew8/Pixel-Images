@@ -154,7 +154,7 @@ class RenderPhotos extends Component {
                                 <Link className="link" to={`/photo/${this.props.photo._id}`}>
                                     <img onClick={this.showModal} alt={this.props.photo.tags[0]} data-id={this.props.photo._id} className="image" width="200" height="200" src={this.props.photo.imageUrl} />
                                 </Link>
-                                <div id="posted" className="category">
+                                <div id="liked" className="category">
                                     <div onClick={this.unlikePhoto.bind(this, this.props.photo._id)} className="delete"><i className="far fa-heart"></i><p>Remove Photo</p></div>
                                 </div>
                             </React.Fragment>

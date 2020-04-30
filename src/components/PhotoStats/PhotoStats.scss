@@ -7,7 +7,7 @@
     bottom: 6px;
     text-align: center;
     transition: 300ms ease-in;
-    opacity: 1;
+    opacity: 0;
     width: 100%;
     transform: translate(1px, 1px);
     .statText {
@@ -63,7 +63,7 @@
     top: 50%;
     transform: translate(-50%, -50%);
     transition: 300ms ease-in-out;
-    opacity: 1;
+    opacity: 0;
     &:hover {
         background-color: rgba(0,0,0,0.1);
         box-shadow: 2px 2px 5px rgba(0,0,0,0.5)
@@ -71,6 +71,12 @@
 }
 
 #posted {
+    opacity: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+
+}
+
+#liked {
     opacity: 1;
     background-color: rgba(0, 0, 0, 0.4);
 
@@ -92,3 +98,37 @@
       margin: 0rem 2rem 0rem 1rem;
     }
   }
+
+//   HOVER EFFECTS FOR POSTED PHOTOS IN PROFILE PAGE
+  .photoContainer {
+      .photo {
+          &:hover #stats {
+              opacity: 1;
+          }
+          &:hover #posted.category {
+              opacity: 1;
+          }
+          &:hover .viewLink {
+              opacity: 1;
+          }
+      }
+  }
+
+  @media all and (max-width: 768px) {
+    #stats {
+        opacity: 1;
+    }
+    #posted.category {
+        opacity: 1;
+    }
+    .viewLink {
+        opacity: 1;
+    }
+    
+    
+  }
+
+
+
+
+

@@ -18,7 +18,7 @@ class ProfileToggle extends React.Component {
             )
         } else {
             return (
-                <h1 className="heading">Your Liked Photos</h1>
+                <h1 className="heading">Your Favorite Photos</h1>
             )
         }
     }
@@ -31,7 +31,7 @@ class ProfileToggle extends React.Component {
                         POSTED PHOTOS
                     </div>
                     <div onClick={this.props.toggle.bind(this, "liked")} className={this.props.page === 'liked' ? "toggleButton highlight" : "toggleButton post"}>
-                        LIKED PHOTOS
+                        FAVORITE PHOTOS
                     </div>
                 </div>
                 {this.renderPhotos()}

@@ -56,7 +56,7 @@ class UserBanner extends React.Component {
             const { createdAt } = this.props.author; 
             return (
                 <div className="banner">
-                    <div onClick={this.showForm}className="editButton">Edit Profile<i className="fas fa-pencil-alt"></i></div>
+                    <div onClick={this.showForm} id="edit" className="editButton">Edit Profile<i className="fas fa-pencil-alt"></i></div>
                     <div className="bannerGrid">
                         <div className="userBanner">
                             <img src={userImage} alt={`${firstName}`} />
@@ -74,7 +74,7 @@ class UserBanner extends React.Component {
             const { firstName, lastName, userImage, createdAt, bio } = this.props.author;
             return (
                 <div className="banner">
-                    <div onClick={this.showForm}className="editButton">Edit Profile<i className="fas fa-pencil-alt"></i></div>
+                    <div onClick={this.showForm} id="edit" className="editButton">Edit Profile<i className="fas fa-pencil-alt"></i></div>
                     <div className="bannerGrid">
                         <div className="userBanner">
                             <img src={userImage} alt={`${firstName}`} />
